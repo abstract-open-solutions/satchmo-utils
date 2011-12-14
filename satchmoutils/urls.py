@@ -7,9 +7,8 @@ catbase = r'^' + get_satchmo_setting('CATEGORY_SLUG') + '/'
 prodbase = r'^' + get_satchmo_setting('PRODUCT_SLUG') + '/'
 
 urlpatterns = patterns('',
-    (r'^cart/$', 'satchmoutils.views.display_cart', {}, 'satchmo_cart'),
-    (r'^cart/add/$', 'satchmoutils.views.cart_add', {}, 'satchmo_cart_add'),
     (r'^cart/empty/$', 'satchmoutils.views.cart_empty', {}, 'satchmo_cart_empty'),
-    (r'^add/$', 'satchmoutils.views.smart_add', {}, 'satchmo_smart_add'),
+    (r'^contactus/$', 'satchmoutils.views.contacts', {}, 'primifrutti_contacts'),
+    (r'^contacts/submit/$', 'satchmoutils.views.contacts_action', {}, 'primifrutti_contacts_action'),
     (r"^captcha/", include('captcha.urls')),
 )

@@ -1,0 +1,94 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+
+{% block content %}
+ <div id="contact-page">
+  <h1 class="documentFirstHeading">
+   Contatti
+  </h1>
+  <p>
+   Potete comunicare con noi scegliendo tra:
+  </p>
+  <div class="x bigspage">
+  </div>
+  <h1 class="documentFirstHeading">
+   Contatto immediato
+  </h1>
+  <form action="." method="post" accept-charset="utf-8" class="contact-form">
+      {{ form.non_field_errors }}
+      {% if message %}
+        <h3 class="contact-message" style="background-color : #fefcbe;">{{ message }}</h3>
+      {% endif %}
+   <p>
+    <label for="nome_e_cognome">
+     {% trans "Name and Surname" %}{% if form.sender_fullname.field.required %}*{% endif %}
+    </label>
+   </p>
+   <p>
+       <span style="text-color: red;">{{ form.sender_fullname.errors }}</span>
+       {{ form.sender_fullname }}
+   </p>
+   <p>
+    <label for="azienda">
+     {% trans "Company" %}{% if form.company.field.required %}*{% endif %}
+    </label>
+   </p>
+   <p>
+    <span style="text-color: red;">{{ form.company.errors }}</span>
+    {{ form.company }}
+   </p>
+   <p>
+    <label for="città">
+     {% trans "City" %}{% if form.city.field.required %}*{% endif %}
+    </label>
+   </p>
+   <p>
+       <span style="text-color: red;">{{ form.city.errors }}</span>
+       {{ form.city }}
+   </p>
+   <p>
+    <label for="telefono">
+     {% trans "Telephone" %}{% if form.telephone.field.required %}*{% endif %}
+    </label>
+   </p>
+   <p>
+       <span style="text-color: red;">{{ form.telephone.errors }}</span>
+       {{ form.telephone }}
+   </p>
+   <p>
+    <label for="email">
+     Email{% if form.sender_from_address.field.required %}*{% endif %}
+    </label>
+   </p>
+   <p>
+       <span style="text-color: red;">{{ form.sender_from_address.errors }}</span>
+       {{ form.sender_from_address }}
+   </p>
+   <div class="x">
+   </div>
+   <p>
+    <label>
+     {% trans "Message" %}{% if form.message.field.required %}*{% endif %}
+    </label>
+   </p>
+   <p>
+    <span style="text-color: red;">{{ form.message.errors }}</span>
+    {{ form.message }}
+    </textarea>
+   </p>
+   <p>
+   <!-- Captcha -->
+   <span style="text-color: red;">{{ form.captcha.errors }}</span>
+   {{ form.captcha }}
+   </p>
+   <p class="required">
+       {% trans "* fields are required" %}
+   </p>
+   <p>
+       <div class="button yellow">
+           <input type="submit" class="button yellow" value="{% trans 'Submit' %}" />
+       </div>
+   </p>
+  </form>
+ </div>
+{% endblock %}
