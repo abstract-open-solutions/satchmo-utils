@@ -15,6 +15,7 @@
    Contatto immediato
   </h1>
   <form action="." method="post" accept-charset="utf-8" class="contact-form">
+      {% csrf_token %}
       {{ form.non_field_errors }}
       {% if message %}
         <h3 class="contact-message" style="background-color : #fefcbe;">{{ message }}</h3>
