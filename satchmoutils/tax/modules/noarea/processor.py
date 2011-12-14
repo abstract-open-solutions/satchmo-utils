@@ -5,10 +5,10 @@ from livesettings import config_value
 from product.models import TaxClass
 from satchmo_utils import is_string_like
 
-from satchmoutils.modules.noarea.models import TaxRate
+from satchmoutils.tax.modules.noarea.models import TaxRate
 
 
-log = logging.getLogger('satchmoutils.noarea')
+log = logging.getLogger('satchmoutils.tax.noarea')
 
 class Processor(object):
     

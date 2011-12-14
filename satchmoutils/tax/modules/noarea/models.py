@@ -1,13 +1,12 @@
 from django.db import models
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 from product.models import TaxClass
-from l10n.models import AdminArea, Country
 
 class TaxRate(models.Model):
     """
-    Actual percentage tax based on area and product class
+    Actual percentage tax based on product class
     """
-    taxClass = models.ForeignKey(TaxClass, verbose_name=_('Tax Class'))
+    taxClass = models.ForeignKey(TaxClass, verbose_name=_('tax class'))
     percentage = models.DecimalField(_("Percentage"), max_digits=7,
         decimal_places=6, help_text=_("% tax for this type"))
 
@@ -21,7 +20,7 @@ class TaxRate(models.Model):
                              self.display_percentage)
 
     class Meta:
-        verbose_name = _("Tax Rate")
-        verbose_name_plural = _("Tax Rates")
+        verbose_name = _("tax rate")
+        verbose_name_plural = _("tax rates")
         
 import config
