@@ -6,7 +6,7 @@ version = '0.1'
 
 
 setup(
-    name='utils',
+    name='satchmoutils',
     version=version,
     description="Satchmo utils: an online grocery",
     long_description=open("README.rst").read() + "\n" +
