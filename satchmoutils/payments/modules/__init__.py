@@ -7,7 +7,7 @@ def get_processor_by_key(key):
 
     :param key: A string of the form 'PAYMENT_<PROCESSOR_NAME>'.
     """
-    payment_module = config_get_group(key)
+    payment_module = config_get_group('PAYMENT_%s' % key)
     processor_module = payment_module.MODULE.load_module('processor')
     return processor_module.PaymentProcessor(payment_module)
     
