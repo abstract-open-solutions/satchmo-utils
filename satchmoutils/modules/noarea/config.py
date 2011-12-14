@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from livesettings import * 
 from tax.config import TAX_MODULE
 
-TAX_MODULE.add_choice(('satchmoutils.modules.area', _('No Area Tax')))
+TAX_MODULE.add_choice(('satchmoutils.modules.noarea', _('No Area Tax')))
 TAX_GROUP = config_get_group('TAX')
         
 config_register(
@@ -11,7 +11,7 @@ config_register(
          'TAX_SHIPPING',
          description=_("Tax Shipping?"),
          requires=TAX_MODULE,
-         requiresvalue='satchmoutils.modules.area',
+         requiresvalue='satchmoutils.modules.noarea',
          default=False)
 )
 

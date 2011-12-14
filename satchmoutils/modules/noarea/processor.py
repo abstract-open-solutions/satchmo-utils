@@ -8,7 +8,7 @@ from satchmo_utils import is_string_like
 from satchmoutils.modules.noarea.models import TaxRate
 
 
-log = logging.getLogger('tax.area')
+log = logging.getLogger('satchmoutils.noarea')
 
 class Processor(object):
     
