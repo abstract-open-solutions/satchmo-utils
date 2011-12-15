@@ -26,34 +26,34 @@
     </label>
    </p>
    <p>
-       <span style="text-color: red;">{{ form.sender_fullname.errors }}</span>
+       <span class="error">{{ form.sender_fullname.errors }}</span>
        {{ form.sender_fullname }}
    </p>
    <p>
-    <label for="azienda">
+    <label for="company">
      {% trans "Company" %}{% if form.company.field.required %}*{% endif %}
     </label>
    </p>
    <p>
-    <span style="text-color: red;">{{ form.company.errors }}</span>
+    <span class="error">{{ form.company.errors }}</span>
     {{ form.company }}
    </p>
    <p>
-    <label for="città">
+    <label for="city">
      {% trans "City" %}{% if form.city.field.required %}*{% endif %}
     </label>
    </p>
    <p>
-       <span style="text-color: red;">{{ form.city.errors }}</span>
+       <span class="error">{{ form.city.errors }}</span>
        {{ form.city }}
    </p>
    <p>
-    <label for="telefono">
+    <label for="telephone">
      {% trans "Telephone" %}{% if form.telephone.field.required %}*{% endif %}
     </label>
    </p>
    <p>
-       <span style="text-color: red;">{{ form.telephone.errors }}</span>
+       <span class="error">{{ form.telephone.errors }}</span>
        {{ form.telephone }}
    </p>
    <p>
@@ -62,7 +62,7 @@
     </label>
    </p>
    <p>
-       <span style="text-color: red;">{{ form.sender_from_address.errors }}</span>
+       <span class="error">{{ form.sender_from_address.errors }}</span>
        {{ form.sender_from_address }}
    </p>
    <div class="x">
@@ -73,14 +73,13 @@
     </label>
    </p>
    <p>
-    <span style="text-color: red;">{{ form.message.errors }}</span>
+    <span class="error">{{ form.message.errors }}</span>
     {{ form.message }}
-    </textarea>
    </p>
    <p>
    <!-- Captcha -->
-   <span style="text-color: red;">{{ form.captcha.errors }}</span>
    {{ form.captcha }}
+   <span class="error">{{ form.captcha.errors }}</span>
    </p>
    <p class="required">
        {% trans "* fields are required" %}

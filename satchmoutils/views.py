@@ -40,8 +40,7 @@ def get_form(request):
         if form.is_valid():
             return_message = contacts_action(form)
         else:
-            import pdb; pdb.set_trace()
-            return_message = _(u"ERROR! Check your input")
+            return_message = _(u"ERROR. Make sure you have insert required data and valid captcha code")
     else:
         form = ContactForm()
     return form, return_message
@@ -97,9 +96,9 @@ def contacts_action(form):
     }
     try:
         send_mail(subject, mail_message, sender_from_address, [to_address,])
-        contact_msg = _(u"Message sent!")
+        contact_msg = _(u"Message sent.")
     except:
-        contact_msg = _(u"ERROR! Check your input")
+        contact_msg = _(u"ERROR. Make sure you have insert required data and valid captcha code")
         
     return contact_msg
 
