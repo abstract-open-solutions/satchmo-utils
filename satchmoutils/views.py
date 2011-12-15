@@ -40,6 +40,7 @@ def get_form(request):
         if form.is_valid():
             return_message = contacts_action(form)
         else:
+            import pdb; pdb.set_trace()
             return_message = _(u"ERROR! Check your input")
     else:
         form = ContactForm()

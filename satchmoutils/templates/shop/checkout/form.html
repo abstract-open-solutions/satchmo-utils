@@ -95,11 +95,7 @@
     <tr><td colspan="2"><hr /></td></tr>
     <tr><td><label for="id_commercial_conditions">{% trans "I have read the Terms and Conditions." %}{% if form.commercial_conditions.field.required %}*{% endif %}</label></td><td> {{ form.commercial_conditions }}</td></tr>
     {% if form.commercial_conditions.errors %}<tr><td class="error" colspan="2">*** {{ form.commercial_conditions.errors|join:", " }}</td></tr>{% endif %}
-    <tr><td><a title=""
-         href="{% url commercial_conditions %}">
-          <span>{% trans "Commercial Conditions" %}</span>
-      </a>
-    </td></tr>
+    <tr><td></td></tr>
 
 	<tr><td></td><td><input type="submit" value="{% trans "Continue Checkout" %}"/></td></tr>
 </table>

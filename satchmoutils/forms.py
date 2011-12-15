@@ -18,7 +18,9 @@ class ContactForm(forms.Form):
     city = forms.CharField(required=False, max_length=100)
     telephone = forms.CharField(required=False, max_length=100)
     sender_from_address = forms.EmailField(required=True, max_length=100)
-    message = forms.CharField(required=True, widget=forms.widgets.Textarea(), max_length=1000)
+    message = forms.CharField(required=True, 
+        widget=forms.widgets.Textarea(), 
+        max_length=1000)
     captcha = CaptchaField(required=True)
     
 def clean_person_number(self):
@@ -29,7 +31,8 @@ def clean_person_number(self):
     else:
         raise ValidationError(
             message = _(
-                u"Almeno uno dei due valori deve essere presente"
+                u"You must specify either your person number or the VAT number"
+                u" of your company in order to proceed with the purchase"
             ),
             code = 'invalid'
         )
@@ -37,7 +40,7 @@ def clean_person_number(self):
 def form_commercial_conditions_init_handler(sender, form, **kwargs):
     if 'business_number' not in form.fields:
         form.fields['business_number'] = CharField(
-            label = _(u"Business number"),
+            label = _(u"Vat number"),
             validators = [buisness_number_validator,],
             required = False
         )
