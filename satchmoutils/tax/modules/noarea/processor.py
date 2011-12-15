@@ -130,7 +130,7 @@ class Processor(object):
             
             if config_value('TAX', 'TAX_USE_ITEMPRICE'):
                 # use full price before taxing
-                # XXX: this case is valid in Italy/Europe
+                # XXX: this case is valid in Italy/Europe??
                 price = item.line_item_price
             else:
                 # use discounted price before taxing
