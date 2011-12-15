@@ -8,7 +8,8 @@ prodbase = r'^' + get_satchmo_setting('PRODUCT_SLUG') + '/'
 
 urlpatterns = patterns('',
     (r'^cart/empty/$', 'satchmoutils.views.cart_empty', {}, 'satchmo_cart_empty'),
-    (r'^contactus/$', 'satchmoutils.views.contacts', {}, 'primifrutti_contacts'),
-    (r'^contacts/submit/$', 'satchmoutils.views.contacts_action', {}, 'primifrutti_contacts_action'),
+    (r'^contactus/$', 'satchmoutils.views.contacts', {}, 'contactus'),
+    (r'^contacts/submit/$', 'satchmoutils.views.contacts_action', {}, 'contactus_action'),
+    (r'^commercial-conditions/$', direct_to_template, {'template': 'shop/commercial_conditions.html'}, 'commercial_conditions'),
     (r"^captcha/", include('captcha.urls')),
 )
