@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-15 09:48+0100\n"
+"POT-Creation-Date: 2011-12-15 16:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,106 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
+#: forms.py:34
+msgid ""
+"You must specify either your person number or the VAT number of your company "
+"in order to proceed with the purchase"
+msgstr ""
+
+#: forms.py:43
+msgid "Vat number"
+msgstr ""
+
+#: forms.py:49 forms.py:85 templates/contact/update_form.html:63
+#: templates/contact/view_profile.html:35 templates/shop/checkout/form.html:78
+msgid "Person number"
+msgstr ""
+
+#: forms.py:55 templates/shop/checkout/form.html:96
+msgid "I have read the Terms and Conditions."
+msgstr ""
+
+#: forms.py:79 templates/contact/update_form.html:60
+#: templates/contact/view_profile.html:34 templates/shop/checkout/form.html:75
+msgid "Business number"
+msgstr ""
+
+#: forms.py:109 templates/contact/_contact_info_form_billing.html:12
+msgid "Billing Civic number"
+msgstr ""
+
+#: forms.py:114 templates/contact/_contact_info_form_shipping.html:15
+msgid "Shipping Civic number"
+msgstr ""
+
+#: models.py:9 models.py:32
+msgid "contact"
+msgstr ""
+
+#: models.py:12
+msgid "business number"
+msgstr ""
+
+#: models.py:16
+msgid "person number"
+msgstr ""
+
+#: models.py:21
+#, python-format
+msgid "administrative information for %(contact_name)s"
+msgstr ""
+
+#: models.py:26
+msgid "administrative information"
+msgstr ""
+
+#: models.py:27
+msgid "administrative informations"
+msgstr ""
+
+#: models.py:35
+msgid "billing bivic number"
+msgstr ""
+
+#: models.py:41
+msgid "shipping civic number"
+msgstr ""
+
+#: models.py:48
+#, python-format
+msgid "extra address information for %(contact_name)s"
+msgstr ""
+
+#: models.py:53
+msgid "extra address information"
+msgstr ""
+
+#: models.py:54
+msgid "extra address informations"
+msgstr ""
+
+#: validators.py:33 validators.py:61
+msgid "The code is too short or contains invalid characters"
+msgstr ""
+
+#: validators.py:42 validators.py:73
+msgid "The code is malformed"
+msgstr ""
+
+#: validators.py:48
+msgid "Invalid person number"
+msgstr ""
+
+#: validators.py:79
+msgid "Invalid company number"
+msgstr ""
+
 #: views.py:43 views.py:101
-msgid "ERROR! Check your input"
+msgid "ERROR. Make sure you have insert required data and valid captcha code"
 msgstr ""
 
 #: views.py:99
-msgid "Message sent!"
+msgid "Message sent."
 msgstr ""
 
 #: payments/views.py:34
@@ -235,7 +329,67 @@ msgstr ""
 msgid "tax rates"
 msgstr ""
 
-#: templates/shop/cart.html:11
+#: templates/contact/_contact_info_form_billing.html:4
+msgid "Billing Information"
+msgstr ""
+
+#: templates/contact/_contact_info_form_billing.html:6
+msgid "Bill To"
+msgstr ""
+
+#: templates/contact/_contact_info_form_billing.html:6
+#: templates/contact/_contact_info_form_shipping.html:9
+msgid "If different from the first and last names above"
+msgstr ""
+
+#: templates/contact/_contact_info_form_billing.html:9
+#: templates/contact/_contact_info_form_billing.html:15
+#: templates/contact/_contact_info_form_shipping.html:12
+#: templates/contact/_contact_info_form_shipping.html:18
+msgid "Street"
+msgstr ""
+
+#: templates/contact/_contact_info_form_billing.html:18
+#: templates/contact/_contact_info_form_shipping.html:21
+#: templates/shop/contacts.html:43
+msgid "City"
+msgstr ""
+
+#: templates/contact/_contact_info_form_billing.html:24
+#: templates/contact/_contact_info_form_billing.html:30
+#: templates/contact/_contact_info_form_shipping.html:27
+#: templates/contact/_contact_info_form_shipping.html:33
+msgid "State/Province"
+msgstr ""
+
+#: templates/contact/_contact_info_form_billing.html:36
+#: templates/contact/_contact_info_form_shipping.html:39
+msgid "Zipcode/Postcode"
+msgstr ""
+
+#: templates/contact/_contact_info_form_billing.html:40
+#: templates/contact/_contact_info_form_shipping.html:43
+msgid "Country"
+msgstr ""
+
+#: templates/contact/_contact_info_form_shipping.html:4
+msgid "Shipping Information"
+msgstr ""
+
+#: templates/contact/_contact_info_form_shipping.html:6
+msgid "Shipping same as billing?"
+msgstr ""
+
+#: templates/contact/_contact_info_form_shipping.html:9
+msgid "Ship To"
+msgstr ""
+
+#: templates/contact/_custom_addressblock.html:12
+msgid "Not set"
+msgstr ""
+
+#: templates/contact/update_form.html:5 templates/contact/view_profile.html:7
+#: templates/shop/cart.html:11 templates/shop/checkout/form.html:9
 #: templates/shop/checkout/success_bonifico.html:12
 #: templates/shop/checkout/success_contrassegno.html:12
 #: templates/shop/checkout/success_creditcard.html:12
@@ -243,6 +397,159 @@ msgstr ""
 #: templates/shop/checkout/creditcard/error.html:9
 #: templates/shop/checkout/creditcard/success.html:9
 msgid "Home"
+msgstr ""
+
+#: templates/contact/update_form.html:6 templates/contact/view_profile.html:8
+msgid "Account"
+msgstr ""
+
+#: templates/contact/update_form.html:7
+msgid "Update Profile"
+msgstr ""
+
+#: templates/contact/update_form.html:15
+msgid "Your Profile"
+msgstr ""
+
+#: templates/contact/update_form.html:17 templates/shop/checkout/form.html:24
+msgid "Please correct the following error:"
+msgstr ""
+
+#: templates/contact/update_form.html:24
+msgid "You&apos;ll need to fill out at least the fields with a *"
+msgstr ""
+
+#: templates/contact/update_form.html:26 templates/shop/checkout/form.html:56
+msgid "Basic Information"
+msgstr ""
+
+#: templates/contact/update_form.html:27 templates/shop/checkout/form.html:57
+msgid "Email address"
+msgstr ""
+
+#: templates/contact/update_form.html:30 templates/shop/checkout/form.html:60
+msgid "First name"
+msgstr ""
+
+#: templates/contact/update_form.html:33 templates/shop/checkout/form.html:63
+msgid "Last name"
+msgstr ""
+
+#: templates/contact/update_form.html:36
+msgid "Organization"
+msgstr ""
+
+#: templates/contact/update_form.html:40
+msgid "Birthday"
+msgstr ""
+
+#: templates/contact/update_form.html:43 templates/shop/checkout/form.html:66
+msgid "Phone number"
+msgstr ""
+
+#: templates/contact/update_form.html:47
+msgid "Newsletter"
+msgstr ""
+
+#: templates/contact/update_form.html:58
+#: templates/contact/view_profile.html:32 templates/shop/checkout/form.html:71
+msgid "Administrative information"
+msgstr ""
+
+#: templates/contact/update_form.html:71
+msgid "Update"
+msgstr ""
+
+#: templates/contact/view_profile.html:12
+msgid "Your Account info"
+msgstr ""
+
+#: templates/contact/view_profile.html:15
+#, python-format
+msgid "Welcome, %(full_name)s."
+msgstr ""
+
+#: templates/contact/view_profile.html:18
+msgid "Your profile"
+msgstr ""
+
+#: templates/contact/view_profile.html:20
+msgid "Email:"
+msgstr ""
+
+#: templates/contact/view_profile.html:22
+msgid "Organization:"
+msgstr ""
+
+#: templates/contact/view_profile.html:24
+msgid "Birthday:"
+msgstr ""
+
+#: templates/contact/view_profile.html:26
+msgid "Newsletter:"
+msgstr ""
+
+#: templates/contact/view_profile.html:26
+msgid "Yes"
+msgstr ""
+
+#: templates/contact/view_profile.html:26
+msgid "No"
+msgstr ""
+
+#: templates/contact/view_profile.html:28
+msgid "Billing Address:"
+msgstr ""
+
+#: templates/contact/view_profile.html:29
+msgid "Shipping Address:"
+msgstr ""
+
+#: templates/contact/view_profile.html:40
+msgid "Address Book Entries"
+msgstr ""
+
+#: templates/contact/view_profile.html:43
+msgid "Edit"
+msgstr ""
+
+#: templates/contact/view_profile.html:43
+msgid "Delete"
+msgstr ""
+
+#: templates/contact/view_profile.html:47
+#: templates/contact/view_profile.html:62
+msgid "Account options"
+msgstr ""
+
+#: templates/contact/view_profile.html:49
+msgid "Update your profile"
+msgstr ""
+
+#: templates/contact/view_profile.html:51
+msgid "Add address book entry"
+msgstr ""
+
+#: templates/contact/view_profile.html:53
+#: templates/contact/view_profile.html:66
+msgid "Change your password"
+msgstr ""
+
+#: templates/contact/view_profile.html:55
+msgid "Order History"
+msgstr ""
+
+#: templates/contact/view_profile.html:60
+msgid ""
+"Sorry, the user you've logged in as doesn't have any contact information."
+msgstr ""
+
+#: templates/contact/view_profile.html:60
+msgid "Probably because you are an admin."
+msgstr ""
+
+#: templates/contact/view_profile.html:64
+msgid "Set up contact information"
 msgstr ""
 
 #: templates/shop/cart.html:12
@@ -297,15 +604,15 @@ msgstr ""
 msgid "Cart Total"
 msgstr ""
 
-#: templates/shop/cart.html:88
+#: templates/shop/cart.html:87
 msgid "Continue shopping"
 msgstr ""
 
-#: templates/shop/cart.html:91
+#: templates/shop/cart.html:90
 msgid "Empty"
 msgstr ""
 
-#: templates/shop/cart.html:94
+#: templates/shop/cart.html:93
 msgid "Check out"
 msgstr ""
 
@@ -317,10 +624,6 @@ msgstr ""
 msgid "Company"
 msgstr ""
 
-#: templates/shop/contacts.html:43
-msgid "City"
-msgstr ""
-
 #: templates/shop/contacts.html:52
 msgid "Telephone"
 msgstr ""
@@ -329,14 +632,15 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
-#: templates/shop/contacts.html:86
+#: templates/shop/contacts.html:85
 msgid "* fields are required"
 msgstr ""
 
-#: templates/shop/contacts.html:90
+#: templates/shop/contacts.html:89
 msgid "Submit"
 msgstr ""
 
+#: templates/shop/checkout/form.html:10 templates/shop/checkout/form.html:14
 #: templates/shop/checkout/success_bonifico.html:13
 #: templates/shop/checkout/success_contrassegno.html:13
 #: templates/shop/checkout/success_creditcard.html:13
@@ -344,6 +648,77 @@ msgstr ""
 #: templates/shop/checkout/creditcard/error.html:10
 #: templates/shop/checkout/creditcard/success.html:10
 msgid "Checkout"
+msgstr ""
+
+#: templates/shop/checkout/form.html:17
+msgid "Ship/Bill"
+msgstr ""
+
+#: templates/shop/checkout/form.html:18
+#: templates/shop/checkout/contrassegno/confirm.html:6
+#: templates/shop/checkout/contrassegno/confirm.html:9
+#: templates/shop/checkout/creditcard/confirm.html:7
+#: templates/shop/checkout/creditcard/confirm.html:15
+msgid "Payment"
+msgstr ""
+
+#: templates/shop/checkout/form.html:19
+msgid "Confirmation"
+msgstr ""
+
+#: templates/shop/checkout/form.html:22
+msgid ""
+"Please complete the following information in order to submit your order."
+msgstr ""
+
+#: templates/shop/checkout/form.html:33
+msgid ""
+"If you already have an account, you can login now to fill in most of the "
+"information below."
+msgstr ""
+
+#: templates/shop/checkout/form.html:34
+msgid "This is just a convenience, no account is required!"
+msgstr ""
+
+#: templates/shop/checkout/form.html:37
+msgid "Username or email"
+msgstr ""
+
+#: templates/shop/checkout/form.html:38
+msgid "Password"
+msgstr ""
+
+#: templates/shop/checkout/form.html:39
+msgid "Login"
+msgstr ""
+
+#: templates/shop/checkout/form.html:46
+msgid "You'll need to fill out at least the fields with a *"
+msgstr ""
+
+#: templates/shop/checkout/form.html:51
+msgid "How do you want to pay?"
+msgstr ""
+
+#: templates/shop/checkout/form.html:52
+msgid "Payment method"
+msgstr ""
+
+#: templates/shop/checkout/form.html:73
+msgid "Insert at least one of following fields."
+msgstr ""
+
+#: templates/shop/checkout/form.html:89
+msgid "Discounts"
+msgstr ""
+
+#: templates/shop/checkout/form.html:90
+msgid "Discount code"
+msgstr ""
+
+#: templates/shop/checkout/form.html:100
+msgid "Continue Checkout"
 msgstr ""
 
 #: templates/shop/checkout/success_bonifico.html:19
@@ -425,13 +800,6 @@ msgstr ""
 
 #: templates/shop/checkout/suspended.html:80
 msgid "Proceed with another purchase"
-msgstr ""
-
-#: templates/shop/checkout/contrassegno/confirm.html:6
-#: templates/shop/checkout/contrassegno/confirm.html:9
-#: templates/shop/checkout/creditcard/confirm.html:7
-#: templates/shop/checkout/creditcard/confirm.html:15
-msgid "Payment"
 msgstr ""
 
 #: templates/shop/checkout/contrassegno/confirm.html:11
