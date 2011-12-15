@@ -24,7 +24,7 @@ def make_test_order(country, state, site=None, price=None, quantity=5):
         country = Country.objects.get(iso2_code__iexact = country)
 
     ad = AddressBook(contact=c, description="home",
-        street1 = "test", state=state, city="Portland",
+        street1 = "test", state=state, city="Napoli",
         country = country, is_default_shipping=True,
         is_default_billing=True)
     ad.save()
@@ -58,7 +58,7 @@ class TaxTest(TestCase):
 
         self.assertEqual(subtotal, Decimal('50.00'))
         self.assertEqual(tax, Decimal('10.50'))
-        # 50 + 10 shipping + 10.5 tax
+        # 50 + 10 shipping + 10.5 (21% on 50) tax
         self.assertEqual(price, Decimal('70.50'))
 
         taxes = order.taxes.all()
