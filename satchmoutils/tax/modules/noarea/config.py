@@ -12,7 +12,7 @@ config_register(
          'TAX_SHIPPING',
          description=_("Tax Shipping?"),
          requires=TAX_MODULE,
-         requiresvalue='satchmoutils.modules.noarea',
+         requiresvalue='satchmoutils.tax.modules.noarea',
          default=False)
 )
 
@@ -23,4 +23,13 @@ config_register(
          help_text=_("Select a TaxClass that should be applied for shipments."),
          default='Shipping'
      )
+)
+
+config_register(
+     BooleanValue(TAX_GROUP,
+         'TAX_USE_ITEMPRICE',
+         description=_("Use item full-price for tax?"),
+         requires=TAX_MODULE,
+         requiresvalue='satchmoutils.tax.modules.noarea',
+         default=True)
 )

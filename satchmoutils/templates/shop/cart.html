@@ -43,6 +43,7 @@
           <tr>
                  <td align="center" width="10%" class="cart-td">
                      <form class="qtyform" id="form-{{ cartitem.id }}" action="{% url satchmo_cart_set_qty %}" method="post">
+                         {% csrf_token %}
                          <input class="button" type="hidden" name="cartitem" value="{{ cartitem.id }}" />
                          <input type="text" name="quantity" id="id_quantity" value="{{ cartitem.quantity|normalize_decimal }}" size="2" />
                          <input type="submit" id="id_update_submit" value="{% trans 'update' %}" />

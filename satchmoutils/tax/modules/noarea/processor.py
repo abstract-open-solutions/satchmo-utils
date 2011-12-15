@@ -127,8 +127,15 @@ class Processor(object):
                 rate = self.get_rate(tc, get_object=True)
                 rates[tc_key] = rate
                 taxes[tc_key] = Decimal("0.00")
+            
+            if config_value('TAX', 'TAX_USE_ITEMPRICE'):
+                # use full price before taxing
+                # XXX: this case is valid in Italy/Europe
+                price = item.line_item_price
+            else:
+                # use discounted price before taxing
+                price = item.sub_total
                 
-            price = item.sub_total
             if rate:
                 t = price*rate.percentage
             else:
