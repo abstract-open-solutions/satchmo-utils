@@ -40,7 +40,7 @@ def get_form(request):
         if form.is_valid():
             return_message = contacts_action(form)
         else:
-            return_message = "ERRORE! Per favore, controlla le informazioni inserite"
+            return_message = _(u"ERROR! Check your input")
     else:
         form = ContactForm()
     return form, return_message
@@ -96,9 +96,9 @@ def contacts_action(form):
     }
     try:
         send_mail(subject, mail_message, sender_from_address, [to_address,])
-        contact_msg = _(u"Messaggio spedito!")
+        contact_msg = _(u"Message sent!")
     except:
-        contact_msg = _(u"ERRORE! Per favore, controlla le informazioni inserite")
+        contact_msg = _(u"ERROR! Check your input")
         
     return contact_msg
 
