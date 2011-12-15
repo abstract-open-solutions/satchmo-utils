@@ -9,21 +9,6 @@ form_extraaddressfield_init_handler, form_extrafield_save_handler, contact_extra
 form_extraaddressfield_save_handler, contact_extraaddressfield_view_handler, contact_form_postsave
 
 
-# Shop evaluation handlers
-def form_shop_evaluation_init_handler_wrapper(sender, **kwargs):
-    from payment.forms import PaymentContactInfoForm
-    if sender == PaymentContactInfoForm:
-        form_shop_evaluation_init_handler(sender, **kwargs)
-
-form_init.connect(form_shop_evaluation_init_handler_wrapper)
-
-def form_shop_evaluation_save_handler_wrapper(sender, **kwargs):
-    from payment.forms import PaymentContactInfoForm
-    if sender == PaymentContactInfoForm:
-        form_shop_evaluation_save_handler(sender, **kwargs)
-
-form_postsave.connect(form_shop_evaluation_save_handler_wrapper)
-
 # Contact extra fields handler
 def form_extrafield_init_handler_wrapper(sender, **kwargs):
     if (sender == ContactInfoForm) or (sender == ExtendedContactInfoForm):
