@@ -24,6 +24,8 @@ log = logging.getLogger('primifrutti.ui.views')
 
 time_format = "%d-%m-%Y %H:%M:%S"
 
+error_msg = u"ERROR. Some fields do contain wrong values. Please correct the errors below"
+
 
 def classview(cls):
     def view_wrapper(request, *args, **kwargs):
@@ -40,7 +42,7 @@ def get_form(request):
         if form.is_valid():
             return_message = contacts_action(form)
         else:
-            return_message = _(u"ERROR. Make sure you have insert required data and valid captcha code")
+            return_message = _(error_msg)
     else:
         form = ContactForm()
     return form, return_message
@@ -98,7 +100,7 @@ def contacts_action(form):
         send_mail(subject, mail_message, sender_from_address, [to_address,])
         contact_msg = _(u"Message sent.")
     except:
-        contact_msg = _(u"ERROR. Make sure you have insert required data and valid captcha code")
+        contact_msg = _(error_msg)
         
     return contact_msg
 
