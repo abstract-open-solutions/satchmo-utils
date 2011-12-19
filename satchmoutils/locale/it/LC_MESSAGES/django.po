@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-15 16:22+0100\n"
+"POT-Creation-Date: 2011-12-19 19:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,82 +18,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: forms.py:34
+#: config.py:8
+msgid "Shop info"
+msgstr ""
+
+#: config.py:16
+msgid "IBAN code"
+msgstr ""
+
+#: config.py:26 forms.py:120
+msgid "VAT number"
+msgstr ""
+
+#: forms.py:37
 msgid ""
 "You must specify either your person number or the VAT number of your company "
 "in order to proceed with the purchase"
 msgstr ""
 
-#: forms.py:43
+#: forms.py:51
+msgid "You must specify house number in your address"
+msgstr ""
+
+#: forms.py:83
 msgid "Vat number"
 msgstr ""
 
-#: forms.py:49 forms.py:85 templates/contact/update_form.html:63
+#: forms.py:89 forms.py:126 templates/contact/update_form.html:63
 #: templates/contact/view_profile.html:35 templates/shop/checkout/form.html:78
 msgid "Person number"
 msgstr ""
 
-#: forms.py:55 templates/shop/checkout/form.html:96
+#: forms.py:95 templates/shop/checkout/form.html:96
 msgid "I have read the Terms and Conditions."
 msgstr ""
 
-#: forms.py:79 templates/contact/update_form.html:60
-#: templates/contact/view_profile.html:34 templates/shop/checkout/form.html:75
-msgid "Business number"
-msgstr ""
-
-#: forms.py:109 templates/contact/_contact_info_form_billing.html:12
-msgid "Billing Civic number"
-msgstr ""
-
-#: forms.py:114 templates/contact/_contact_info_form_shipping.html:15
-msgid "Shipping Civic number"
-msgstr ""
-
-#: models.py:9 models.py:32
+#: models.py:12
 msgid "contact"
 msgstr ""
 
-#: models.py:12
+#: models.py:15
 msgid "business number"
 msgstr ""
 
-#: models.py:16
+#: models.py:19
 msgid "person number"
 msgstr ""
 
-#: models.py:21
+#: models.py:24
 #, python-format
 msgid "administrative information for %(contact_name)s"
 msgstr ""
 
-#: models.py:26
+#: models.py:29
 msgid "administrative information"
 msgstr ""
 
-#: models.py:27
+#: models.py:30
 msgid "administrative informations"
-msgstr ""
-
-#: models.py:35
-msgid "billing bivic number"
-msgstr ""
-
-#: models.py:41
-msgid "shipping civic number"
-msgstr ""
-
-#: models.py:48
-#, python-format
-msgid "extra address information for %(contact_name)s"
-msgstr ""
-
-#: models.py:53
-msgid "extra address information"
-msgstr ""
-
-#: models.py:54
-msgid "extra address informations"
 msgstr ""
 
 #: validators.py:33 validators.py:61
@@ -112,28 +94,8 @@ msgstr ""
 msgid "Invalid company number"
 msgstr ""
 
-#: views.py:43 views.py:101
-msgid "ERROR. Make sure you have insert required data and valid captcha code"
-msgstr ""
-
-#: views.py:99
+#: views.py:101
 msgid "Message sent."
-msgstr ""
-
-#: payments/views.py:34
-#, python-format
-msgid "%(shop_name)s : Your order was suspended"
-msgstr ""
-
-#: payments/views.py:52
-#, python-format
-msgid "%(shop_name)s : Suspended order"
-msgstr ""
-
-#: payments/views.py:73 payments/modules/views.py:88
-#: payments/modules/creditcard/views.py:218
-#: payments/modules/creditcard/views.py:267
-msgid "Your order has already been processed."
 msgstr ""
 
 #: payments/modules/base.py:38
@@ -142,6 +104,10 @@ msgstr ""
 
 #: payments/modules/views.py:63
 msgid "Payment needs to be confirmed"
+msgstr ""
+
+#: payments/modules/views.py:88 payments/modules/creditcard/views.py:184
+msgid "Your order has already been processed."
 msgstr ""
 
 #: payments/modules/bonifico/config.py:5
@@ -220,7 +186,7 @@ msgid "Payment Contrassegno Module Settings"
 msgstr ""
 
 #: payments/modules/contrassegno/config.py:36
-msgid "Pagamento alla consegna (+ 4 Euro)"
+msgid "Pagamento alla consegna"
 msgstr ""
 
 #: payments/modules/contrassegno/config.py:46
@@ -285,14 +251,6 @@ msgstr ""
 msgid "Your order is no longer valid."
 msgstr ""
 
-#: payments/modules/creditcard/views.py:162
-msgid "Paid through PAYMENTPROCESSOR."
-msgstr ""
-
-#: payments/modules/creditcard/views.py:172
-msgid "---Comment via PAYMENTPROCESSOR IPN---"
-msgstr ""
-
 #: tax/modules/noarea/config.py:6
 msgid "No Area Tax"
 msgstr ""
@@ -307,6 +265,10 @@ msgstr ""
 
 #: tax/modules/noarea/config.py:23
 msgid "Select a TaxClass that should be applied for shipments."
+msgstr ""
+
+#: tax/modules/noarea/config.py:31
+msgid "Use item full-price for tax?"
 msgstr ""
 
 #: tax/modules/noarea/models.py:9
@@ -343,32 +305,32 @@ msgid "If different from the first and last names above"
 msgstr ""
 
 #: templates/contact/_contact_info_form_billing.html:9
-#: templates/contact/_contact_info_form_billing.html:15
+#: templates/contact/_contact_info_form_billing.html:12
 #: templates/contact/_contact_info_form_shipping.html:12
-#: templates/contact/_contact_info_form_shipping.html:18
+#: templates/contact/_contact_info_form_shipping.html:15
 msgid "Street"
 msgstr ""
 
-#: templates/contact/_contact_info_form_billing.html:18
-#: templates/contact/_contact_info_form_shipping.html:21
-#: templates/shop/contacts.html:43
+#: templates/contact/_contact_info_form_billing.html:15
+#: templates/contact/_contact_info_form_shipping.html:18
+#: templates/shop/contacts.html:37
 msgid "City"
 msgstr ""
 
-#: templates/contact/_contact_info_form_billing.html:24
-#: templates/contact/_contact_info_form_billing.html:30
-#: templates/contact/_contact_info_form_shipping.html:27
-#: templates/contact/_contact_info_form_shipping.html:33
+#: templates/contact/_contact_info_form_billing.html:21
+#: templates/contact/_contact_info_form_billing.html:27
+#: templates/contact/_contact_info_form_shipping.html:24
+#: templates/contact/_contact_info_form_shipping.html:30
 msgid "State/Province"
 msgstr ""
 
-#: templates/contact/_contact_info_form_billing.html:36
-#: templates/contact/_contact_info_form_shipping.html:39
+#: templates/contact/_contact_info_form_billing.html:33
+#: templates/contact/_contact_info_form_shipping.html:36
 msgid "Zipcode/Postcode"
 msgstr ""
 
-#: templates/contact/_contact_info_form_billing.html:40
-#: templates/contact/_contact_info_form_shipping.html:43
+#: templates/contact/_contact_info_form_billing.html:37
+#: templates/contact/_contact_info_form_shipping.html:40
 msgid "Country"
 msgstr ""
 
@@ -384,18 +346,14 @@ msgstr ""
 msgid "Ship To"
 msgstr ""
 
-#: templates/contact/_custom_addressblock.html:12
-msgid "Not set"
-msgstr ""
-
 #: templates/contact/update_form.html:5 templates/contact/view_profile.html:7
-#: templates/shop/cart.html:11 templates/shop/checkout/form.html:9
+#: templates/product/product.html:23 templates/shop/cart.html:11
+#: templates/shop/checkout/form.html:9
 #: templates/shop/checkout/success_bonifico.html:12
 #: templates/shop/checkout/success_contrassegno.html:12
 #: templates/shop/checkout/success_creditcard.html:12
-#: templates/shop/checkout/suspended.html:55
+#: templates/shop/checkout/success_generic.html:12
 #: templates/shop/checkout/creditcard/error.html:9
-#: templates/shop/checkout/creditcard/success.html:9
 msgid "Home"
 msgstr ""
 
@@ -454,6 +412,11 @@ msgstr ""
 #: templates/contact/update_form.html:58
 #: templates/contact/view_profile.html:32 templates/shop/checkout/form.html:71
 msgid "Administrative information"
+msgstr ""
+
+#: templates/contact/update_form.html:60
+#: templates/contact/view_profile.html:34 templates/shop/checkout/form.html:75
+msgid "Business number"
 msgstr ""
 
 #: templates/contact/update_form.html:71
@@ -552,6 +515,22 @@ msgstr ""
 msgid "Set up contact information"
 msgstr ""
 
+#: templates/product/product.html:34 templates/shop/cart.html:35
+msgid "Price"
+msgstr ""
+
+#: templates/product/product.html:34
+msgid "(incl. tax)"
+msgstr ""
+
+#: templates/product/product.html:54 templates/shop/cart.html:29
+msgid "Quantity"
+msgstr ""
+
+#: templates/product/product.html:56
+msgid "Add to cart"
+msgstr ""
+
 #: templates/shop/cart.html:12
 msgid "Cart"
 msgstr ""
@@ -562,10 +541,6 @@ msgstr ""
 
 #: templates/shop/cart.html:24
 msgid "Your cart is empty."
-msgstr ""
-
-#: templates/shop/cart.html:29
-msgid "Quantity"
 msgstr ""
 
 #: templates/shop/cart.html:30
@@ -580,10 +555,6 @@ msgstr ""
 msgid "Sale Price"
 msgstr ""
 
-#: templates/shop/cart.html:35
-msgid "Price"
-msgstr ""
-
 #: templates/shop/cart.html:37
 msgid "Total<br/>(incl.&nbsp;tax)"
 msgstr ""
@@ -592,51 +563,55 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: templates/shop/cart.html:48
+#: templates/shop/cart.html:49
 msgid "update"
 msgstr ""
 
-#: templates/shop/cart.html:62
+#: templates/shop/cart.html:63
 msgid "Remove"
 msgstr ""
 
-#: templates/shop/cart.html:72
+#: templates/shop/cart.html:73
 msgid "Cart Total"
 msgstr ""
 
-#: templates/shop/cart.html:87
+#: templates/shop/cart.html:88
 msgid "Continue shopping"
 msgstr ""
 
-#: templates/shop/cart.html:90
+#: templates/shop/cart.html:91
 msgid "Empty"
 msgstr ""
 
-#: templates/shop/cart.html:93
+#: templates/shop/cart.html:94
 msgid "Check out"
 msgstr ""
 
-#: templates/shop/contacts.html:25
+#: templates/shop/contacts.html:9
+msgid "Contact us"
+msgstr ""
+
+#: templates/shop/contacts.html:19
 msgid "Name and Surname"
 msgstr ""
 
-#: templates/shop/contacts.html:34
+#: templates/shop/contacts.html:28
 msgid "Company"
 msgstr ""
 
-#: templates/shop/contacts.html:52
+#: templates/shop/contacts.html:46
 msgid "Telephone"
 msgstr ""
 
-#: templates/shop/contacts.html:72
+#: templates/shop/contacts.html:66
 msgid "Message"
 msgstr ""
 
-#: templates/shop/contacts.html:85
+#: templates/shop/contacts.html:79
 msgid "* fields are required"
 msgstr ""
 
-#: templates/shop/contacts.html:89
+#: templates/shop/contacts.html:83
 msgid "Submit"
 msgstr ""
 
@@ -644,9 +619,8 @@ msgstr ""
 #: templates/shop/checkout/success_bonifico.html:13
 #: templates/shop/checkout/success_contrassegno.html:13
 #: templates/shop/checkout/success_creditcard.html:13
-#: templates/shop/checkout/suspended.html:56
+#: templates/shop/checkout/success_generic.html:13
 #: templates/shop/checkout/creditcard/error.html:10
-#: templates/shop/checkout/creditcard/success.html:10
 msgid "Checkout"
 msgstr ""
 
@@ -727,15 +701,15 @@ msgstr ""
 #: templates/shop/checkout/success_contrassegno.html:31
 #: templates/shop/checkout/success_creditcard.html:20
 #: templates/shop/checkout/success_creditcard.html:28
-#: templates/shop/checkout/creditcard/success.html:16
-#: templates/shop/checkout/creditcard/success.html:26
+#: templates/shop/checkout/success_generic.html:19
+#: templates/shop/checkout/success_generic.html:28
 msgid "Thank you for your order!"
 msgstr ""
 
 #: templates/shop/checkout/success_bonifico.html:21
 #: templates/shop/checkout/success_contrassegno.html:20
 #: templates/shop/checkout/success_creditcard.html:23
-#: templates/shop/checkout/creditcard/success.html:19
+#: templates/shop/checkout/success_generic.html:20
 msgid ""
 "Please print out this page as a receipt.  You will also receive an email "
 "with this information."
@@ -750,22 +724,22 @@ msgstr ""
 #: templates/shop/checkout/success_bonifico.html:44
 #: templates/shop/checkout/success_contrassegno.html:35
 #: templates/shop/checkout/success_creditcard.html:31
-#: templates/shop/checkout/creditcard/success.html:30
-msgid "Puoi vedere lo stato del tuo ordine"
+#: templates/shop/checkout/success_generic.html:32
+msgid "You can check your order status"
 msgstr ""
 
 #: templates/shop/checkout/success_bonifico.html:45
 #: templates/shop/checkout/success_contrassegno.html:36
 #: templates/shop/checkout/success_creditcard.html:32
-#: templates/shop/checkout/suspended.html:79
-#: templates/shop/checkout/creditcard/success.html:31
+#: templates/shop/checkout/success_generic.html:33
 msgid "order history"
 msgstr ""
 
 #: templates/shop/checkout/success_bonifico.html:46
+#: templates/shop/checkout/success_contrassegno.html:37
 #: templates/shop/checkout/success_creditcard.html:33
-#: templates/shop/checkout/creditcard/success.html:32
-msgid "Procedi con gli acquisti"
+#: templates/shop/checkout/success_generic.html:34
+msgid "Proceed with another purchase"
 msgstr ""
 
 #: templates/shop/checkout/success_bonifico.html:54
@@ -780,26 +754,6 @@ msgstr ""
 msgid ""
 "Attenzione!!! Il pagamento in contrassegno &egrave; valido solo in contanti. "
 "Il corriere accetter&agrave; solo contanti."
-msgstr ""
-
-#: templates/shop/checkout/success_contrassegno.html:37
-msgid "Procedi con un altro acquisto"
-msgstr ""
-
-#: templates/shop/checkout/suspended.html:62
-msgid "Suspended order"
-msgstr ""
-
-#: templates/shop/checkout/suspended.html:63
-msgid "Your order is suspended"
-msgstr ""
-
-#: templates/shop/checkout/suspended.html:78
-msgid "You can check your order status"
-msgstr ""
-
-#: templates/shop/checkout/suspended.html:80
-msgid "Proceed with another purchase"
 msgstr ""
 
 #: templates/shop/checkout/contrassegno/confirm.html:11
@@ -819,8 +773,4 @@ msgstr ""
 
 #: templates/shop/checkout/creditcard/error.html:16
 msgid "Error. Check your order!"
-msgstr ""
-
-#: templates/shop/checkout/creditcard/success.html:31
-msgid "or"
 msgstr ""

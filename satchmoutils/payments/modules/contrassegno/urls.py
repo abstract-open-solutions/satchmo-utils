@@ -7,6 +7,5 @@ config = config_get_group('PAYMENT_CONTRASSEGNO')
 
 urlpatterns = patterns('',
     (r'^$', 'satchmoutils.payments.modules.contrassegno.views.one_step', {'SSL': ssl}, 'CONTRASSEGNO_satchmo_checkout-step2'),
-    (r'^suspended/$', 'satchmoutils.payments.views.suspended', {'SSL': ssl}, 'CONTRASSEGNO_satchmo_checkout-suspended'),
     (r'^success/$', 'satchmoutils.payments.modules.views.multisuccess_view', {'SSL': ssl}, 'CONTRASSEGNO_satchmo_checkout-success'),    
 )
