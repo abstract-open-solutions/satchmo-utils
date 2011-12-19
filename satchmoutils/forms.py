@@ -66,6 +66,9 @@ def clean_street1(self):
 def clean_ship_street1(self):
     shipping_address = self.cleaned_data.get('ship_street1', '')
     shipping_country = self.cleaned_data.get('ship_country', 'IT')
+    copy_address = self.cleaned_data.get('copy_address', False)
+    if copy_address:
+        shipping_address = self.cleaned_data.get('street1', '')
     return address_validator(shipping_country, shipping_address)
     
 clean_methods = (
