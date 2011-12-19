@@ -25,8 +25,8 @@
     {% if show_newsletter %}
     <li>{% trans 'Newsletter:' %} {% if newsletter %}{% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}</li>
     {% endif %}
-    <li>{% trans 'Billing Address:'%}<br/>{% custom_addressblock user_data.billing_address eainfo.billing_civicnumber %}</li>
-    <li>{% trans 'Shipping Address:'%}<br/>{% custom_addressblock user_data.shipping_address eainfo.shipping_civicnumber %}</li>
+    <li>{% trans 'Billing Address:'%}<br/>{% addressblock user_data.billing_address %}</li>
+    <li>{% trans 'Shipping Address:'%}<br/>{% addressblock user_data.shipping_address %}</li>
     {% if adminfo %}
     <li>
       <span class="discreet">{% trans 'Administrative information' %}:</span>

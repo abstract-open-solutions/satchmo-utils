@@ -9,9 +9,6 @@
     <tr><td><label for="id_street1">{% trans "Street" %}{% if form.street1.field.required %}*{% endif %}</label></td><td> {{ form.street1 }}</td></tr>
     {% if form.street1.errors %}<tr><td class="error" colspan="2">*** {{ form.street1.errors|join:", " }}</td></tr>{% endif %}
 
-    <tr><td><label for="id_billing_civicnumber">{% trans "Billing Civic number" %}{% if form.billing_civicnumber.field.required %}*{% endif %}</label></td><td> {{ form.billing_civicnumber }}</td></tr>
-    {% if form.billing_civicnumber.errors %}<tr><td class="error" colspan="2">*** {{ form.billing_civicnumber.errors|join:", " }}</td></tr>{% endif %}
-
     <tr><td><label for="id_street2">{% trans "Street" %}</label></td><td> {{ form.street2 }}</td></tr>
     {% if form.street2.errors %}<tr><td class="error" colspan="2">*** {{ form.street2.errors|join:", " }}</td></tr>{% endif %}
 

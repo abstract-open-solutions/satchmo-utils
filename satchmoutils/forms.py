@@ -1,4 +1,4 @@
-import logging, types
+import logging, types, re
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
@@ -7,8 +7,11 @@ from django.forms.fields import CharField, BooleanField
 from satchmo_store.contact.models import Contact
 from captcha.fields import CaptchaField
 
-from satchmoutils.models import ContactAdministrativeInformation, ContactExtraAddressInformation
-from satchmoutils.validators import person_number_validator, buisness_number_validator
+from satchmoutils.models import ContactAdministrativeInformation
+from satchmoutils.validators import person_number_validator, \
+buisness_number_validator
+
+civic_number_countries = ['IT', 'DE']
 
 
 # "Contact Us" Form
@@ -36,7 +39,40 @@ def clean_person_number(self):
             ),
             code = 'invalid'
         )
-        
+
+def address_validator(country, address):
+    regex = re.compile(r"\w+-?\s?([^\d]\w)*\s?(\d+)")
+    check = regex.match(address)
+    if country in civic_number_countries:
+        if not check:
+            raise ValidationError(
+                message = _(
+                    u"You must specify civic number"
+                    u" in your address"
+                ),
+                code = 'invalid'
+            )
+        else:
+            return address
+    else:
+        return address
+
+def clean_street1(self):
+    billing_address = self.cleaned_data.get('street1', '')
+    billing_country = self.cleaned_data.get('country', 'IT')
+    return address_validator(billing_country, billing_address)
+
+def clean_ship_street1(self):
+    shipping_address = self.cleaned_data.get('ship_street1', '')
+    shipping_country = self.cleaned_data.get('ship_country', 'IT')
+    return address_validator(shipping_country, shipping_address)
+    
+clean_methods = (
+    ('clean_person_number', clean_person_number),
+    ('clean_street1', clean_street1),
+    ('clean_ship_street1', clean_ship_street1)
+)
+
 def form_commercial_conditions_init_handler(sender, form, **kwargs):
     if 'business_number' not in form.fields:
         form.fields['business_number'] = CharField(
@@ -65,18 +101,19 @@ def form_commercial_conditions_init_handler(sender, form, **kwargs):
                 form.initial['business_number'] = info.business_number
             if info.person_number:
                 form.initial['person_number'] = info.person_number
-                
-    # handle required
-    form.__dict__['clean_person_number'] = types.MethodType(
-        clean_person_number,
-        form,
-        sender
-    )
+    
+    # custom clean methods
+    for key, method in clean_methods:
+        form.__dict__[key] = types.MethodType(
+            method,
+            form,
+            sender
+        )
                 
 def form_extrafield_init_handler(sender, form, **kwargs):
     if 'business_number' not in form.fields:
         form.fields['business_number'] = CharField(
-            label = _(u"Business number"),
+            label = _(u"VAT number"),
             validators = [buisness_number_validator,],
             required = False
         )
@@ -96,36 +133,14 @@ def form_extrafield_init_handler(sender, form, **kwargs):
             if info.person_number:
                 form.initial['person_number'] = info.person_number
     
-    # handle required
-    form.__dict__['clean_person_number'] = types.MethodType(
-        clean_person_number,
-        form,
-        sender
-    )
+    # custom clean methods
+    for key, method in clean_methods:
+        form.__dict__[key] = types.MethodType(
+            method,
+            form,
+            sender
+        )
 
-def form_extraaddressfield_init_handler(sender, form, **kwargs):
-    if 'billing_civicnumber' not in form.fields:
-        form.fields['billing_civicnumber'] = CharField(
-            label = _(u"Billing Civic number"),
-            required = True
-        )
-    if 'shipping_civicnumber' not in form.fields:
-        form.fields['shipping_civicnumber'] = CharField(
-            label = _(u"Shipping Civic number"),
-            required = True
-        )
-    if form.data.get('copy_address', False):
-        form.fields['shipping_civicnumber'].required = False
-    if hasattr(form, '_contact') and \
-            isinstance(form._contact, Contact):
-        contact = form._contact
-        if hasattr(contact, 'contactextraaddressinformation'):
-            info = contact.contactextraaddressinformation
-            if info.billing_civicnumber:
-                form.initial['billing_civicnumber'] = info.billing_civicnumber
-            if info.shipping_civicnumber:
-                form.initial['shipping_civicnumber'] = info.shipping_civicnumber
-                
 def form_extrafield_save_handler(sender, form, **kwargs):
     try:
         data = kwargs['formdata']
@@ -155,79 +170,3 @@ def contact_extrafield_view_handler(sender, **kwargs):
                'business_number': a_info.business_number,
                'person_number': a_info.person_number,
            }
-           
-def form_extraaddressfield_save_handler(sender, form, **kwargs):
-    try:
-        data = kwargs['formdata']
-        contact = kwargs['object']
-    except KeyError, e:
-        logging.warning("The form save handler is missing something: %s" % e)
-    else:
-        billing_civicnumber = data.get('billing_civicnumber', '')
-        shipping_civicnumber = data.get('shipping_civicnumber', '')
-        if hasattr(contact, 'contactextraaddressinformation'):
-           a_info = contact.contactextraaddressinformation
-        else:
-           a_info = ContactExtraAddressInformation(contact=contact)
-        if billing_civicnumber:
-           a_info.billing_civicnumber = billing_civicnumber
-        if shipping_civicnumber:
-           a_info.shipping_civicnumber = shipping_civicnumber
-        a_info.save()
-
-def contact_extraaddressfield_view_handler(sender, **kwargs):
-    if 'contact' in kwargs and 'contact_dict' in kwargs:
-        contact = kwargs['contact']
-        contact_dict = kwargs['contact_dict']
-        billing_civicnumber = ''
-        shipping_civicnumber = ''
-        if hasattr(contact, 'contactextraaddressinformation'):
-            a_info = contact.contactextraaddressinformation
-            billing_civicnumber = a_info.billing_civicnumber
-            shipping_civicnumber = a_info.shipping_civicnumber
-        contact_dict['eainfo'] = {
-            'billing_civicnumber': billing_civicnumber,
-            'shipping_civicnumber': shipping_civicnumber,
-        }
-        
-def save_to_model(type_, name, model_, data, form_name = None):
-    if form_name is None:
-        form_name = name
-    fullname = "%s_%s" % (type_, form_name)
-    if data.get(fullname, None):
-        setattr(model_, name, data[fullname])
-
-def contact_form_postsave(sender, **kwargs):
-    logger = logging.getLogger("%s.contact_form_postsave" % __name__)
-    try:
-        form = kwargs['form']
-    except KeyError, e:
-        logger.warning("The form save handler is missing something: %s" % e)
-    else:
-        data = form.cleaned_data
-        try:
-            contact = form.order.contact
-        except:
-            contact = form._contact
-        
-        if not contact:
-            return
-            
-        # BBB: we shopuld check form.changed_data too, here
-        for type_ in ['billing', 'shipping']:
-            eainfo = getattr(contact, 'contactextraaddressinformation', None)
-            if not eainfo:
-                eainfo = ContactExtraAddressInformation(
-                    contact = contact,
-                    billing_civicnumber = ' ',
-                    shipping_civicnumber = ' ',
-                    )
-                eainfo.save()
-            form_type = type_
-            if type_ == 'shipping' and data.get('copy_address', False):
-                form_type = 'billing'
-                # Copy "Billing civic number" into "Shipping civic number"
-                billing_civicnumber = data.get('billing_civicnumber', False)
-                if billing_civicnumber:
-                    eainfo.shipping_civicnumber = billing_civicnumber
-                    eainfo.save()
