@@ -13,8 +13,9 @@ from satchmo_store.shop.models import Order, OrderItem
 from satchmo_store.contact.models import *
 from satchmo_store.shop.models import *
 
+from product.utils import find_best_auto_discount
 from product.models import *
-from product.models import Product
+from product.models import Product, Discount
 from payment import utils
 
 
@@ -51,6 +52,12 @@ def make_test_order(country, state, site=None, orderitems=None):
 
     return o
     
+def make_test_discount(description, code, amount, allowedUses,
+    numUses, minOrder, active, automatic, startDate, endDate, shipping, site):
+    return Discount.objects.create(description=description, code=code, amount=amount, allowedUses=allowedUses,
+        numUses=numUses, minOrder=minOrder, active=active, automatic=automatic, allValid=True, startDate=startDate, 
+        endDate=endDate, shipping=shipping, site=site)
+    
 class TaxTest(TestCase):
     
     def setUp(self):
@@ -75,7 +82,7 @@ class TaxTest(TestCase):
 
         self.assertEqual(subtotal, Decimal('50.00'))
         self.assertEqual(tax, Decimal('12.60'))
-        # 50 + 10 shipping + 12.6 (21% on 50) tax
+        # 50 + 10 shipping + 12.6 (21% on 60) tax
         self.assertEqual(price, Decimal('72.60'))
 
         taxes = order.taxes.all()
@@ -227,3 +234,105 @@ class TestPaymentHandling(TestCase):
         self.assertEqual(order.authorized_remaining, Decimal('0'))
         self.assertEqual(order.orderstatus_set.latest().status, 'New')
         self.assertEqual(order.balance, Decimal('0'))
+
+class DiscountTest(TestCase):
+
+    def setUp(self):
+        self.site = Site.objects.get_current()
+        self.old_language_code = settings.LANGUAGE_CODE
+        settings.LANGUAGE_CODE = 'it-it'
+        self.IT = Country.objects.get(iso2_code__iexact = "IT")
+        tax = config_get('TAX','MODULE')
+        tax.update('satchmoutils.tax.modules.noarea')
+
+    def tearDown(self):
+        keyedcache.cache_delete()
+        settings.LANGUAGE_CODE = self.old_language_code
+
+    def testValid(self):
+        start = datetime.date(2011, 1, 1)
+        end = datetime.date(2016, 1, 1)
+        self.discount = make_test_discount(description="New Sale", code="BUYME", amount="5.00", allowedUses=10,
+            numUses=0, minOrder=5, active=True, automatic=False, startDate=start, endDate=end, shipping='NONE', site=self.site)
+        v = self.discount.isValid()
+        self.assert_(v[0])
+        self.assertEqual(v[1], u'Valid.')
+
+    def testFutureDate(self):
+        """Test a future date for discount start"""
+        start = datetime.date(5000, 1, 1)
+        end = datetime.date(5000, 10, 1)
+        self.discount = make_test_discount(description="New Sale", code="BUYME", amount="5.00", allowedUses=10,
+            numUses=0, minOrder=5, active=True, automatic=False, startDate=start, endDate=end, shipping='NONE', site=self.site)
+        self.discount.save()
+        self.discount.isValid()
+        v = self.discount.isValid()
+        self.assertFalse(v[0])
+        self.assertEqual(v[1], u'This coupon is not active yet.')
+
+    def testPastDate(self):
+        """Test an expired discount"""
+        #Change end date to the past
+        start = datetime.date(2010, 1, 1)
+        end = datetime.date(2011, 1, 1)
+        self.discount = make_test_discount(description="New Sale", code="BUYME", amount="5.00", allowedUses=10,
+            numUses=0, minOrder=5, active=True, automatic=False, startDate=start, endDate=end, shipping='NONE', site=self.site)
+        self.discount.save()
+        v = self.discount.isValid()
+        self.assertFalse(v[0])
+        self.assertEqual(v[1], u'This coupon has expired.')
+
+    def testNotActive(self):
+        """Not active should always be invalid."""
+        start = datetime.date(2006, 12, 1)
+        end = datetime.date(5000, 12, 1)
+        self.discount = make_test_discount(description="New Sale", code="BUYME", amount="5.00", allowedUses=10,
+            numUses=0, minOrder=5, active=False, automatic=False, startDate=start, endDate=end, shipping='NONE', site=self.site)
+        self.discount.save()
+        v = self.discount.isValid()
+        self.assertFalse(v[0], False)
+        self.assertEqual(v[1], u'This coupon is disabled.')
+        
+    def testAutomaticDiscountedOrder(self):
+        """Order with valid discount"""
+        start = datetime.date(2011, 1, 1)
+        end = datetime.date(2016, 1, 1)
+        self.discount = make_test_discount(description="New Sale", code="BUYME", amount="5.00", allowedUses=100,
+            numUses=0, minOrder=0, active=True, automatic=True, startDate=start, endDate=end, shipping='NONE', site=self.site)
+        
+        v = self.discount.isValid()
+        self.assert_(v[0])
+        self.assertEqual(v[1], u'Valid.')
+        
+        order = make_test_order(self.IT, '')
+        order.discount_code = "BUYME"
+        order.save()
+        
+        product = order.orderitem_set.all()[0].product
+        best_discount = find_best_auto_discount(product)
+        self.assertEqual(best_discount, self.discount)
+        
+        order.recalculate_total(save=False)
+        price = order.total
+        subtotal = order.sub_total
+        tax = order.tax
+
+        self.assertEqual(subtotal, Decimal('50.00'))
+        self.assertEqual(tax, Decimal('12.60'))
+        # 50 - 5 (discount) + 10 shipping + 12.6 (21% on 60) tax
+        self.assertEqual(price, Decimal('67.60'))
+
+        taxes = order.taxes.all()
+        self.assertEqual(2, len(taxes))
+        t1 = taxes[0]
+        t2 = taxes[1]
+        self.assert_('Shipping' in (t1.description, t2.description))
+        if t1.description == 'Shipping':
+            tship = t1
+            tmain = t2
+        else:
+            tship = t2
+            tmain = t1
+        self.assertEqual(tmain.tax, Decimal('10.50'))
+        self.assertEqual(tship.tax, Decimal('2.10'))
+        
