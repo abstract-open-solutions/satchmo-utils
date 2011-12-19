@@ -11,7 +11,7 @@ from satchmoutils.models import ContactAdministrativeInformation
 from satchmoutils.validators import person_number_validator, \
 buisness_number_validator
 
-civic_number_countries = ['IT', 'DE']
+house_number_countries = ['IT', 'DE']
 
 
 # "Contact Us" Form
@@ -41,13 +41,14 @@ def clean_person_number(self):
         )
 
 def address_validator(country, address):
+    # BBB: what are the countries that use the house number?
     regex = re.compile(r"\w+-?\s?([^\d]\w)*\s?(\d+)")
     check = regex.match(address)
-    if country in civic_number_countries:
+    if country in house_number_countries:
         if not check:
             raise ValidationError(
                 message = _(
-                    u"You must specify civic number"
+                    u"You must specify house number"
                     u" in your address"
                 ),
                 code = 'invalid'
