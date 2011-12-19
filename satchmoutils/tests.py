@@ -305,6 +305,8 @@ class DiscountTest(TestCase):
         self.assertEqual(v[1], u'Valid.')
         
         order = make_test_order(self.IT, '')
+        # BBB: discount_code is required! If you don't specify discount_code,
+        # none (existing valid) discount will bi applied to current order
         order.discount_code = "BUYME"
         order.save()
         
@@ -321,6 +323,57 @@ class DiscountTest(TestCase):
         self.assertEqual(tax, Decimal('12.60'))
         # 50 - 5 (discount) + 10 shipping + 12.6 (21% on 60) tax
         self.assertEqual(price, Decimal('67.60'))
+
+        taxes = order.taxes.all()
+        self.assertEqual(2, len(taxes))
+        t1 = taxes[0]
+        t2 = taxes[1]
+        self.assert_('Shipping' in (t1.description, t2.description))
+        if t1.description == 'Shipping':
+            tship = t1
+            tmain = t2
+        else:
+            tship = t2
+            tmain = t1
+        self.assertEqual(tmain.tax, Decimal('10.50'))
+        self.assertEqual(tship.tax, Decimal('2.10'))
+        
+    def testMultipleDiscountedOrder(self):
+        """Order with valid discount"""
+        start = datetime.date(2011, 1, 1)
+        end = datetime.date(2016, 1, 1)
+        discount1 = make_test_discount(description="New Sale 1", code="BUYME1", amount="5.00", allowedUses=100,
+            numUses=0, minOrder=0, active=True, automatic=True, startDate=start, endDate=end, shipping='NONE', site=self.site)
+        
+        discount2 = make_test_discount(description="New Sale 2", code="BUYME2", amount="1.00", allowedUses=100,
+            numUses=0, minOrder=0, active=True, automatic=True, startDate=start, endDate=end, shipping='NONE', site=self.site)
+        
+        v = discount1.isValid()
+        self.assert_(v[0])
+        self.assertEqual(v[1], u'Valid.')
+        
+        v = discount2.isValid()
+        self.assert_(v[0])
+        self.assertEqual(v[1], u'Valid.')
+        order = make_test_order(self.IT, '')
+        # BBB: discount_code is required! If you don't specify discount_code,
+        # none (existing valid) discount will bi applied to current order
+        order.discount_code = "BUYME2"
+        order.save()
+        
+        product = order.orderitem_set.all()[0].product
+        best_discount = find_best_auto_discount(product)
+        self.assertEqual(best_discount, discount1)
+        
+        order.recalculate_total(save=False)
+        price = order.total
+        subtotal = order.sub_total
+        tax = order.tax
+
+        self.assertEqual(subtotal, Decimal('50.00'))
+        self.assertEqual(tax, Decimal('12.60'))
+        # 50 - 1 (discount 2) + 10 shipping + 12.6 (21% on 60) tax
+        self.assertEqual(price, Decimal('71.60'))
 
         taxes = order.taxes.all()
         self.assertEqual(2, len(taxes))
