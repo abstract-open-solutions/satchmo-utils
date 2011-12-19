@@ -2,6 +2,9 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from satchmo_store.contact import models as contact_models
 
+# load custom configs
+import config
+
 
 class ContactAdministrativeInformation(models.Model):
     contact = models.OneToOneField(

@@ -9,7 +9,7 @@ from satchmo_utils.dynamic import lookup_url, lookup_template
 from satchmo_utils.views import bad_or_missing
 from satchmo_store.shop.models import Order
 
-from livesettings import config_get_group
+from livesettings import config_get_group, config_value
 from payment.utils import get_processor_by_key, get_or_create_order
 
 
@@ -103,19 +103,15 @@ def multisuccess_view(request):
     store_name = shop.store_name
     street1 = shop.street1
     state = shop.state
-    p_iva = ""
-    iban = ""
+    p_iva = config_value('SHOP_INFO','VAT_NUMBER')
+    iban = config_value('SHOP_INFO','IBAN_CODE')
     
     # Cablare il campo per il rilevamento della tipologia 
     # di pagamento
-    if payment_completed.lower() == "contrassegno":
-        target_view = "shop/checkout/success_contrassegno.html"
-    elif payment_completed.lower() == "bonifico":
-        target_view = "shop/checkout/success_bonifico.html"
-    elif payment_completed.lower() == "creditcard":
-        target_view = "shop/checkout/success_creditcard.html"
-    else:
-        target_view = "shop/checkout/success_paypal.html"
+    target_view = []
+    if payment_completed:
+        target_view.append("shop/checkout/success_%s.html" % payment_completed.lower())
+    target_view.append("shop/checkout/success_generic.html")
     
     return render_to_response(
           target_view,

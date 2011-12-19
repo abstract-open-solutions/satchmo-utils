@@ -129,8 +129,9 @@ class Processor(object):
                 taxes[tc_key] = Decimal("0.00")
             
             if config_value('TAX', 'TAX_USE_ITEMPRICE'):
-                # use full price before taxing
-                # XXX: this case is valid in Italy/Europe??
+                # In Europe, if there is a supplier 
+                # which applies discounts to products
+                # you have to use full price for taxes.
                 price = item.line_item_price
             else:
                 # use discounted price before taxing
