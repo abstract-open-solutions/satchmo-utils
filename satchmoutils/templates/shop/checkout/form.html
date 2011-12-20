@@ -44,58 +44,15 @@
 <form method="post" action="{% url satchmo_checkout-step1 %}">{% csrf_token %}
 <table>
     <tr><td colspan="2"><p>{% trans "You'll need to fill out at least the fields with a *" %}</p></td></tr>
-
-	{% ifequal paymentmethod_ct 1 %}
-	    {# If we only have one payment method, then the form renders it as a hidden field #}{{ form.paymentmethod }}
-    {% else %}
-	<tr><td colspan="2"><h4>{% trans "How do you want to pay?" %}</h4></td></tr>
-	<tr><td><label for="id_paymentmethod">{% trans "Payment method" %}*</label></td> <td><div id="payment">{{ form.paymentmethod }}</div></td></tr>
-    {% if form.paymentmethod.errors %}<tr><td class="error" colspan="2">*** {{ form.paymentmethod.errors|join:", " }}</td></tr>{% endif %}
-    {% endifequal %}
-
-	<tr><td colspan="2"><h4>{% trans "Basic Information" %}</h4></td></tr>
-    <tr><td><label for="id_email">{% trans "Email address" %}*</label></td> <td>{{ form.email }}</td></tr>
-    {% if form.email.errors %}<tr><td class="error" colspan="2">*** {{ form.email.errors|join:", " }}</td></tr>{% endif %}
-
-    <tr><td><label for="id_first_name">{% trans "First name" %}{% if form.first_name.field.required %}*{% endif %}</label></td><td> {{ form.first_name }}</td></tr>
-   {% if form.first_name.errors %}<tr><td class="error" colspan="2">*** {{ form.first_name.errors|join:", " }}</td></tr>{% endif %}
-
-    <tr><td><label for="id_last_name">{% trans "Last name" %}{% if form.last_name.field.required %}*{% endif %}</label></td><td> {{ form.last_name }}</td></tr>
-    {% if form.last_name.errors %}<tr><td class="error" colspan="2">*** {{ form.last_name.errors|join:", " }}</td></tr>{% endif %}
-
-    <tr><td><label for="id_phone">{% trans "Phone number" %}{% if form.phone.field.required %}*{% endif %}</label></td><td> {{ form.phone }}</td></tr>
-    {% if form.phone.errors %}<tr><td class="error" colspan="2">*** {{ form.phone.errors|join:", " }}</td></tr>{% endif %}
-
-    {% block billing-info %}{% include "contact/_contact_info_form_billing.html" %}{% endblock %}
-    <tr><td colspan="2"><hr /></td></tr>
-    <tr><td colspan="2"><span class="title-dark">{% trans "Administrative information" %}</span></td></tr>
-
-    <tr><td colspan="2">{% trans "Insert at least one of following fields." %}</span></td></tr>
-
-    <tr><td><label for="id_business_number">{% trans "VAT number" %}{% if form.business_number.field.required %}*{% endif %}</label></td><td> {{ form.business_number }}</td></tr>
-    {% if form.business_number.errors %}<tr><td class="error" colspan="2">*** {{ form.business_number.errors|join:", " }}</td></tr>{% endif %}
-
-    <tr><td><label for="id_person_number">{% trans "Person number" %}{% if form.person_number.field.required %}*{% endif %}</label></td><td> {{ form.person_number }}</td></tr>
-    {% if form.person_number.errors %}<tr><td class="error" colspan="2">*** {{ form.person_number.errors|join:", " }}</td></tr>{% endif %}
-    <tr><td colspan="2"><hr /></td></tr>
-
-    {% if cart.is_shippable %}
-        {% block shipping-info %}{% include "contact/_contact_info_form_shipping.html" %}{% endblock %}
-    {% endif %}
-
-    {% if form.discount.is_hidden %}
-        {{ form.discount }}
-    {% else %}
-        <tr><td colspan="2"><h4>{% trans "Discounts" %}</h4></td></tr>
-        <tr><td><label for="id_discount">{% trans "Discount code" %}</label></td><td>{{ form.discount }}</td></tr>
-        {% if form.discount.errors %}<tr><td class="error" colspan="2">*** {{ form.discount.errors|join:", " }}</td></tr>{% endif %}
-    {% endif %}
-    {% if sale %}{% include "product/sale_details.html" %}{% endif %}
     
-    <tr><td colspan="2"><hr /></td></tr>
-    <tr><td><label for="id_commercial_conditions">{% trans "I have read the Terms and Conditions." %}{% if form.commercial_conditions.field.required %}*{% endif %}</label></td><td> {{ form.commercial_conditions }}</td></tr>
-    {% if form.commercial_conditions.errors %}<tr><td class="error" colspan="2">*** {{ form.commercial_conditions.errors|join:", " }}</td></tr>{% endif %}
-    <tr><td></td></tr>
+    {% for fieldset in form.fieldsets %}
+        <tr><td colspan="2"><h4>{{ fieldset.title }}</h4></td></tr>
+        {% for field in fieldset.fields %}
+            <tr{% if field.class %} class="{{field.class}}"{% endif %}><td><label for="{{field.id}}">{{field.field.label}}</label></td> <td>{{ field.field }}</td></tr>
+            {% if field.field.errors %}<tr><td class="error" colspan="2">*** {{ field.field.errors|join:", " }}</td></tr>{% endif %}
+        {% endfor %}
+        <tr><td colspan="2"><hr /></td></tr>
+    {% endfor %}
 
 	<tr><td></td><td><input type="submit" value="{% trans "Continue Checkout" %}"/></td></tr>
 </table>
