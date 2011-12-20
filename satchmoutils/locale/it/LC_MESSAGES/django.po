@@ -20,147 +20,149 @@ msgstr ""
 
 #: config.py:8
 msgid "Shop info"
-msgstr ""
+msgstr "Informazioni sul negozio"
 
 #: config.py:16
 msgid "IBAN code"
-msgstr ""
+msgstr "Codice IBAN"
 
 #: config.py:26 forms.py:120
 msgid "VAT number"
-msgstr ""
+msgstr "P. IVA"
 
 #: forms.py:37
 msgid ""
 "You must specify either your person number or the VAT number of your company "
 "in order to proceed with the purchase"
 msgstr ""
+"Devi specificare almeno uno tra p.iva e codice fiscale "
+"per poter continuare il tuo ordine"
 
 #: forms.py:51
 msgid "You must specify house number in your address"
-msgstr ""
+msgstr "Devi specificare il numero civico nell'indirizzo"
 
 #: forms.py:83
 msgid "Vat number"
-msgstr ""
+msgstr "P. IVA"
 
 #: forms.py:89 forms.py:126 templates/contact/update_form.html:63
 #: templates/contact/view_profile.html:35 templates/shop/checkout/form.html:78
 msgid "Person number"
-msgstr ""
+msgstr "Codice fiscale"
 
 #: forms.py:95 templates/shop/checkout/form.html:96
 msgid "I have read the Terms and Conditions."
-msgstr ""
+msgstr "Ho letto le condizioni commerciali."
 
 #: models.py:12
 msgid "contact"
-msgstr ""
+msgstr "contatto"
 
 #: models.py:15
 msgid "business number"
-msgstr ""
+msgstr "p.iva"
 
 #: models.py:19
 msgid "person number"
-msgstr ""
+msgstr "codice fiscale"
 
 #: models.py:24
 #, python-format
 msgid "administrative information for %(contact_name)s"
-msgstr ""
+msgstr "informazioni amministrative per %(contact_name)s"
 
 #: models.py:29
 msgid "administrative information"
-msgstr ""
+msgstr "informazioni amministrative"
 
 #: models.py:30
 msgid "administrative informations"
-msgstr ""
+msgstr "informazioni amministrative"
 
 #: validators.py:33 validators.py:61
 msgid "The code is too short or contains invalid characters"
-msgstr ""
+msgstr "Il codice è troppo corto oppure contiene caratteri non consentiti"
 
 #: validators.py:42 validators.py:73
 msgid "The code is malformed"
-msgstr ""
+msgstr "Il codice non è valido"
 
 #: validators.py:48
 msgid "Invalid person number"
-msgstr ""
+msgstr "Codice fiscale non valido"
 
 #: validators.py:79
 msgid "Invalid company number"
-msgstr ""
+msgstr "P. iva non valida"
 
 #: views.py:101
 msgid "Message sent."
-msgstr ""
+msgstr "Messaggio spedito con successo."
 
 #: payments/modules/base.py:38
 msgid "Success"
-msgstr ""
+msgstr "Operazione eseguita con successo"
 
 #: payments/modules/views.py:63
 msgid "Payment needs to be confirmed"
-msgstr ""
+msgstr "Il pagamento deve essere confermato"
 
 #: payments/modules/views.py:88 payments/modules/creditcard/views.py:184
 msgid "Your order has already been processed."
-msgstr ""
+msgstr "Il tuo ordine è stato già eseguito"
 
 #: payments/modules/bonifico/config.py:5
 msgid "Payment Bonifico Module Settings"
-msgstr ""
+msgstr "Configurazione Pagamento tramite Bonifico"
 
 #: payments/modules/bonifico/config.py:11
 #: payments/modules/contrassegno/config.py:11
 #: payments/modules/creditcard/config.py:11
 msgid "Accept real payments"
-msgstr ""
+msgstr "Accetta pagamenti reali"
 
 #: payments/modules/bonifico/config.py:12
 #: payments/modules/contrassegno/config.py:12
 #: payments/modules/creditcard/config.py:12
 msgid "False if you want to be in test mode"
-msgstr ""
+msgstr "Modalità di test"
 
 #: payments/modules/bonifico/config.py:17
 #: payments/modules/contrassegno/config.py:17
 #: payments/modules/creditcard/config.py:17
 msgid "Implementation module"
-msgstr ""
+msgstr "Modulo di implementazione"
 
 #: payments/modules/bonifico/config.py:23
 #: payments/modules/contrassegno/config.py:23
 #: payments/modules/creditcard/config.py:23
 msgid "Module key"
-msgstr ""
+msgstr "Codice"
 
 #: payments/modules/bonifico/config.py:29
 #: payments/modules/contrassegno/config.py:29
 #: payments/modules/creditcard/config.py:34
 msgid "Currency Code"
-msgstr ""
+msgstr "Codice valuta"
 
 #: payments/modules/bonifico/config.py:30
 #: payments/modules/contrassegno/config.py:30
 #: payments/modules/creditcard/config.py:35
 msgid "Currency code for transactions (242 = EUR)."
-msgstr ""
+msgstr "Codice valuta per le transizioni (242 = EUR)."
 
 #: payments/modules/bonifico/config.py:35
 #: payments/modules/contrassegno/config.py:35
 #: payments/modules/creditcard/config.py:40
 msgid "English name for this group on the checkout screens"
-msgstr ""
+msgstr "Nome inglese per questo tipo di pagamento"
 
 #: payments/modules/bonifico/config.py:37
 #: payments/modules/contrassegno/config.py:37
 #: payments/modules/creditcard/config.py:42
 msgid "This will be passed to the translation utility"
-msgstr ""
+msgstr "Questo testo verrà processato dal modulo di traduzione"
 
 #: payments/modules/bonifico/config.py:41
 #: payments/modules/contrassegno/config.py:41
@@ -168,78 +170,79 @@ msgstr ""
 msgid ""
 "The url base used for constructing urlpatterns which will use this module"
 msgstr ""
+"URL base per questo pagamento"
 
 #: payments/modules/bonifico/config.py:46
 #: payments/modules/contrassegno/config.py:51
 #: payments/modules/creditcard/config.py:51
 msgid "Verbose logs"
-msgstr ""
+msgstr "Log esteso"
 
 #: payments/modules/bonifico/config.py:47
 #: payments/modules/contrassegno/config.py:52
 #: payments/modules/creditcard/config.py:52
 msgid "Add extensive logs during post."
-msgstr ""
+msgstr "Aggiunge un maggior numero di log durante le richieste"
 
 #: payments/modules/contrassegno/config.py:5
 msgid "Payment Contrassegno Module Settings"
-msgstr ""
+msgstr "Configurazione Pagamento tramite Contrassegno"
 
 #: payments/modules/contrassegno/config.py:36
-msgid "Pagamento alla consegna"
-msgstr ""
+msgid "Payment on delivery"
+msgstr "Pagamento alla consegna"
 
 #: payments/modules/contrassegno/config.py:46
 msgid "The handling cost of this payment"
-msgstr ""
+msgstr "Costo di gestione"
 
 #: payments/modules/creditcard/config.py:5
 msgid "Payment Credit card Module Settings thru BancaSella"
-msgstr ""
+msgstr "Configurazione Pagamento tramite BancaSella"
 
 #: payments/modules/creditcard/config.py:29
 msgid "Use SSL for the checkout pages?"
-msgstr ""
+msgstr "Usa il modulo SSL?"
 
 #: payments/modules/creditcard/config.py:41
 msgid "Creditcard (Bancasella)"
-msgstr ""
+msgstr "Bancasella (Carta di credito)"
 
 #: payments/modules/creditcard/config.py:57
 msgid "Post URL "
-msgstr ""
+msgstr "URL Bancasella"
 
 #: payments/modules/creditcard/config.py:58
 msgid "The BancaSella URL for real transaction posting."
-msgstr ""
+msgstr "URL per le richieste verso Bancasella"
 
 #: payments/modules/creditcard/config.py:63
 msgid "Post URL TEST"
-msgstr ""
+msgstr "URL TEST Bancasella"
 
 #: payments/modules/creditcard/config.py:64
 msgid "The BancaSella URL for test transaction posting."
-msgstr ""
+msgstr "URL di TEST per le richieste verso Bancasella"
 
 #: payments/modules/creditcard/config.py:69
 msgid "Merchant ID"
-msgstr ""
+msgstr "ID negoziante"
 
 #: payments/modules/creditcard/config.py:74
 msgid "Merchant Key"
-msgstr ""
+msgstr "Codice negoziante"
 
 #: payments/modules/creditcard/config.py:79
 msgid "Merchant Test ID"
-msgstr ""
+msgstr "ID Negoziante di test"
 
 #: payments/modules/creditcard/config.py:84
 msgid "Merchant Test Key"
-msgstr ""
+msgstr "Codice Negoziante di test"
 
 #: payments/modules/creditcard/config.py:89
 msgid "Return URL"
-msgstr ""
+msgstr "URL di ritorno"
 
 #: payments/modules/creditcard/config.py:90
 msgid ""

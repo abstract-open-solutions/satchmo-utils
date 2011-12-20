@@ -72,7 +72,7 @@
 
     <tr><td colspan="2">{% trans "Insert at least one of following fields." %}</span></td></tr>
 
-    <tr><td><label for="id_business_number">{% trans "Business number" %}{% if form.business_number.field.required %}*{% endif %}</label></td><td> {{ form.business_number }}</td></tr>
+    <tr><td><label for="id_business_number">{% trans "VAT number" %}{% if form.business_number.field.required %}*{% endif %}</label></td><td> {{ form.business_number }}</td></tr>
     {% if form.business_number.errors %}<tr><td class="error" colspan="2">*** {{ form.business_number.errors|join:", " }}</td></tr>{% endif %}
 
     <tr><td><label for="id_person_number">{% trans "Person number" %}{% if form.person_number.field.required %}*{% endif %}</label></td><td> {{ form.person_number }}</td></tr>

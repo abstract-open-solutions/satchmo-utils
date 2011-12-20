@@ -185,7 +185,7 @@ msgid "Payment Contrassegno Module Settings"
 msgstr ""
 
 #: payments/modules/contrassegno/config.py:36
-msgid "Pagamento alla consegna"
+msgid "Payment on delivery"
 msgstr ""
 
 #: payments/modules/contrassegno/config.py:46
