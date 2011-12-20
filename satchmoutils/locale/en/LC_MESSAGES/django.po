@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-19 19:19+0100\n"
+"POT-Creation-Date: 2011-12-20 18:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,11 +44,11 @@ msgid "Vat number"
 msgstr ""
 
 #: forms.py:89 forms.py:126 templates/contact/update_form.html:63
-#: templates/contact/view_profile.html:35 templates/shop/checkout/form.html:78
+#: templates/contact/view_profile.html:35
 msgid "Person number"
 msgstr ""
 
-#: forms.py:95 templates/shop/checkout/form.html:96
+#: forms.py:95
 msgid "I have read the Terms and Conditions."
 msgstr ""
 
@@ -75,6 +75,30 @@ msgstr ""
 
 #: models.py:30
 msgid "administrative informations"
+msgstr ""
+
+#: signals.py:16 templates/shop/checkout/form.html:18
+#: templates/shop/checkout/contrassegno/confirm.html:6
+#: templates/shop/checkout/contrassegno/confirm.html:9
+#: templates/shop/checkout/creditcard/confirm.html:7
+#: templates/shop/checkout/creditcard/confirm.html:15
+msgid "Payment"
+msgstr ""
+
+#: signals.py:17
+msgid "Basic informations"
+msgstr ""
+
+#: signals.py:18
+msgid "Billing informations"
+msgstr ""
+
+#: signals.py:19
+msgid "Shipping informations"
+msgstr ""
+
+#: signals.py:103
+msgid "Other fields"
 msgstr ""
 
 #: validators.py:33 validators.py:61
@@ -290,61 +314,6 @@ msgstr ""
 msgid "tax rates"
 msgstr ""
 
-#: templates/contact/_contact_info_form_billing.html:4
-msgid "Billing Information"
-msgstr ""
-
-#: templates/contact/_contact_info_form_billing.html:6
-msgid "Bill To"
-msgstr ""
-
-#: templates/contact/_contact_info_form_billing.html:6
-#: templates/contact/_contact_info_form_shipping.html:9
-msgid "If different from the first and last names above"
-msgstr ""
-
-#: templates/contact/_contact_info_form_billing.html:9
-#: templates/contact/_contact_info_form_billing.html:12
-#: templates/contact/_contact_info_form_shipping.html:12
-#: templates/contact/_contact_info_form_shipping.html:15
-msgid "Street"
-msgstr ""
-
-#: templates/contact/_contact_info_form_billing.html:15
-#: templates/contact/_contact_info_form_shipping.html:18
-#: templates/shop/contacts.html:37
-msgid "City"
-msgstr ""
-
-#: templates/contact/_contact_info_form_billing.html:21
-#: templates/contact/_contact_info_form_billing.html:27
-#: templates/contact/_contact_info_form_shipping.html:24
-#: templates/contact/_contact_info_form_shipping.html:30
-msgid "State/Province"
-msgstr ""
-
-#: templates/contact/_contact_info_form_billing.html:33
-#: templates/contact/_contact_info_form_shipping.html:36
-msgid "Zipcode/Postcode"
-msgstr ""
-
-#: templates/contact/_contact_info_form_billing.html:37
-#: templates/contact/_contact_info_form_shipping.html:40
-msgid "Country"
-msgstr ""
-
-#: templates/contact/_contact_info_form_shipping.html:4
-msgid "Shipping Information"
-msgstr ""
-
-#: templates/contact/_contact_info_form_shipping.html:6
-msgid "Shipping same as billing?"
-msgstr ""
-
-#: templates/contact/_contact_info_form_shipping.html:9
-msgid "Ship To"
-msgstr ""
-
 #: templates/contact/update_form.html:5 templates/contact/view_profile.html:7
 #: templates/product/product.html:23 templates/shop/cart.html:11
 #: templates/shop/checkout/form.html:9
@@ -376,19 +345,19 @@ msgstr ""
 msgid "You&apos;ll need to fill out at least the fields with a *"
 msgstr ""
 
-#: templates/contact/update_form.html:26 templates/shop/checkout/form.html:56
+#: templates/contact/update_form.html:26
 msgid "Basic Information"
 msgstr ""
 
-#: templates/contact/update_form.html:27 templates/shop/checkout/form.html:57
+#: templates/contact/update_form.html:27
 msgid "Email address"
 msgstr ""
 
-#: templates/contact/update_form.html:30 templates/shop/checkout/form.html:60
+#: templates/contact/update_form.html:30
 msgid "First name"
 msgstr ""
 
-#: templates/contact/update_form.html:33 templates/shop/checkout/form.html:63
+#: templates/contact/update_form.html:33
 msgid "Last name"
 msgstr ""
 
@@ -400,7 +369,7 @@ msgstr ""
 msgid "Birthday"
 msgstr ""
 
-#: templates/contact/update_form.html:43 templates/shop/checkout/form.html:66
+#: templates/contact/update_form.html:43
 msgid "Phone number"
 msgstr ""
 
@@ -409,12 +378,12 @@ msgid "Newsletter"
 msgstr ""
 
 #: templates/contact/update_form.html:58
-#: templates/contact/view_profile.html:32 templates/shop/checkout/form.html:71
+#: templates/contact/view_profile.html:32
 msgid "Administrative information"
 msgstr ""
 
 #: templates/contact/update_form.html:60
-#: templates/contact/view_profile.html:34 templates/shop/checkout/form.html:75
+#: templates/contact/view_profile.html:34
 msgid "Business number"
 msgstr ""
 
@@ -598,6 +567,10 @@ msgstr ""
 msgid "Company"
 msgstr ""
 
+#: templates/shop/contacts.html:37
+msgid "City"
+msgstr ""
+
 #: templates/shop/contacts.html:46
 msgid "Telephone"
 msgstr ""
@@ -625,14 +598,6 @@ msgstr ""
 
 #: templates/shop/checkout/form.html:17
 msgid "Ship/Bill"
-msgstr ""
-
-#: templates/shop/checkout/form.html:18
-#: templates/shop/checkout/contrassegno/confirm.html:6
-#: templates/shop/checkout/contrassegno/confirm.html:9
-#: templates/shop/checkout/creditcard/confirm.html:7
-#: templates/shop/checkout/creditcard/confirm.html:15
-msgid "Payment"
 msgstr ""
 
 #: templates/shop/checkout/form.html:19
@@ -670,27 +635,7 @@ msgstr ""
 msgid "You'll need to fill out at least the fields with a *"
 msgstr ""
 
-#: templates/shop/checkout/form.html:51
-msgid "How do you want to pay?"
-msgstr ""
-
-#: templates/shop/checkout/form.html:52
-msgid "Payment method"
-msgstr ""
-
-#: templates/shop/checkout/form.html:73
-msgid "Insert at least one of following fields."
-msgstr ""
-
-#: templates/shop/checkout/form.html:89
-msgid "Discounts"
-msgstr ""
-
-#: templates/shop/checkout/form.html:90
-msgid "Discount code"
-msgstr ""
-
-#: templates/shop/checkout/form.html:100
+#: templates/shop/checkout/form.html:57
 msgid "Continue Checkout"
 msgstr ""
 
