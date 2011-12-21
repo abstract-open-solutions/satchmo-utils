@@ -87,7 +87,6 @@
 <input type="hidden" name="email" value="{{order.contact.email}}" />
 <input type="hidden" name="address_override" value="0" />
 {% endwith %}{% endif %}
-<input type="hidden" name="notify_url" value="{{shop.base_url}}{% url CREDITCARD_satchmo_checkout-ipn %}" />
 <div class="button-cart-go">
 	<div class="addBttnBig">
 	    <input type="submit" value="{% trans 'Purchase Items' %}"/>
