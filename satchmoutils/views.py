@@ -27,13 +27,6 @@ time_format = "%d-%m-%Y %H:%M:%S"
 error_msg = u"ERROR. Some fields do contain wrong values. Please correct the errors below"
 
 
-def classview(cls):
-    def view_wrapper(request, *args, **kwargs):
-        instance = cls(request, *args, **kwargs)
-        return instance()
-    return view_wrapper
-
-
 # Contacts View
 def get_form(request):
     return_message = ''
