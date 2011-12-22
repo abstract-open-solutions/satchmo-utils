@@ -1,4 +1,4 @@
-import logging, types, re
+import logging, re
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
@@ -10,22 +10,11 @@ from captcha.fields import CaptchaField
 from satchmoutils.models import ContactAdministrativeInformation
 from satchmoutils.validators import person_number_validator, \
 buisness_number_validator
+from satchmoutils.utils import DynForm
 
 house_number_countries = ['IT', 'DE']
 
 
-# "Contact Us" Form
-class ContactForm(forms.Form):
-    sender_fullname = forms.CharField(required=True, max_length=100)
-    company = forms.CharField(required=False, max_length=100)
-    city = forms.CharField(required=False, max_length=100)
-    telephone = forms.CharField(required=False, max_length=100)
-    sender_from_address = forms.EmailField(required=True, max_length=100)
-    message = forms.CharField(required=True, 
-        widget=forms.widgets.Textarea(), 
-        max_length=1000)
-    captcha = CaptchaField(required=True)
-    
 def clean_person_number(self):
     business_number = self.cleaned_data.get('business_number', None)
     person_number = self.cleaned_data.get('person_number', None)
@@ -77,92 +66,114 @@ clean_methods = (
     ('clean_ship_street1', clean_ship_street1)
 )
 
+contact_additional_fields = (
+    {
+        'field_name' : 'business_number',
+        'field_label' : 'Vat number',
+        'field_class' : CharField,
+        'validators' : [buisness_number_validator,],
+        'required' : False,
+        'fieldset' : '',
+        'widget' : None
+    },
+    {
+        'field_name' : 'person_number',
+        'field_label' : 'Person number',
+        'field_class' : CharField,
+        'validators' : [person_number_validator,],
+        'required' : False,
+        'fieldset' : '',
+        'widget' : None
+    },
+)
+
+chackout_additional_fields = tuple(list(contact_additional_fields) + [
+    {
+        'field_name' : 'commercial_conditions',
+        'field_label' : 'I have read the Terms and Conditions.',
+        'field_class' : BooleanField,
+        'validators' : [],
+        'required' : True,
+        'fieldset' : '',
+        'widget' : forms.CheckboxInput()
+    },
+])
+
+class PersonalDataForm(DynForm):
+    """
+    Override of dynamic from
+    """
+    def set_data(self):
+        if hasattr(self.form, '_contact') and \
+                isinstance(self.form._contact, Contact):
+            contact = self.form._contact
+            if hasattr(contact, 'contactadministrativeinformation'):
+                info = contact.contactadministrativeinformation
+                if info.business_number:
+                    self.form.initial['business_number'] = info.business_number
+                if info.person_number:
+                    self.form.initial['person_number'] = info.person_number
+    
+    def save_data(self, **kwargs):
+        try:
+            data = kwargs['formdata']
+            contact = kwargs['object']
+        except KeyError, e:
+            logging.warning("The form save handler is missing something: %s" % e)
+        else:
+            business_number = data.get('business_number', '')
+            person_number = data.get('person_number', '')
+            if hasattr(contact, 'contactadministrativeinformation'):
+               a_info = contact.contactadministrativeinformation
+            else:
+               a_info = ContactAdministrativeInformation(contact=contact)
+            if business_number:
+               a_info.business_number = business_number
+            if person_number:
+               a_info.person_number = person_number
+            a_info.save()
+            
 def form_commercial_conditions_init_handler(sender, form, **kwargs):
-    if 'business_number' not in form.fields:
-        form.fields['business_number'] = CharField(
-            label = _(u"Vat number"),
-            validators = [buisness_number_validator,],
-            required = False
+    dynform = PersonalDataForm(form)
+    for field in chackout_additional_fields:
+        dynform.add_field(
+            field_name = field['field_name'], 
+            field_label = field['field_label'], 
+            field_class = field['field_class'], 
+            validators = field['validators'], 
+            required = field['required'], 
+            fieldset = field['fieldset'],
+            widget = field['widget']
         )
-    if 'person_number' not in form.fields:
-        form.fields['person_number'] = CharField(
-            label = _(u"Person number"),
-            validators = [person_number_validator,],
-            required = False
-        )
-    if 'commercial_conditions' not in form.fields:
-        form.fields['commercial_conditions'] = BooleanField(
-            label = _(u"I have read the Terms and Conditions."),
-            required = True,
-            widget=forms.CheckboxInput()
-        )
-    if hasattr(form, '_contact') and \
-            isinstance(form._contact, Contact):
-        contact = form._contact
-        if hasattr(contact, 'contactadministrativeinformation'):
-            info = contact.contactadministrativeinformation
-            if info.business_number:
-                form.initial['business_number'] = info.business_number
-            if info.person_number:
-                form.initial['person_number'] = info.person_number
-    
+        
+    dynform.set_data()
+
     # custom clean methods
     for key, method in clean_methods:
-        form.__dict__[key] = types.MethodType(
-            method,
-            form,
-            sender
-        )
-                
+        dynform.add_method(sender, key, method)
+
 def form_extrafield_init_handler(sender, form, **kwargs):
-    if 'business_number' not in form.fields:
-        form.fields['business_number'] = CharField(
-            label = _(u"VAT number"),
-            validators = [buisness_number_validator,],
-            required = False
-        )
-    if 'person_number' not in form.fields:
-        form.fields['person_number'] = CharField(
-            label = _(u"Person number"),
-            validators = [person_number_validator,],
-            required = False
-        )
-    if hasattr(form, '_contact') and \
-            isinstance(form._contact, Contact):
-        contact = form._contact
-        if hasattr(contact, 'contactadministrativeinformation'):
-            info = contact.contactadministrativeinformation
-            if info.business_number:
-                form.initial['business_number'] = info.business_number
-            if info.person_number:
-                form.initial['person_number'] = info.person_number
-    
-    # custom clean methods
-    for key, method in clean_methods:
-        form.__dict__[key] = types.MethodType(
-            method,
-            form,
-            sender
+    dynform = PersonalDataForm(form)
+    for field in contact_additional_fields:
+        dynform.add_field(
+            field_name = field['field_name'], 
+            field_label = field['field_label'], 
+            field_class = field['field_class'], 
+            validators = field['validators'], 
+            required = field['required'], 
+            fieldset = field['fieldset'],
+            widget = field['widget']
         )
 
+    dynform.set_data()
+
+    # custom clean methods
+    for key, method in clean_methods:
+        dynform.add_method(sender, key, method)
+
 def form_extrafield_save_handler(sender, form, **kwargs):
-    try:
-        data = kwargs['formdata']
-        contact = kwargs['object']
-    except KeyError, e:
-        logging.warning("The form save handler is missing something: %s" % e)
-    else:
-        business_number = data.get('business_number', '')
-        person_number = data.get('person_number', '')
-        if hasattr(contact, 'contactadministrativeinformation'):
-           a_info = contact.contactadministrativeinformation
-        else:
-           a_info = ContactAdministrativeInformation(contact=contact)
-        if business_number:
-           a_info.business_number = business_number
-        if person_number:
-           a_info.person_number = person_number
-        a_info.save()
+    dynform = PersonalDataForm(form)
+    dynform.save_data(**kwargs)
 
 def contact_extrafield_view_handler(sender, **kwargs):
     if 'contact' in kwargs and 'contact_dict' in kwargs:
@@ -174,3 +185,15 @@ def contact_extrafield_view_handler(sender, **kwargs):
                'business_number': a_info.business_number,
                'person_number': a_info.person_number,
            }
+
+# "Contact Us" Form
+class ContactForm(forms.Form):
+    sender_fullname = forms.CharField(required=True, max_length=100)
+    company = forms.CharField(required=False, max_length=100)
+    city = forms.CharField(required=False, max_length=100)
+    telephone = forms.CharField(required=False, max_length=100)
+    sender_from_address = forms.EmailField(required=True, max_length=100)
+    message = forms.CharField(required=True, 
+        widget=forms.widgets.Textarea(), 
+        max_length=1000)
+    captcha = CaptchaField(required=True)
