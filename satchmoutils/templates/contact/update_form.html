@@ -29,7 +29,11 @@
 
     <tr><td><label for="id_first_name">{% trans "First name" %}{% if form.first_name.field.required %}*{% endif %}</label></td><td> {{ form.first_name }}</td></tr>
    {% if form.first_name.errors %}<tr><td>&nbsp;</td><td>*** {{ form.first_name.errors|join:", " }}</td></tr>{% endif %}
-
+   
+    <tr><td><label for="id_myfield">{% trans "myfield" %}{% if form.myfield.field.required %}*{% endif %}</label></td><td> {{ form.myfield }}</td></tr>
+   {% if form.myfield.errors %}<tr><td>&nbsp;</td><td>*** {{ form.myfield.errors|join:", " }}</td></tr>{% endif %}
+   
+   
     <tr><td><label for="id_last_name">{% trans "Last name" %}{% if form.last_name.field.required %}*{% endif %}</label></td><td> {{ form.last_name }}</td></tr>
     {% if form.last_name.errors %}<tr><td>&nbsp;</td><td>*** {{ form.last_name.errors|join:", " }}</td></tr>{% endif %}
 

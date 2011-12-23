@@ -10,7 +10,7 @@ from captcha.fields import CaptchaField
 from satchmoutils.models import ContactAdministrativeInformation
 from satchmoutils.validators import person_number_validator, \
 buisness_number_validator
-from satchmoutils.utils import DynForm
+from satchmoutils.utils import DynamicForm
 
 house_number_countries = ['IT', 'DE']
 
@@ -99,7 +99,7 @@ chackout_additional_fields = tuple(list(contact_additional_fields) + [
     },
 ])
 
-class PersonalDataForm(DynForm):
+class PersonalDataForm(DynamicForm):
     """
     Override of dynamic from
     """
@@ -135,56 +135,19 @@ class PersonalDataForm(DynForm):
             
 def form_commercial_conditions_init_handler(sender, form, **kwargs):
     dynform = PersonalDataForm(form)
-    for field in chackout_additional_fields:
-        dynform.add_field(
-            field_name = field['field_name'], 
-            field_label = field['field_label'], 
-            field_class = field['field_class'], 
-            validators = field['validators'], 
-            required = field['required'], 
-            fieldset = field['fieldset'],
-            widget = field['widget']
-        )
-        
+    dynform.add_fields(chackout_additional_fields)
     dynform.set_data()
-
-    # custom clean methods
-    for key, method in clean_methods:
-        dynform.add_method(sender, key, method)
+    dynform.add_methods(sender, clean_methods)
 
 def form_extrafield_init_handler(sender, form, **kwargs):
     dynform = PersonalDataForm(form)
-    for field in contact_additional_fields:
-        dynform.add_field(
-            field_name = field['field_name'], 
-            field_label = field['field_label'], 
-            field_class = field['field_class'], 
-            validators = field['validators'], 
-            required = field['required'], 
-            fieldset = field['fieldset'],
-            widget = field['widget']
-        )
-
+    dynform.add_fields(contact_additional_fields)
     dynform.set_data()
-
-    # custom clean methods
-    for key, method in clean_methods:
-        dynform.add_method(sender, key, method)
+    dynform.add_methods(sender, clean_methods)
 
 def form_extrafield_save_handler(sender, form, **kwargs):
     dynform = PersonalDataForm(form)
     dynform.save_data(**kwargs)
-
-def contact_extrafield_view_handler(sender, **kwargs):
-    if 'contact' in kwargs and 'contact_dict' in kwargs:
-        contact = kwargs['contact']
-        contact_dict = kwargs['contact_dict']
-        if hasattr(contact, 'contactadministrativeinformation'):
-           a_info = contact.contactadministrativeinformation
-           contact_dict['adminfo'] = {
-               'business_number': a_info.business_number,
-               'person_number': a_info.person_number,
-           }
 
 # "Contact Us" Form
 class ContactForm(forms.Form):

@@ -5,8 +5,7 @@ from satchmo_store.contact.signals import satchmo_contact_view
 from satchmo_store.contact.forms import ExtendedContactInfoForm, ContactInfoForm
 
 from satchmoutils.forms import (form_commercial_conditions_init_handler, 
-form_extrafield_init_handler, form_extrafield_save_handler, 
-contact_extrafield_view_handler)
+form_extrafield_init_handler, form_extrafield_save_handler)
 
 checkout_std_fields = ('paymentmethod', 'email',  \
 'first_name', 'last_name', 'phone',  'organization', 'addressee', 'street1', \
@@ -45,7 +44,15 @@ def form_extrafield_save_handler_wrapper(sender, **kwargs):
 form_postsave.connect(form_extrafield_save_handler_wrapper)
 
 def contact_extrafield_view_handler_wrapper(sender, **kwargs):
-    contact_extrafield_view_handler(sender, **kwargs)
+    if 'contact' in kwargs and 'contact_dict' in kwargs:
+        contact = kwargs['contact']
+        contact_dict = kwargs['contact_dict']
+        if hasattr(contact, 'contactadministrativeinformation'):
+           a_info = contact.contactadministrativeinformation
+           contact_dict['adminfo'] = {
+               'business_number': a_info.business_number,
+               'person_number': a_info.person_number,
+           }
 
 satchmo_contact_view.connect(contact_extrafield_view_handler_wrapper)
 
