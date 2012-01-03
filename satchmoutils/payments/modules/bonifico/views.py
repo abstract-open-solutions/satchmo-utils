@@ -18,5 +18,5 @@ class BonificoView(OneStepView):
         )
         
 one_step = one_step_view_wrapper('bonifico', BonificoView)
-confirm_info = confirm_info_view_wrapper('bonifico')
 pay_ship_info = pay_ship_info_view_wrapper('bonifico')
+confirm_info = confirm_info_view_wrapper('bonifico')

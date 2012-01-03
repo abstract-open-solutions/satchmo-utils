@@ -95,12 +95,16 @@ class OneStepView(object):
 def one_step_view_wrapper(processor, klass=OneStepView):
     return never_cache(klass(processor))
 
+# Override for allow_skip = False
+def noskip_simple_pay_ship_process_form(request, contact, working_cart, payment_module, allow_skip=False):
+    return simple_pay_ship_process_form(request, contact, working_cart, payment_module, allow_skip=False)
+        
 class PayshipInfoClass(BaseViewClass):
     
     def __call__(self, request):
         processor_key = self.processor_configuration.KEY.value.lower()
         template = 'shop/checkout/%s/pay_ship.html' % processor_key
-        return base_pay_ship_info(request, self.processor_configuration, simple_pay_ship_process_form, template)
+        return base_pay_ship_info(request, self.processor_configuration, noskip_simple_pay_ship_process_form, template)
             
 def pay_ship_info_view_wrapper(processor, klass=PayshipInfoClass):
     return never_cache(klass(processor))
