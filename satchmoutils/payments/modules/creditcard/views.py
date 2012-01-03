@@ -1,9 +1,8 @@
 from decimal import Decimal
 from django.core import urlresolvers
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.utils.http import urlencode
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
 from livesettings import config_get_group, config_value 
@@ -11,12 +10,9 @@ from payment.config import gateway_live
 from payment.utils import get_processor_by_key
 from payment.views import payship
 from satchmo_store.shop.models import Cart
-from satchmo_store.shop.models import Order, OrderPayment
+from satchmo_store.shop.models import Order
 from satchmo_utils.dynamic import lookup_url, lookup_template
-from sys import exc_info
-from traceback import format_exception
 import logging
-import urllib2
 from satchmo_utils.views import bad_or_missing
 
 from satchmoutils.payments.modules.creditcard.GestPayCrypt import GestPayCrypt
@@ -25,8 +21,10 @@ log = logging.getLogger()
 
 def pay_ship_info(request):
     return payship.base_pay_ship_info(request,
-        config_get_group('PAYMENT_CREDITCARD'), payship.simple_pay_ship_process_form,
-        'shop/checkout/creditcard/pay_ship.html')
+        config_get_group('PAYMENT_CREDITCARD'), 
+        payship.simple_pay_ship_process_form,
+        'shop/checkout/creditcard/pay_ship.html'
+    )
 pay_ship_info = never_cache(pay_ship_info)
 
 
@@ -41,17 +39,23 @@ def confirm_info(request):
 
     tempCart = Cart.objects.from_request(request)
     if tempCart.numItems == 0 and not order.is_partially_paid:
-        template = lookup_template(payment_module, 'shop/checkout/empty_cart.html')
+        template = lookup_template(
+            payment_module, 
+            'shop/checkout/empty_cart.html'
+        )
         return render_to_response(template,
                                   context_instance=RequestContext(request))
 
     # Check if the order is still valid
     if not order.validate(request):
         context = RequestContext(request,
-                                 {'message': _('Your order is no longer valid.')})
+                        {'message': _('Your order is no longer valid.')})
         return render_to_response('shop/404.html', context_instance=context)
 
-    template = lookup_template(payment_module, 'shop/checkout/creditcard/confirm.html')
+    template = lookup_template(
+        payment_module, 
+        'shop/checkout/creditcard/confirm.html'
+    )
     if payment_module.LIVE.value:
         log.debug("live order on %s", payment_module.KEY.value)
         url = payment_module.POST_URL.value
@@ -75,9 +79,13 @@ def confirm_info(request):
     order_items = order.orderitem_set.all()
     for item in order_items:
         if item.product.is_subscription:
-            recurring = {'product':item.product, 'price':item.product.price_set.all()[0].price.quantize(Decimal('.01')),}
+            recurring = {
+                'product':item.product, 
+                'price':item.product.price_set.all()[0].price.quantize(Decimal('.01'))
+            }
             trial0 = recurring['product'].subscriptionproduct.get_trial_terms(0)
-            if len(order_items) > 1 or trial0 is not None or recurring['price'] < order.balance:
+            if len(order_items) > 1 or trial0 is not None \
+                        or recurring['price'] < order.balance:
                 recurring['trial1'] = {'price': order.balance,}
                 if trial0 is not None:
                     recurring['trial1']['expire_length'] = trial0.expire_length

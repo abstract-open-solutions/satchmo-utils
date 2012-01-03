@@ -14,7 +14,7 @@ checkout_std_fields = ('paymentmethod', 'email',  \
 'ship_street2', 'ship_city', 'ship_state', 'ship_postal_code', 'ship_country')
 checkout_exclude_fields = ('title', 'next', 'street2', 'ship_street2')
 
-fieldsets = {
+default_fieldsets = {
     'payment' : (_(u'Payment'), ('paymentmethod',)),
     'personal' : (_(u'Basic informations'), ('email', 'first_name', \
                 'last_name', 'phone',  'organization')),
@@ -67,7 +67,10 @@ form_init.connect(form_commercial_conditions_init_handler_wrapper)
 # Grouping fields for checkout form refactoring
 def form_group_fields_init_handler_wrapper(sender, **kwargs):
     from payment.forms import PaymentContactInfoForm
-
+    
+    fieldsets = kwargs.get('fieldsets', default_fieldsets)
+    std_fields = kwargs.get('std_fields', checkout_std_fields)
+    
     checkout_shipping_fields = fieldsets['shipping']
 
     if sender == PaymentContactInfoForm:
@@ -101,7 +104,7 @@ def form_group_fields_init_handler_wrapper(sender, **kwargs):
 
         # Additional fields
         other_fields_ids = list(
-            set(checkout_fields_ids) - set(checkout_std_fields)
+            set(checkout_fields_ids) - set(std_fields)
         )
         other_fields = []
         for fid in other_fields_ids:

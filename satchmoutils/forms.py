@@ -73,17 +73,13 @@ contact_additional_fields = (
         'field_class' : CharField,
         'validators' : [buisness_number_validator,],
         'required' : False,
-        'fieldset' : '',
-        'widget' : None
     },
     {
         'field_name' : 'person_number',
         'field_label' : 'Person number',
         'field_class' : CharField,
         'validators' : [person_number_validator,],
-        'required' : False,
-        'fieldset' : '',
-        'widget' : None
+        'required' : False
     },
 )
 
@@ -94,7 +90,6 @@ chackout_additional_fields = tuple(list(contact_additional_fields) + [
         'field_class' : BooleanField,
         'validators' : [],
         'required' : True,
-        'fieldset' : '',
         'widget' : forms.CheckboxInput()
     },
 ])

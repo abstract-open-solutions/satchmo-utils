@@ -21,10 +21,10 @@ class PersonNumberValidator(BaseValidator):
     """
 
     regex = re.compile(r"^[A-Z0-9]{16}$")
-    set_1 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    set_2 = "ABCDEFGHIJABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    set_even = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    set_uneven = "BAKPLCQDREVOSFTGUHMINJWZYX";
+    set_1 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    set_2 = "ABCDEFGHIJABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    set_even = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    set_uneven = "BAKPLCQDREVOSFTGUHMINJWZYX"
 
     def is_valid(self, value):
         value = value.upper()
@@ -76,5 +76,5 @@ class BuisnessNumberValidator(BaseValidator):
 
 
 buisness_number_validator = BuisnessNumberValidator(
-    message = _(u"Invalid company number")
+    message = _(u"Invalid Vat number")
 )
