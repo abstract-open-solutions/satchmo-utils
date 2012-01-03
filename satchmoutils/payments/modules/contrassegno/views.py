@@ -1,6 +1,7 @@
 from decimal import Decimal
 
-from satchmoutils.payments.modules.views import OneStepView, one_step_view_wrapper
+from satchmoutils.payments.modules.views import OneStepView, one_step_view_wrapper, \
+    pay_ship_info_view_wrapper, confirm_info_view_wrapper
 
 import logging
 
@@ -17,5 +18,9 @@ class ContrassegnoView(OneStepView):
             self.payment_module.HANDLING_COST.value
         )
 
+class ConfirmContrassegnoView(ContrassegnoView):
+    """ pass """
 
 one_step = one_step_view_wrapper('contrassegno', ContrassegnoView)
+confirm_info = confirm_info_view_wrapper('contrassegno', ConfirmContrassegnoView)
+pay_ship_info = pay_ship_info_view_wrapper('contrassegno')

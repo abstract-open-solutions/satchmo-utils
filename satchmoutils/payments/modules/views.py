@@ -8,11 +8,31 @@ from satchmo_store.shop.models import Config, Cart, Contact
 from satchmo_utils.dynamic import lookup_url, lookup_template
 from satchmo_utils.views import bad_or_missing
 from satchmo_store.shop.models import Order
+from payment.views.payship import base_pay_ship_info, simple_pay_ship_process_form
+from payment.views.confirm import ConfirmController
 
 from livesettings import config_get_group, config_value
 from payment.utils import get_processor_by_key, get_or_create_order
 
 
+class BaseViewClass(object):
+    
+    def __init__(self, processor):
+        self.payment_module = config_get_group('PAYMENT_%s' % processor.upper())
+        self.processor = get_processor_by_key('PAYMENT_%s' % processor.upper())
+        self.processor_configuration = config_get_group('PAYMENT_%s' % processor.upper())
+        self._postprocess_callables = []
+        
+    def preprocess_order(self, order):
+        pass
+        
+    def postprocess_order(self, order):
+        for postprocess in self._postprocess_callables:
+            postprocess(order)
+            
+    def __call__(self, request):
+        pass
+        
 class OneStepView(object):
 
     def __init__(self, processor):
@@ -75,6 +95,33 @@ class OneStepView(object):
 def one_step_view_wrapper(processor, klass=OneStepView):
     return never_cache(klass(processor))
 
+class PayshipInfoClass(BaseViewClass):
+    
+    def __call__(self, request):
+        processor_key = self.processor_configuration.KEY.value.lower()
+        template = 'shop/checkout/%s/pay_ship.html' % processor_key
+        return base_pay_ship_info(request, self.processor_configuration, simple_pay_ship_process_form, template)
+            
+def pay_ship_info_view_wrapper(processor, klass=PayshipInfoClass):
+    return never_cache(klass(processor))
+    
+class ConfirmInfoClass(BaseViewClass):
+    
+    def __call__(self, request):
+        processor_key = self.processor_configuration.KEY.value.lower()
+        template = 'shop/checkout/%s/confirm.html' % processor_key
+        
+        controller = ConfirmController(request, self.payment_module)
+        
+        controller.templates['CONFIRM'] = template
+        
+        controller.confirm()
+        
+        return controller.response
+
+def confirm_info_view_wrapper(processor, klass=ConfirmInfoClass):
+    return never_cache(klass(processor))
+    
 def multisuccess_view(request):
     """
     The order has been succesfully processed.  This can be used to generate a receipt or some other confirmation
@@ -131,4 +178,5 @@ def multisuccess_view(request):
           },
           context_instance=RequestContext(request)
     )
+    
 multisuccess_view = never_cache(multisuccess_view)

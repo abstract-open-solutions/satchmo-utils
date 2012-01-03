@@ -1,4 +1,5 @@
-from satchmoutils.payments.modules.views import OneStepView, one_step_view_wrapper
+from satchmoutils.payments.modules.views import OneStepView, one_step_view_wrapper, \
+    confirm_info_view_wrapper, pay_ship_info_view_wrapper
 
 import logging
 
@@ -13,3 +14,5 @@ class BonificoView(OneStepView):
         order.add_status(status='New', notes="Attesa di pagamento a mezzo bonifico")
         
 one_step = one_step_view_wrapper('bonifico', BonificoView)
+confirm_info = confirm_info_view_wrapper('bonifico')
+pay_ship_info = pay_ship_info_view_wrapper('bonifico')
