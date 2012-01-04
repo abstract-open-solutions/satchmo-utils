@@ -1,5 +1,5 @@
 from collections import Sequence
-from signals_ahoy.signals import form_init, form_initdata, form_postsave
+from signals_ahoy.signals import form_init, form_postsave
 
 
 class ExtraField(object):
@@ -33,9 +33,9 @@ class Fieldsets(Sequence):
 
     def __init__(self, initial = tuple()):
         self.elements = list(initial)
-        self.ids = {}
+        self.ids_ = {}
         for element in self.elements:
-            self.ids[element.id_] = element
+            self.ids_[element.id_] = element
 
     def __len__(self):
         return len(self.elements)
@@ -44,21 +44,21 @@ class Fieldsets(Sequence):
         return iter(self.elements)
 
     def __contains__(self, item):
-        return item.id_ in self.ids
+        return item.id_ in self.ids_
 
     def __getitem__(self, index):
         return self.elements[index]
 
     def add(self, item):
-        if item.id_ in self.ids:
-            self.elements.remove(self.ids[item.id_])
+        if item.id_ in self.ids_:
+            self.elements.remove(self.ids_[item.id_])
             del self.ids[item.id_]
         self.ids_[item.id_] = item
         if item.before is None:
             self.elements.append(item)
         else:
             try:
-                index = self.elements.index(self.ids[item.before])
+                index = self.elements.index(self.ids_[item.before])
             except ValueError:
                 self.elements.append(item)
             else:
@@ -74,7 +74,7 @@ def extends(*form_classes):
         for form_class in form_classes:
             form_init.connect(extender.handle_init, sender=form_class)
             if hasattr(extender, 'handle_initdata'):
-                form_initdata.connect(extender.handle_initdata,
+                form_init.connect(extender.handle_initdata,
                                       sender=form_class)
             if hasattr(extender, 'handle_postsave'):
                 form_postsave.connect(extender.handle_postsave,
