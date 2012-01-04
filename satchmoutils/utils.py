@@ -1,3 +1,4 @@
+from types import MethodType
 from collections import Sequence
 from signals_ahoy.signals import form_init, form_postsave
 
@@ -133,12 +134,16 @@ class Extender(object):
     """
 
     fields = []
+    methods = {}
 
     @classmethod
     def handle_init(cls, **kwargs):
         form = kwargs['form']
         for extrafield in cls.fields:
             form.fields[extrafield.name] = extrafield()
+        for name, method in cls.methods.items():
+            form.__dict__[name] = MethodType(method, form,
+                                                   form.__class__)
         if hasattr(cls, 'fieldsets') and len(cls.fieldsets) > 0:
             if not hasattr(form, 'fieldsets'):
                 form.fieldsets = Fieldsets()
