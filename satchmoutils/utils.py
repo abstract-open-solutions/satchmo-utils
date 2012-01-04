@@ -83,8 +83,8 @@ class Fieldsets(Sequence):
                 except (KeyError, ValueError):
                     pass
                 else:
-                    self.elements.insert(new_index, element)
                     del self.elements[index]
+                    self.elements.insert(new_index, element)
 
     def add(self, item):
         if item.id_ in self.ids:

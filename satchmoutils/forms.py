@@ -42,7 +42,6 @@ class ContactForm(forms.Form):
                               required=True)
     captcha = CaptchaField(required=True)
 
-# Checkout Form dynamic customization
 def address_validator(country, address):
     # BBB: what are the countries that use the house number?
     regex = re.compile(r"\w+-?\s?([^\d]\w)*\s?(\d+)")
@@ -61,34 +60,40 @@ def address_validator(country, address):
     else:
         return address
 
+def clean_person_number(self):
+    business_number = self.cleaned_data.get('business_number', None)
+    person_number = self.cleaned_data.get('person_number', None)
+    if business_number or person_number:
+        return person_number
+    else:
+        raise ValidationError(
+            message = _(
+                u"You must specify either your person number or the VAT number"
+                u" of your company in order to proceed with the purchase"
+            ),
+            code = 'invalid'
+        )
+
+def clean_street1(self):
+    billing_address = self.cleaned_data.get('street1', '')
+    billing_country = self.cleaned_data.get('country', 'IT')
+    return address_validator(billing_country, billing_address)
+
+def clean_ship_street1(self):
+    shipping_address = self.cleaned_data.get('ship_street1', '')
+    shipping_country = self.cleaned_data.get('ship_country', 'IT')
+    copy_address = self.cleaned_data.get('copy_address', False)
+    if copy_address:
+        shipping_address = self.cleaned_data.get('street1', '')
+    return address_validator(shipping_country, shipping_address)
+    
 class CheckoutFormBaseExtender(Extender):
-    def clean_person_number(self):
-        business_number = self.cleaned_data.get('business_number', None)
-        person_number = self.cleaned_data.get('person_number', None)
-        if business_number or person_number:
-            return person_number
-        else:
-            raise ValidationError(
-                message = _(
-                    u"You must specify either your person number or the VAT number"
-                    u" of your company in order to proceed with the purchase"
-                ),
-                code = 'invalid'
-            )
+    methods = {
+        'clean_person_number' : clean_person_number,
+        'clean_street1' : clean_street1,
+        'clean_ship_street1' : clean_ship_street1
+    }
 
-    def clean_street1(self):
-        billing_address = self.cleaned_data.get('street1', '')
-        billing_country = self.cleaned_data.get('country', 'IT')
-        return address_validator(billing_country, billing_address)
-
-    def clean_ship_street1(self):
-        shipping_address = self.cleaned_data.get('ship_street1', '')
-        shipping_country = self.cleaned_data.get('ship_country', 'IT')
-        copy_address = self.cleaned_data.get('copy_address', False)
-        if copy_address:
-            shipping_address = self.cleaned_data.get('street1', '')
-        return address_validator(shipping_country, shipping_address)
-        
     @classmethod
     def handle_initdata(cls, **kwargs):
         # pylint: disable=W0212
