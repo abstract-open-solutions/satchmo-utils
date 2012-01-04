@@ -49,7 +49,7 @@ person_number_validator = PersonNumberValidator(
 )
 
 
-class BuisnessNumberValidator(BaseValidator):
+class BusinessNumberValidator(BaseValidator):
     """Based on http://www.icosaedro.it/cf-pi/vedi-codice.cgi?f=pi-js.txt
     """
 
@@ -75,6 +75,6 @@ class BuisnessNumberValidator(BaseValidator):
         return True
 
 
-buisness_number_validator = BuisnessNumberValidator(
+business_number_validator = BusinessNumberValidator(
     message = _(u"Invalid Vat number")
 )

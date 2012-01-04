@@ -10,8 +10,7 @@ from satchmo_store.contact.forms import (ExtendedContactInfoForm,
                                          ContactInfoForm)
 from satchmoutils.models import ContactAdministrativeInformation
 from satchmoutils.validators import (person_number_validator,
-                                     # XXX: business
-                                     buisness_number_validator)
+                                     business_number_validator)
 from satchmoutils.utils import Extender, extends, ExtraField, Fieldset
 
 
@@ -43,22 +42,7 @@ class ContactForm(forms.Form):
                               required=True)
     captcha = CaptchaField(required=True)
 
-
-def clean_person_number(self):
-    business_number = self.cleaned_data.get('business_number', None)
-    person_number = self.cleaned_data.get('person_number', None)
-    if business_number or person_number:
-        return person_number
-    else:
-        raise ValidationError(
-            message = _(
-                u"You must specify either your person number or the VAT number"
-                u" of your company in order to proceed with the purchase"
-            ),
-            code = 'invalid'
-        )
-
-
+# Checkout Form dynamic customization
 def address_validator(country, address):
     # BBB: what are the countries that use the house number?
     regex = re.compile(r"\w+-?\s?([^\d]\w)*\s?(\d+)")
@@ -77,24 +61,34 @@ def address_validator(country, address):
     else:
         return address
 
-
-def clean_street1(self):
-    billing_address = self.cleaned_data.get('street1', '')
-    billing_country = self.cleaned_data.get('country', 'IT')
-    return address_validator(billing_country, billing_address)
-
-
-def clean_ship_street1(self):
-    shipping_address = self.cleaned_data.get('ship_street1', '')
-    shipping_country = self.cleaned_data.get('ship_country', 'IT')
-    copy_address = self.cleaned_data.get('copy_address', False)
-    if copy_address:
-        shipping_address = self.cleaned_data.get('street1', '')
-    return address_validator(shipping_country, shipping_address)
-
-
 class CheckoutFormBaseExtender(Extender):
+    def clean_person_number(self):
+        business_number = self.cleaned_data.get('business_number', None)
+        person_number = self.cleaned_data.get('person_number', None)
+        if business_number or person_number:
+            return person_number
+        else:
+            raise ValidationError(
+                message = _(
+                    u"You must specify either your person number or the VAT number"
+                    u" of your company in order to proceed with the purchase"
+                ),
+                code = 'invalid'
+            )
 
+    def clean_street1(self):
+        billing_address = self.cleaned_data.get('street1', '')
+        billing_country = self.cleaned_data.get('country', 'IT')
+        return address_validator(billing_country, billing_address)
+
+    def clean_ship_street1(self):
+        shipping_address = self.cleaned_data.get('ship_street1', '')
+        shipping_country = self.cleaned_data.get('ship_country', 'IT')
+        copy_address = self.cleaned_data.get('copy_address', False)
+        if copy_address:
+            shipping_address = self.cleaned_data.get('street1', '')
+        return address_validator(shipping_country, shipping_address)
+        
     @classmethod
     def handle_initdata(cls, **kwargs):
         # pylint: disable=W0212
@@ -130,21 +124,13 @@ class ContactExtender(CheckoutFormBaseExtender):
     fields = [
         ExtraField(CharField, name='business_number',
             label = 'Vat number',
-            validators = [buisness_number_validator,],
+            validators = [business_number_validator,],
             required = False,
         ),
         ExtraField(CharField, name='person_number',
             label = 'Person number',
             validators = [person_number_validator,],
             required = False,
-        )
-    ]
-    fieldsets = [
-        Fieldset(
-            'billing',
-            _(u'Billing informations'),
-            ('person_number',
-             'business_number')
         )
     ]
 
@@ -180,6 +166,7 @@ class CheckoutExtender(CheckoutFormBaseExtender):
             _(u'Billing informations'),
             ('addressee',
              'street1',
+             'street2',
              'city',
              'state',
              'postal_code',
@@ -193,9 +180,16 @@ class CheckoutExtender(CheckoutFormBaseExtender):
             ('copy_address',
              'ship_addressee',
              'ship_street1',
+             'ship_street2',
              'ship_city',
              'ship_state',
              'ship_postal_code',
              'ship_country')
-        )
+        ),
+        Fieldset(
+            'other',
+            _(u'Other informations'),
+            ('discount',
+             'commercial_conditions')
+        ),
     ]
