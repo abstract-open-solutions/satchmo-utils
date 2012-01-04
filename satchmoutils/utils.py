@@ -1,78 +1,57 @@
 import types
-import abc
+from signals_ahoy.signals import form_init
 
-from django.utils.translation import ugettext_lazy as _
+class ExtraHandler(object):
+
+    signal = None
+
+    @classmethod
+    def hook(cls, form_class):
+        cls.signal.connect(cls(), sender=form_class)
+
+    def __call__(self, **kwargs):
+        pass
 
 
-class AbstractDynamicForm(object):
-    __metaclass__ = abc.ABCMeta
-    
-    @abc.abstractmethod
-    def set_data(self):
-        """
-        This is an abstract method.
-        Should have implemented this method to set 
-        additional fields into the form.
-        """
-        raise NotImplementedError("Should have implemented this")
-    
-    @abc.abstractmethod
-    def save_data(self, **kwargs):
-        """
-        This is an abstract method.
-        Should have implemented this method to save additional data 
-        dynamically injected into the form.
-        """
-        raise NotImplementedError("Should have implemented this")
-    
-class DynamicForm(object):
-    """
-    Dynamic form that allows the user to change 
-    and then verify the data that was parsed
-    """
+class metainitializer(type):
 
-    def __init__(self, form=None):
-        self.form = form
+    def __call__(cls, *args, **kwargs):
+        dict_ = dict(cls.__dict__.items())
+        if len(args) > 0:
+            dict_['name'] = args[0]
+        if len(args) > 1:
+            dict_['instance'] = args[1]
+        dict_.update(kwargs)
+        return type.__new__(metainitializer, cls.__name__, cls.__bases__, dict_)
 
-    def add_fields(self, fields=()):
-        """ Add multiple fields to the given form """
-        for field in fields:
-            self.add_field(**field)
-                
-    def add_field(self, field_name=None, field_label='', field_class=None, 
-                    validators=[], required=False, fieldset='', widget=None, choices=[]):
-        """ Add single field to the given form """
-        args = {
-            'label' : _(u"%s" % field_label),
-            'validators' : validators,
-            'required' : required,
-            'widget' : widget
-        }
-        if choices:
-            args['choices'] = choices
-            
-        if field_name not in self.form.fields:
-            self.form.fields[field_name] = field_class(**args)
 
-    def add_methods(self, sender, methods=()):
-        """ Add multiple methods to the given form """
-        for key, method in methods:
-            self.add_method(sender, key, method)
+class ExtraBase(ExtraHandler):
+    __metaclass__ = metainitializer
+    signal = form_init
 
-    def add_method(self, sender, key, method):
-        """ Add single method to the given form """
-        self.form.__dict__[key] = types.MethodType(
-            method,
-            self.form,
-            sender
+
+class ExtraField(ExtraBase):
+
+    def __call__(self, **kwargs):
+        form = kwargs['form']
+        form.fields[self.name] = self.instance
+
+
+class ExtraMethod(ExtraBase):
+
+    def __call__(self, **kwargs):
+        form = kwargs['form']
+        form_class = kwargs['sender']
+        form.__dict__[self.name] = types.MethodType(
+            self.instance,
+            form,
+            form_class
         )
-    
-    def set_data(self):
-        """ To implements """
-        return
 
-    def save_data(self, **kwargs):
-        """ To implements """
-        return
 
-AbstractDynamicForm.register(DynamicForm)
+def add_to_form(form_class, *args):
+    for arg in args:
+        if isinstance(arg, type) and issubclass(arg, ExtraHandler):
+            arg.hook(form_class)
+        else:
+            raise ValueError("Must be an ExtraHandler class")

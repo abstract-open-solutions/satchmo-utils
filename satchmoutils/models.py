@@ -28,5 +28,3 @@ class ContactAdministrativeInformation(models.Model):
     class Meta:
         verbose_name = _("administrative information")
         verbose_name_plural = _("administrative informations")
-        
-from satchmoutils.signals import *

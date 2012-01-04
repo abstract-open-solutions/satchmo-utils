@@ -3,6 +3,9 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.forms.fields import CharField, BooleanField
+from signals_ahoy.signals import form_init, form_postsave
+from satchmo_store.contact.forms import ExtendedContactInfoForm, ContactInfoForm
+from payment.forms import PaymentContactInfoForm
 
 from satchmo_store.contact.models import Contact
 from captcha.fields import CaptchaField
@@ -10,11 +13,44 @@ from captcha.fields import CaptchaField
 from satchmoutils.models import ContactAdministrativeInformation
 from satchmoutils.validators import person_number_validator, \
 buisness_number_validator
-from satchmoutils.utils import DynamicForm
+# from satchmoutils.utils import DynamicForm
+from satchmoutils.utils import *
 
 house_number_countries = ['IT', 'DE']
+checkout_std_fields = ('paymentmethod', 'email', \
+'first_name', 'last_name', 'phone', 'organization', 'addressee', 'street1', \
+'street2', 'city', 'state', 'postal_code', 'country', 'business_number', \
+'person_number', 'copy_address', 'ship_addressee', 'ship_street1', \
+'ship_street2', 'ship_city', 'ship_state', 'ship_postal_code', 'ship_country')
+checkout_exclude_fields = ('title', 'next', 'street2', 'ship_street2')
+
+default_fieldsets = {
+    'payment' : (_(u'Payment'), ('paymentmethod',)),
+    'personal' : (_(u'Basic informations'), ('email', 'first_name', \
+                'last_name', 'phone', 'organization')),
+    'billing' : (_(u'Billing informations'), ('addressee', 'street1', \
+                'city', 'state', 'postal_code', 'country', 'business_number', \
+                'person_number')),
+    'shipping' : (_(u'Shipping informations'), ('copy_address', \
+                'ship_addressee', 'ship_street1', 'ship_city', 'ship_state', \
+                'ship_postal_code', 'ship_country')),
+}
+sorted_fieldsets_keys = ['payment', 'personal', 'billing', 'shipping']
 
 
+# "Contact Us" Form
+class ContactForm(forms.Form):
+    sender_fullname = forms.CharField(required=True, max_length=100)
+    company = forms.CharField(required=False, max_length=100)
+    city = forms.CharField(required=False, max_length=100)
+    telephone = forms.CharField(required=False, max_length=100)
+    sender_from_address = forms.EmailField(required=True, max_length=100)
+    message = forms.CharField(required=True,
+        widget=forms.widgets.Textarea(),
+        max_length=1000)
+    captcha = CaptchaField(required=True)
+
+# Dynamic customizing checkout form
 def clean_person_number(self):
     business_number = self.cleaned_data.get('business_number', None)
     person_number = self.cleaned_data.get('person_number', None)
@@ -59,57 +95,46 @@ def clean_ship_street1(self):
     if copy_address:
         shipping_address = self.cleaned_data.get('street1', '')
     return address_validator(shipping_country, shipping_address)
-    
-clean_methods = (
-    ('clean_person_number', clean_person_number),
-    ('clean_street1', clean_street1),
-    ('clean_ship_street1', clean_ship_street1)
-)
 
-contact_additional_fields = (
-    {
-        'field_name' : 'business_number',
-        'field_label' : 'Vat number',
-        'field_class' : CharField,
-        'validators' : [buisness_number_validator,],
-        'required' : False,
-    },
-    {
-        'field_name' : 'person_number',
-        'field_label' : 'Person number',
-        'field_class' : CharField,
-        'validators' : [person_number_validator,],
-        'required' : False
-    },
-)
 
-chackout_additional_fields = tuple(list(contact_additional_fields) + [
-    {
-        'field_name' : 'commercial_conditions',
-        'field_label' : 'I have read the Terms and Conditions.',
-        'field_class' : BooleanField,
-        'validators' : [],
-        'required' : True,
-        'widget' : forms.CheckboxInput()
-    },
-])
+class ExtraInitCheckoutForm(ExtraHandler):
+    signal = form_init
 
-class PersonalDataForm(DynamicForm):
-    """
-    Override of dynamic from
-    """
-    def set_data(self):
-        if hasattr(self.form, '_contact') and \
-                isinstance(self.form._contact, Contact):
-            contact = self.form._contact
+    def __call__(self, **kwargs):
+        import pdb; pdb.set_trace()
+        form = kwargs['form']
+        if hasattr(form, '_contact') and \
+                isinstance(form._contact, Contact):
+            contact = form._contact
             if hasattr(contact, 'contactadministrativeinformation'):
                 info = contact.contactadministrativeinformation
                 if info.business_number:
-                    self.form.initial['business_number'] = info.business_number
+                    form.initial['business_number'] = info.business_number
                 if info.person_number:
-                    self.form.initial['person_number'] = info.person_number
+                    form.initial['person_number'] = info.person_number
+
+for form_ in [ContactInfoForm, ExtendedContactInfoForm]:
+    add_to_form(form_,
+                ExtraField('business_number', CharField(
+                    label='Vat number',
+                    validators=[buisness_number_validator,],
+                    required=False
+                )),
+                ExtraField('person_number', CharField(
+                    label='Person number',
+                    validators=[person_number_validator,],
+                    required=False
+                )),
+                ExtraMethod('clean_person_number', clean_person_number),
+                ExtraMethod('clean_street1', clean_street1),
+                ExtraMethod('clean_ship_street1', clean_ship_street1),
+                ExtraInitCheckoutForm)
+
+
+class ExtraPaymentContactPostSaveForm(ExtraHandler):
+    signal = form_postsave
     
-    def save_data(self, **kwargs):
+    def __call__(self, **kwargs):
         try:
             data = kwargs['formdata']
             contact = kwargs['object']
@@ -128,30 +153,82 @@ class PersonalDataForm(DynamicForm):
                a_info.person_number = person_number
             a_info.save()
             
-def form_commercial_conditions_init_handler(sender, form, **kwargs):
-    dynform = PersonalDataForm(form)
-    dynform.add_fields(chackout_additional_fields)
-    dynform.set_data()
-    dynform.add_methods(sender, clean_methods)
+class ExtraPaymentContactInfoForm(ExtraHandler):
+    signal = form_init
+    
+    def __call__(self, **kwargs):
+        fieldsets = kwargs.get('fieldsets', default_fieldsets)
+        std_fields = kwargs.get('std_fields', checkout_std_fields)
 
-def form_extrafield_init_handler(sender, form, **kwargs):
-    dynform = PersonalDataForm(form)
-    dynform.add_fields(contact_additional_fields)
-    dynform.set_data()
-    dynform.add_methods(sender, clean_methods)
+        checkout_shipping_fields = fieldsets['shipping']
 
-def form_extrafield_save_handler(sender, form, **kwargs):
-    dynform = PersonalDataForm(form)
-    dynform.save_data(**kwargs)
+        form = kwargs['form']
+        checkout_fields = dict([(f.name, f) for f in form])
+        checkout_fields_ids = tuple(checkout_fields.keys())
+        form.fieldsets = []
+        used_fields = []
+        for key in sorted_fieldsets_keys:
+            fieldset = fieldsets[key]
+            fieldset_fields = []
+            for f in fieldset[1]:
+                if f in checkout_shipping_fields[1] and f != 'copy_address':
+                    class_ = 'shiprow'
+                else:
+                    class_ = ''
+                used_fields.append(f)
+                fieldset_fields.append(
+                    {
+                        'id':checkout_fields[f].auto_id,
+                        'field':checkout_fields[f],
+                        'class':class_
+                    }
+                )
+            form.fieldsets.append(
+                {
+                    'title': fieldset[0],
+                    'fields': fieldset_fields
+                }
+            )
 
-# "Contact Us" Form
-class ContactForm(forms.Form):
-    sender_fullname = forms.CharField(required=True, max_length=100)
-    company = forms.CharField(required=False, max_length=100)
-    city = forms.CharField(required=False, max_length=100)
-    telephone = forms.CharField(required=False, max_length=100)
-    sender_from_address = forms.EmailField(required=True, max_length=100)
-    message = forms.CharField(required=True, 
-        widget=forms.widgets.Textarea(), 
-        max_length=1000)
-    captcha = CaptchaField(required=True)
+        # Additional fields
+        other_fields_ids = list(
+            set(checkout_fields_ids) - set(std_fields)
+        )
+        other_fields = []
+        for fid in other_fields_ids:
+            if fid not in checkout_exclude_fields:
+                other_fields.append(
+                    {
+                        'id':checkout_fields[fid].auto_id,
+                        'field':checkout_fields[fid]
+                    }
+                )
+
+        if other_fields:
+            form.fieldsets.append(
+                {
+                    'title': _(u'Other fields'),
+                    'fields': other_fields
+                }
+            )
+
+add_to_form(PaymentContactInfoForm,
+            ExtraField('business_number', CharField(
+                label='Vat number',
+                validators=[buisness_number_validator,],
+                required=False
+            )),
+            ExtraField('person_number', CharField(
+                label='Person number',
+                validators=[person_number_validator,],
+                required=False
+            )),
+            ExtraField('commercial_conditions', BooleanField(
+                label='I have read the Terms and Conditions.',
+                widget=forms.CheckboxInput(),
+                required=True
+            )),
+            ExtraPaymentContactInfoForm)
+
+add_to_form(PaymentContactInfoForm,
+            ExtraPaymentContactPostSaveForm)
