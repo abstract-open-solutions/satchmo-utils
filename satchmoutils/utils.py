@@ -15,27 +15,52 @@ class ExtraField(object):
 
 class Fieldset(object):
 
-    def __init__(self, id_, label, before=None, *fields):
+    def __init__(self, id_, label, fields, before=None):
         self.id_ = id_
         self.label = label
         self.fields = fields
         self.before = before
         self.form = None
+        self._reorder()
+
+    def _reorder(self):
+        new_fields = []
+        for field in self.fields:
+            if isinstance(field, tuple):
+                try:
+                    index = self.fields.index(field[1])
+                except ValueError:
+                    new_fields.append(field[0])
+                else:
+                    new_fields.insert(index, field[0])
+            else:
+                new_fields.append(field)
+        self.fields = new_fields
 
     def bind(self, form):
-        copy = self.__class__(self.id_, self.label, before=self.before,
-                              *self.fields)
+        copy = self.__class__(self.id_, self.label, self.fields,
+                              before=self.before)
         copy.form = form
         return copy
+
+    def merge(self, other):
+        self.label = other.label
+        self.fields.extend(other.fields)
+        self.before = other.before
+        self._reorder()
+
+    def items(self):
+        for field_name in self.fields:
+            yield (field_name, self.form[field_name])
 
 
 class Fieldsets(Sequence):
 
     def __init__(self, initial = tuple()):
         self.elements = list(initial)
-        self.ids_ = {}
+        self.ids = {}
         for element in self.elements:
-            self.ids_[element.id_] = element
+            self.ids[element.id_] = element
 
     def __len__(self):
         return len(self.elements)
@@ -44,25 +69,30 @@ class Fieldsets(Sequence):
         return iter(self.elements)
 
     def __contains__(self, item):
-        return item.id_ in self.ids_
+        return item.id_ in self.ids
 
     def __getitem__(self, index):
         return self.elements[index]
 
+    def _reorder(self):
+        for index, element in enumerate([ e for e in self.elements ]):
+            if element.before is not None:
+                try:
+                    new_index = self.elements.index(self.ids[element.before])
+                except (KeyError, ValueError):
+                    pass
+                else:
+                    self.elements.insert(new_index, element)
+                    del self.elements[index]
+
     def add(self, item):
-        if item.id_ in self.ids_:
-            self.elements.remove(self.ids_[item.id_])
-            del self.ids[item.id_]
-        self.ids_[item.id_] = item
-        if item.before is None:
-            self.elements.append(item)
+        if item.id_ in self.ids:
+            fieldset = self.ids[item.id_]
+            fieldset.merge(item)
         else:
-            try:
-                index = self.elements.index(self.ids_[item.before])
-            except ValueError:
-                self.elements.append(item)
-            else:
-                self.elements.insert(index, item)
+            self.ids[item.id_] = item
+            self.elements.append(item)
+        self._reorder()
 
     def update(self, items):
         for item in items:
