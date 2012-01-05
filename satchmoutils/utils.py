@@ -47,7 +47,8 @@ class Fieldset(object):
     def merge(self, other):
         self.label = other.label
         self.fields.extend(other.fields)
-        self.before = other.before
+        if other.before:
+            self.before = other.before
         self._reorder()
 
     def items(self):
