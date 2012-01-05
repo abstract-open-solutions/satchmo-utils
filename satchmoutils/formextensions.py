@@ -109,12 +109,16 @@ class CheckoutFormBaseExtender(Extender):
 @extends(ContactInfoForm, ExtendedContactInfoForm)
 class ContactExtender(CheckoutFormBaseExtender):
     fields = [
-        ExtraField(CharField, name='business_number',
+        ExtraField(CharField, 
+            name='business_number',
+            css_class='',
             label = 'Vat number',
             validators = [business_number_validator,],
             required = False,
         ),
-        ExtraField(CharField, name='person_number',
+        ExtraField(CharField, 
+            name='person_number',
+            css_class='',
             label = 'Person number',
             validators = [person_number_validator,],
             required = False,
@@ -128,6 +132,7 @@ class CheckoutExtender(CheckoutFormBaseExtender):
         ExtraField(
             BooleanField,
             name='commercial_conditions',
+            css_class='',
             label = _(u"I have read the Terms and Conditions"),
             widget = forms.CheckboxInput(),
             required = True

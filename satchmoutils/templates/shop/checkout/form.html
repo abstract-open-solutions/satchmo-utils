@@ -61,8 +61,14 @@
   {% for fieldset in form.fieldsets %}
   <fieldset name="{{fieldset.id_}}">
     <legend>{{fieldset.label}}</legend>
-    {% for name, field in fieldset.items %}
-    <div>
+    {% for name, css_class, field in fieldset.items %}
+    <div {% if fieldset.id_ == 'shipping' %}
+            {% if css_class != 'noclass' %}
+                {% if name != 'copy_address' %}
+                    class="shiprow"
+                {% endif %}
+            {% endif %}
+         {% endif %}>
       <label for="{{name}}">{{field.label}}</label>
       {{ field }}
       {% if field.errors %}

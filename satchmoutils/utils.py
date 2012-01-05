@@ -5,13 +5,16 @@ from signals_ahoy.signals import form_init, form_postsave
 
 class ExtraField(object):
 
-    def __init__(self, klass, name, **kwargs):
+    def __init__(self, klass, name, css_class='', **kwargs):
         self.name = name
         self.klass = klass
+        self.css_class = css_class
         self.kwargs = kwargs
 
     def __call__(self):
-        return self.klass(**self.kwargs)
+        field = self.klass(**self.kwargs)
+        field.widget.attrs['class'] = self.css_class
+        return field
 
 
 class Fieldset(object):
@@ -53,7 +56,9 @@ class Fieldset(object):
 
     def items(self):
         for field_name in self.fields:
-            yield (field_name, self.form[field_name])
+            bound_field = self.form[field_name]
+            css_class = bound_field.field.widget.attrs.get('class', '')
+            yield (field_name, css_class, bound_field)
 
 
 class Fieldsets(Sequence):
