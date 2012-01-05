@@ -32,4 +32,8 @@ class ContactAdministrativeInformation(models.Model):
         verbose_name = _("administrative information")
         verbose_name_plural = _("administrative informations")
 
-formextensions.ContactAdministrativeInformation = ContactAdministrativeInformation
+
+# XXX: 1P --> this patch is necessary ...
+# ... to skip circular reference error on import
+formextensions.ContactAdministrativeInformation = \
+                                ContactAdministrativeInformation
