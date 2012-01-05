@@ -40,6 +40,7 @@ def get_form(request):
         form = ContactForm()
     return form, return_message
 
+
 @never_cache
 def contacts(request):
     """Contact form
@@ -54,20 +55,20 @@ def contacts(request):
         "shop/contacts.html",
         context_instance=context
     )
-    
+
+
 def contacts_action(form):
     """Execute the contact us action.
-
     Sends an email to the addres taken from settings.
     """
-    
+
     sender_fullname = form.cleaned_data['sender_fullname']
     sender_from_address = form.cleaned_data['sender_from_address']
     company = form.cleaned_data['company']
     city = form.cleaned_data['city']
     telephone = form.cleaned_data['telephone']
     message = form.cleaned_data['message']
-    
+
     # Send email
     shop_config = Config.objects.get_current()
     shop_email = shop_config.store_email
@@ -79,7 +80,7 @@ def contacts_action(form):
     %(company)s
     %(city)s
     %(telephone)s
-    
+
     %(message)s
     """ % {
     'full_name' : sender_fullname,
@@ -94,8 +95,8 @@ def contacts_action(form):
         contact_msg = _(u"Message sent.")
     except:
         contact_msg = _(error_msg)
-        
     return contact_msg
+
 
 # Make Emty Cart View
 def cart_empty(request):

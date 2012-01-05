@@ -5,6 +5,9 @@ from satchmo_store.contact import models as contact_models
 # load custom configs
 import config
 
+# load form extensions
+from satchmoutils import formextensions
+
 
 class ContactAdministrativeInformation(models.Model):
     contact = models.OneToOneField(
@@ -28,3 +31,5 @@ class ContactAdministrativeInformation(models.Model):
     class Meta:
         verbose_name = _("administrative information")
         verbose_name_plural = _("administrative informations")
+
+formextensions.ContactAdministrativeInformation = ContactAdministrativeInformation
