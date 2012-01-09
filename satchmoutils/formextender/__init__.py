@@ -106,24 +106,9 @@ class Fieldsets(Sequence):
             self.add(item)
 
 
-def extends(*form_classes):
-    def wrapper(extender):
-        for form_class in form_classes:
-            form_init.connect(extender.handle_init, sender=form_class)
-            if hasattr(extender, 'handle_initdata'):
-                form_init.connect(extender.handle_initdata,
-                                      sender=form_class)
-            if hasattr(extender, 'handle_postsave'):
-                form_postsave.connect(extender.handle_postsave,
-                                      sender=form_class)
-        return extender
-    return wrapper
-
-
 class Extender(object):
     """Usage
 
-        >>> @extends(MyForm)
         >>> class MyExtender(Extender):
         ...     fields = [
         ...         ExtraField(CharField, name='foo')
@@ -139,18 +124,43 @@ class Extender(object):
         ...         pass
     """
 
+    extends = tuple()
     fields = []
     methods = {}
 
     @classmethod
+    def get_fields(cls):
+        return cls.fields
+
+    @classmethod
+    def get_methods(cls):
+        return cls.methods
+
+    @classmethod
+    def get_fieldsets(cls):
+        if hasattr(cls, 'fieldsets'):
+            return cls.fieldsets
+        return []
+
+    @classmethod
     def handle_init(cls, **kwargs):
         form = kwargs['form']
-        for extrafield in cls.fields:
+        for extrafield in cls.get_fields():
             form.fields[extrafield.name] = extrafield()
-        for name, method in cls.methods.items():
+        for name, method in cls.get_methods().items():
             form.__dict__[name] = MethodType(method, form,
-                                                   form.__class__)
-        if hasattr(cls, 'fieldsets') and len(cls.fieldsets) > 0:
+                                             form.__class__)
+        if len(cls.get_fieldsets()) > 0:
             if not hasattr(form, 'fieldsets'):
                 form.fieldsets = Fieldsets()
-            form.fieldsets.update([ f.bind(form) for f in cls.fieldsets ])
+            form.fieldsets.update([ f.bind(form) for f in cls.get_fieldsets() ])
+
+    @classmethod
+    def extend(cls):
+        for form_class in cls.extends:
+            form_init.connect(cls.handle_init, sender=form_class)
+            if hasattr(cls, 'handle_initdata'):
+                form_init.connect(cls.handle_initdata, sender=form_class)
+            if hasattr(cls, 'handle_postsave'):
+                form_postsave.connect(cls.handle_postsave, sender=form_class)
+

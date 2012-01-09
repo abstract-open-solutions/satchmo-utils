@@ -1,0 +1,15 @@
+- Remove/move locales
+
+- Change the way formextensions.py works in all apps (it has been changed)
+
+- Review contactus and the form action registered as view (the whole thing
+  should use a form view class and stop being silly)
+
+- Determine what the fuck emptycart is all about and possibly totally rework it
+  in a sane way (right now it sucks from the code to the templates)
+
+- Fix extrabillinginfo (formextensions.py) and check each code file and all the
+  templates which are wrong
+
+- Payments right now is an app (with a models.py) to hold templates but, does
+  it make sense?

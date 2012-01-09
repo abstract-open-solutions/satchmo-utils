@@ -9,6 +9,6 @@ class ContactAdministrativeInformationOptions(admin.ModelAdmin):
 
 
 admin.site.register(
-    ContactAdministrativeInformation, 
+    ContactAdministrativeInformation,
     ContactAdministrativeInformationOptions
 )

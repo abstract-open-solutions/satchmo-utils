@@ -1,39 +1,23 @@
-#!/usr/bin/env python
-import logging
-
-from django.http import HttpResponseRedirect
-from django.core import urlresolvers
-from django.conf import settings
 from django.core.mail import send_mail
-from django.views.decorators.cache import never_cache
+from django.utils.translation import ugettext as _
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.utils.translation import ugettext as _
-
+from django.views.decorators.cache import never_cache
+from django.conf import settings
 from satchmo_store.shop.models import Config
-from satchmo_store.shop.models import Cart
-
-from satchmoutils.forms import ContactForm
-
-try:
-    from django.utils import simplejson
-except ImportError:
-    import simplejson
-    
-log = logging.getLogger('primifrutti.ui.views')
-
-time_format = "%d-%m-%Y %H:%M:%S"
-
-error_msg = u"ERROR. Some fields do contain wrong values. Please correct the errors below"
+from .forms import ContactForm
 
 
-# Contacts View
+error_msg = (u"ERROR. Some fields do contain wrong values. "
+             u"Please correct the errors below")
+
+
 def get_form(request):
     return_message = ''
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            return_message = contacts_action(form)
+            return_message = contactus_action(form)
         else:
             return_message = _(error_msg)
     else:
@@ -42,22 +26,22 @@ def get_form(request):
 
 
 @never_cache
-def contacts(request):
+def contactus(request):
     """Contact form
     """
     form, return_message = get_form(request)
-    
+
     context = RequestContext(request, {
         'form': form,
         'message': return_message
     })
     return render_to_response(
-        "shop/contacts.html",
+        "shop/contactus.html",
         context_instance=context
     )
 
 
-def contacts_action(form):
+def contactus_action(form):
     """Execute the contact us action.
     Sends an email to the addres taken from settings.
     """
@@ -94,18 +78,6 @@ def contacts_action(form):
         send_mail(subject, mail_message, sender_from_address, [to_address,])
         contact_msg = _(u"Message sent.")
     except:
+        # XXX: what the fuck? We should catch something
         contact_msg = _(error_msg)
     return contact_msg
-
-
-# Make Emty Cart View
-def cart_empty(request):
-    """
-    make empty current cart
-    """
-    cart = Cart.objects.from_request(request, create=True)
-    
-    # make cart empty
-    cart.empty()
-    return HttpResponseRedirect(urlresolvers.reverse('satchmo_cart'))
-    
