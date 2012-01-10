@@ -3,7 +3,7 @@ from django.db import models
 from satchmo_store.contact import models as contact_models
 
 # load custom configs
-import config
+import config # pylint: disable=W0611
 
 
 class ContactAdministrativeInformation(models.Model):
@@ -19,7 +19,7 @@ class ContactAdministrativeInformation(models.Model):
         _("person number"),
         max_length = 256
     )
-        
+
     def __unicode__(self):
         return _("administrative information for %(contact_name)s") % {
             'contact_name': self.contact.full_name
@@ -30,6 +30,11 @@ class ContactAdministrativeInformation(models.Model):
         verbose_name_plural = _("administrative informations")
 
 
-# XXX: 1P --> this import in file bottom is necessary ...
-# ... to skip circular reference error on import
-from satchmoutils import formextensions
+# XXX: we shall load this here so that if anyone tries to import this
+# 'models.py', it will find something. This issue is solved (although the whole
+# branch is a mess) into the 'simone-formextension-refactor' branch where each
+# functionality gets an app on its own, and there is no risk that the
+# 'models.py' of the 'formextender' app is loaded by anyone because it does
+# only contain the 'load_extensions* code and call
+import formextender
+formextender.load_extensions()
