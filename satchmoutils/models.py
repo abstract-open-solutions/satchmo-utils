@@ -5,9 +5,6 @@ from satchmo_store.contact import models as contact_models
 # load custom configs
 import config
 
-# load form extensions
-from satchmoutils import formextensions
-
 
 class ContactAdministrativeInformation(models.Model):
     contact = models.OneToOneField(
@@ -33,7 +30,6 @@ class ContactAdministrativeInformation(models.Model):
         verbose_name_plural = _("administrative informations")
 
 
-# XXX: 1P --> this patch is necessary ...
+# XXX: 1P --> this import in file bottom is necessary ...
 # ... to skip circular reference error on import
-formextensions.ContactAdministrativeInformation = \
-                                ContactAdministrativeInformation
+from satchmoutils import formextensions

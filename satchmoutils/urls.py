@@ -6,7 +6,5 @@ prodbase = r'^' + get_satchmo_setting('PRODUCT_SLUG') + '/'
 
 urlpatterns = patterns('',
     (r'^cart/empty/$', 'satchmoutils.views.cart_empty', {}, 'satchmo_cart_empty'),
-    (r'^contactus/$', 'satchmoutils.views.contacts', {}, 'contactus'),
-    (r'^contacts/submit/$', 'satchmoutils.views.contacts_action', {}, 'contactus_action'),
     (r"^captcha/", include('captcha.urls')),
 )
