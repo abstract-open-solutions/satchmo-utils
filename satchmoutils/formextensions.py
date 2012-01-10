@@ -3,21 +3,20 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.forms.fields import CharField, BooleanField
-from payment.forms import PaymentContactInfoForm
 from satchmo_store.contact.models import Contact
 from satchmo_store.contact.forms import (ExtendedContactInfoForm,
                                          ContactInfoForm)
+from payment.forms import PaymentContactInfoForm
 from satchmoutils.validators import (person_number_validator,
                                      business_number_validator)
 from satchmoutils.utils import Extender, extends, ExtraField, Fieldset
+from satchmoutils.models import ContactAdministrativeInformation
 
 # XXX: all this should go into settings.py, somewhere, better if in
 # SATCHMO_SETTINGS
 house_number_countries = ['IT', 'DE']
 
-# XXX: 1P --> this is for skip circular imports error from models.py
-ContactAdministrativeInformation = None
-
+PaymentContactInfoForm = None
 
 def address_validator(country, address):
     # BBB: what are the countries that use the house number?
