@@ -9,17 +9,17 @@ from satchmo_store.contact.forms import (ExtendedContactInfoForm,
 from payment.forms import PaymentContactInfoForm
 from satchmoutils.validators import (person_number_validator,
                                      business_number_validator)
-from satchmoutils.utils import Extender, extends, ExtraField, Fieldset
-from satchmoutils.models import ContactAdministrativeInformation
+
+from satchmoutils.formextender import Extender, ExtraField, Fieldset
+from .models import ContactAdministrativeInformation
 
 # XXX: all this should go into settings.py, somewhere, better if in
 # SATCHMO_SETTINGS
 house_number_countries = ['IT', 'DE']
 
-PaymentContactInfoForm = None
 
 def address_validator(country, address):
-    # BBB: what are the countries that use the house number?
+    # XXX: what are the countries that use the house number?
     regex = re.compile(r"\w+-?\s?([^\d]\w)*\s?(\d+)")
     check = regex.match(address)
     if country in house_number_countries:
@@ -105,8 +105,8 @@ class CheckoutFormBaseExtender(Extender):
             a_info.save()
 
 
-@extends(ContactInfoForm, ExtendedContactInfoForm)
 class ContactExtender(CheckoutFormBaseExtender):
+    extends = (ContactInfoForm, ExtendedContactInfoForm)
     fields = [
         ExtraField(CharField, 
             name='business_number',
@@ -125,8 +125,8 @@ class ContactExtender(CheckoutFormBaseExtender):
     ]
 
 
-@extends(PaymentContactInfoForm)
 class CheckoutExtender(CheckoutFormBaseExtender):
+    extends = (PaymentContactInfoForm,)
     fields = ContactExtender.fields + [
         ExtraField(
             BooleanField,
