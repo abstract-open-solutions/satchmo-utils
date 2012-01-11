@@ -58,6 +58,7 @@
                  <td class="cart-td" align="center" width="13%"><span class="prezzo-bold">{{ cartitem|taxed_discount_line_total:sale|currency }}</span></td>
                  <td class="cart-td" align="center" width="13%">
                      <form action="{% url satchmo_cart_remove %}" method="post">
+						 {% csrf_token %}
                          <input type="hidden" name="cartitem" value="{{ cartitem.id }}" />
                          <div class="button">
                              <input class="button" type="submit" value="{% trans 'Remove' %}" />

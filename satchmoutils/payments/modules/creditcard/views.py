@@ -8,7 +8,6 @@ from django.views.decorators.cache import never_cache
 from livesettings import config_get_group, config_value 
 from payment.config import gateway_live
 from payment.utils import get_processor_by_key
-from payment.views import payship
 from satchmo_store.shop.models import Cart
 from satchmo_store.shop.models import Order
 from satchmo_utils.dynamic import lookup_url, lookup_template
@@ -16,17 +15,12 @@ import logging
 from satchmo_utils.views import bad_or_missing
 
 from satchmoutils.payments.modules.creditcard.GestPayCrypt import GestPayCrypt
+from satchmoutils.payments.modules.views import pay_ship_info_view_wrapper
 
 log = logging.getLogger()
 
-def pay_ship_info(request):
-    return payship.base_pay_ship_info(request,
-        config_get_group('PAYMENT_CREDITCARD'), 
-        payship.simple_pay_ship_process_form,
-        'shop/checkout/creditcard/pay_ship.html'
-    )
-pay_ship_info = never_cache(pay_ship_info)
 
+pay_ship_info = pay_ship_info_view_wrapper('creditcard')
 
 def confirm_info(request):
     payment_module = config_get_group('PAYMENT_CREDITCARD')
