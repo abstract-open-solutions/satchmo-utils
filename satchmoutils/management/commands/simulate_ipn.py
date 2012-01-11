@@ -1,9 +1,7 @@
-import random, optparse, sys, logging, httplib, urllib
+import optparse, sys, logging, httplib, urllib
 from django.conf import settings
 from datetime import datetime
-
 from django.core.management.base import BaseCommand
-
 from satchmo_store.shop.models import Order
 
 
@@ -29,14 +27,13 @@ class Command(BaseCommand):
             "-o", "--order-id",
             action = "store",
             dest = "order_id",
-            default = "",
             metavar = "ORDER_ID",
             help = ("ID of a existing order")
         ),
     )
-    help = ("""Simulate PayPal IPN process for given order.
-You must configure 'http://localhost:8000/test_confirm_ipn/' url in 
-PayPal URL Post Test settings in /settings view.""")
+    help = ("Simulate PayPal IPN process for given order.\n"
+            "You must set the PayPal Test POST URL to "
+            "'http://localhost:8000/test_confirm_ipn/' in '/settings'.")
 
     def __init__(self, *args, **kwargs):
         super(Command, self).__init__(*args, **kwargs)
@@ -56,44 +53,46 @@ PayPal URL Post Test settings in /settings view.""")
         else:
             return sys.stdout
 
-    def handle(self, *args, **options):
-        """
+    def print_ts(self, message, output):
+        output.write("%s @ %s" % (
+            message,
+            datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+        ))
+
+    def handle(self, *args, **options): # pylint: disable=W0613
+        """Actually executes the command
         """
         output = self.setupLogging(options)
 
-        start = datetime.now()
-        output.write("IPN testing STARTED At: %s\n" % start.strftime("%d/%m/%Y %H:%M:%S"))
-        
-        order_id = options.get("order_id")
-        if not order_id.isdigit():
-            output.write("Order %s does not exist. Enter valid order id\n" % order_id)
-            end = datetime.now()
-            output.write("IPN testing ENDED At: %s\n" % end.strftime("%d/%m/%Y %H:%M:%S"))
-            return False
-            
-        order_id = int(order_id)
+        self.print_ts("Testing started", output)
+
         try:
-            order = Order.objects.get(id=order_id)
-        except Order.DoesNotExist:
-            output.write("Order %s does not exist. Enter valid order id\n" % order_id)
-            end = datetime.now()
-            output.write("IPN testing ENDED At: %s\n" % end.strftime("%d/%m/%Y %H:%M:%S"))
+            order = Order.objects.get(id=int(options['order_id']))
+        except (KeyError, ValueError, Order.DoesNotExist) as e:
+            if isinstance(e, KeyError):
+                output.write(
+                    "You must pass the order id via the '--order-id' option"
+                )
+            else:
+                output.write(
+                    "Order '%s' does not exist.\n" % options['order_id']
+                )
+            self.print_ts("Testing ended", output)
             return False
-        
+
         # Check if order is payed thru PayPal
         # XXX: It should be a good thing if PayPal payment processor's
         # "ipn" view makes same control onto given order
-        txn_id = random.randint(0, 10)
         payments = order.payments.all().order_by('id')
         if payments and (payments[0].payment == u"PAYPAL"):
             first_payment = payments[0]
             txn_id = first_payment.transaction_id
         else:
-            output.write("Order %s isn't pay thru PayPal\n" % order_id)
-            end = datetime.now()
-            output.write("IPN testing ENDED At: %s\n" % end.strftime("%d/%m/%Y %H:%M:%S"))
+            output.write(
+                "Order '%s' isn't paid through PayPal\n" % options['order_id']
+            )
+            self.print_ts("Testing ended", output)
             return False
-        
         site_domain = settings.SITE_DOMAIN
         url = '/checkout/paypal/ipn/'
         params = urllib.urlencode({
@@ -106,14 +105,15 @@ PayPal URL Post Test settings in /settings view.""")
             "Content-type": "application/x-www-form-urlencoded",
             "Accept": "text/plain"
         }
-
         conn = httplib.HTTPConnection(site_domain, 8000)
         conn.request('POST', url, params, headers)
         response = conn.getresponse()
-        import pdb; pdb.set_trace( )
-        output.write("%s %s\n" % (response.status, response.reason))
+        output.write(
+            "The view replied with a: %s %s\n" % (
+                response.status,
+                response.reason
+            )
+        )
         conn.close()
-        
-        end = datetime.now()
-        output.write("IPN testing ENDED At: %s\n" % end.strftime("%d/%m/%Y %H:%M:%S"))
-        return 'THE END'
+        self.print_ts("Testing ended", output)
+        return True
