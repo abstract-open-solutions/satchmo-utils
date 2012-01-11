@@ -1,4 +1,3 @@
-import re
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
@@ -12,29 +11,6 @@ from satchmoutils.validators import (person_number_validator,
 
 from satchmoutils.formextender import Extender, ExtraField, Fieldset
 from .models import ContactAdministrativeInformation
-
-# XXX: all this should go into settings.py, somewhere, better if in
-# SATCHMO_SETTINGS
-house_number_countries = ['IT', 'DE']
-
-
-def address_validator(country, address):
-    # XXX: what are the countries that use the house number?
-    regex = re.compile(r"\w+-?\s?([^\d]\w)*\s?(\d+)")
-    check = regex.match(address)
-    if country in house_number_countries:
-        if not check:
-            raise ValidationError(
-                message = _(
-                    u"You must specify house number"
-                    u" in your address"
-                ),
-                code = 'invalid'
-            )
-        else:
-            return address
-    else:
-        return address
 
 
 def clean_person_number(self):
@@ -52,26 +28,9 @@ def clean_person_number(self):
         )
 
 
-def clean_street1(self):
-    billing_address = self.cleaned_data.get('street1', '')
-    billing_country = self.cleaned_data.get('country', 'IT')
-    return address_validator(billing_country, billing_address)
-
-
-def clean_ship_street1(self):
-    shipping_address = self.cleaned_data.get('ship_street1', '')
-    shipping_country = self.cleaned_data.get('ship_country', 'IT')
-    copy_address = self.cleaned_data.get('copy_address', False)
-    if copy_address:
-        shipping_address = self.cleaned_data.get('street1', '')
-    return address_validator(shipping_country, shipping_address)
-
-
 class CheckoutFormBaseExtender(Extender):
     methods = {
         'clean_person_number' : clean_person_number,
-        'clean_street1' : clean_street1,
-        'clean_ship_street1' : clean_ship_street1
     }
 
     @classmethod
