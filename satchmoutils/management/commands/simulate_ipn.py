@@ -54,7 +54,7 @@ class Command(BaseCommand):
             return sys.stdout
 
     def print_ts(self, message, output):
-        output.write("%s @ %s" % (
+        output.write("%s @ %s\n" % (
             message,
             datetime.now().strftime('%d/%m/%Y %H:%M:%S')
         ))
@@ -116,4 +116,4 @@ class Command(BaseCommand):
         )
         conn.close()
         self.print_ts("Testing ended", output)
-        return True
+        return 'OK\n'
