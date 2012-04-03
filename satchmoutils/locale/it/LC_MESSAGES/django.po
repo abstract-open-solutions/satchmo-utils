@@ -100,6 +100,10 @@ msgstr "Dati di fatturazione"
 msgid "Shipping informations"
 msgstr "Dati di consegna"
 
+#: signals.py:19
+msgid "Other informations"
+msgstr "Altri dati"
+
 #: signals.py:103
 msgid "Other fields"
 msgstr "Altre informazioni"
@@ -271,19 +275,19 @@ msgstr "URL di ritorno"
 msgid ""
 "Where BancaSella will return the customer after the purchase is complete.  "
 "This can be a named url and defaults to the standard checkout success."
-msgstr ""
+msgstr "URL di ritorno di Bancasella"
 
 #: payments/modules/creditcard/views.py:51
 msgid "Your order is no longer valid."
-msgstr ""
+msgstr "Il tuo ordine e' scaduto"
 
 #: tax/modules/noarea/config.py:6
 msgid "No Area Tax"
-msgstr ""
+msgstr "Tassa Senza Area"
 
 #: tax/modules/noarea/config.py:13
 msgid "Tax Shipping?"
-msgstr ""
+msgstr "Voui usare la tassazione sulla consegna"
 
 #: tax/modules/noarea/config.py:22
 msgid "TaxClass for shipping"
@@ -303,7 +307,7 @@ msgstr ""
 
 #: tax/modules/noarea/models.py:10 tax/modules/noarea/models.py:15
 msgid "Percentage"
-msgstr ""
+msgstr "Percentuale"
 
 #: tax/modules/noarea/models.py:11
 msgid "% tax for this type"
@@ -334,78 +338,78 @@ msgstr ""
 
 #: templates/contact/update_form.html:7
 msgid "Update Profile"
-msgstr ""
+msgstr "Aggiorna il profilo"
 
 #: templates/contact/update_form.html:15
 msgid "Your Profile"
-msgstr ""
+msgstr "Il tuo profilo"
 
 #: templates/contact/update_form.html:17 templates/shop/checkout/form.html:24
 msgid "Please correct the following error:"
-msgstr ""
+msgstr "Per favore correggi gli errori senalati:"
 
 #: templates/contact/update_form.html:24
 msgid "You&apos;ll need to fill out at least the fields with a *"
-msgstr ""
+msgstr "Devi inserire i campi segnati con *"
 
 #: templates/contact/update_form.html:26
 msgid "Basic Information"
-msgstr ""
+msgstr "Informazioni base"
 
 #: templates/contact/update_form.html:27
 msgid "Email address"
-msgstr ""
+msgstr "Indirizzo email"
 
 #: templates/contact/update_form.html:30
 msgid "First name"
-msgstr ""
+msgstr "Nome"
 
 #: templates/contact/update_form.html:33
 msgid "Last name"
-msgstr ""
+msgstr "Cognome"
 
 #: templates/contact/update_form.html:36
 msgid "Organization"
-msgstr ""
+msgstr "Azienda"
 
 #: templates/contact/update_form.html:40
 msgid "Birthday"
-msgstr ""
+msgstr "Data di nascita"
 
 #: templates/contact/update_form.html:43
 msgid "Phone number"
-msgstr ""
+msgstr "Telefono"
 
 #: templates/contact/update_form.html:47
 msgid "Newsletter"
-msgstr ""
+msgstr "Vuoi ricevere la newsletter?"
 
 #: templates/contact/update_form.html:58
 #: templates/contact/view_profile.html:32
 msgid "Administrative information"
-msgstr ""
+msgstr "Informazioni personali"
 
 #: templates/contact/update_form.html:60
 #: templates/contact/view_profile.html:34
 msgid "Business number"
-msgstr ""
+msgstr "P.IVA"
 
 #: templates/contact/update_form.html:71
 msgid "Update"
-msgstr ""
+msgstr "Aggiorna"
 
 #: templates/contact/view_profile.html:12
 msgid "Your Account info"
-msgstr ""
+msgstr "I tuoi dati"
 
 #: templates/contact/view_profile.html:15
 #, python-format
 msgid "Welcome, %(full_name)s."
-msgstr ""
+msgstr "Benvenuto, %(full_name)s."
 
 #: templates/contact/view_profile.html:18
 msgid "Your profile"
-msgstr ""
+msgstr "Il tuo profilo"
 
 #: templates/contact/view_profile.html:20
 msgid "Email:"
@@ -413,11 +417,11 @@ msgstr ""
 
 #: templates/contact/view_profile.html:22
 msgid "Organization:"
-msgstr ""
+msgstr "Azienda:"
 
 #: templates/contact/view_profile.html:24
 msgid "Birthday:"
-msgstr ""
+msgstr "Data di nascita:"
 
 #: templates/contact/view_profile.html:26
 msgid "Newsletter:"
@@ -425,7 +429,7 @@ msgstr ""
 
 #: templates/contact/view_profile.html:26
 msgid "Yes"
-msgstr ""
+msgstr "Si"
 
 #: templates/contact/view_profile.html:26
 msgid "No"
@@ -433,32 +437,32 @@ msgstr ""
 
 #: templates/contact/view_profile.html:28
 msgid "Billing Address:"
-msgstr ""
+msgstr "Indirizzo di fatturazione:"
 
 #: templates/contact/view_profile.html:29
 msgid "Shipping Address:"
-msgstr ""
+msgstr "Indirizzo di consegna"
 
 #: templates/contact/view_profile.html:40
 msgid "Address Book Entries"
-msgstr ""
+msgstr "Indirizzo"
 
 #: templates/contact/view_profile.html:43
 msgid "Edit"
-msgstr ""
+msgstr "Modifica"
 
 #: templates/contact/view_profile.html:43
 msgid "Delete"
-msgstr ""
+msgstr "Cancella"
 
 #: templates/contact/view_profile.html:47
 #: templates/contact/view_profile.html:62
 msgid "Account options"
-msgstr ""
+msgstr "Opzioni"
 
 #: templates/contact/view_profile.html:49
 msgid "Update your profile"
-msgstr ""
+msgstr "Aggiorna il tuo profilo"
 
 #: templates/contact/view_profile.html:51
 msgid "Add address book entry"
@@ -467,128 +471,129 @@ msgstr ""
 #: templates/contact/view_profile.html:53
 #: templates/contact/view_profile.html:66
 msgid "Change your password"
-msgstr ""
+msgstr "Cambia la tua password"
 
 #: templates/contact/view_profile.html:55
 msgid "Order History"
-msgstr ""
+msgstr "Storia degli ordini"
 
 #: templates/contact/view_profile.html:60
 msgid ""
 "Sorry, the user you've logged in as doesn't have any contact information."
 msgstr ""
+"Spiacenti, l'utente usato non ha alcuna informazione."
 
 #: templates/contact/view_profile.html:60
 msgid "Probably because you are an admin."
-msgstr ""
+msgstr "Forse sei un amministratore"
 
 #: templates/contact/view_profile.html:64
 msgid "Set up contact information"
-msgstr ""
+msgstr "Inserisci le tue informazioni"
 
 #: templates/product/product.html:34 templates/shop/cart.html:35
 msgid "Price"
-msgstr ""
+msgstr "Prezzo"
 
 #: templates/product/product.html:34
 msgid "(incl. tax)"
-msgstr ""
+msgstr "(iva incl.)"
 
 #: templates/product/product.html:54 templates/shop/cart.html:29
 msgid "Quantity"
-msgstr ""
+msgstr "Quantita'"
 
 #: templates/product/product.html:56
 msgid "Add to cart"
-msgstr ""
+msgstr "Aggiungi"
 
 #: templates/shop/cart.html:12
 msgid "Cart"
-msgstr ""
+msgstr "Carrello"
 
 #: templates/shop/cart.html:18
 msgid "Your Cart"
-msgstr ""
+msgstr "Il tuo carrello"
 
 #: templates/shop/cart.html:24
 msgid "Your cart is empty."
-msgstr ""
+msgstr "Il tuo carrello e' vuoto."
 
 #: templates/shop/cart.html:30
 msgid "Item"
-msgstr ""
+msgstr "Prodotto"
 
 #: templates/shop/cart.html:32
 msgid "Regular Price"
-msgstr ""
+msgstr "Prezzo base"
 
 #: templates/shop/cart.html:33
 msgid "Sale Price"
-msgstr ""
+msgstr "Prezzo"
 
 #: templates/shop/cart.html:37
 msgid "Total<br/>(incl.&nbsp;tax)"
-msgstr ""
+msgstr "Totale<br/>(incl.&nbsp;tax)"
 
 #: templates/shop/cart.html:37
 msgid "Total"
-msgstr ""
+msgstr "Totale"
 
 #: templates/shop/cart.html:49
 msgid "update"
-msgstr ""
+msgstr "aggiorna"
 
 #: templates/shop/cart.html:63
 msgid "Remove"
-msgstr ""
+msgstr "Elimina"
 
 #: templates/shop/cart.html:73
 msgid "Cart Total"
-msgstr ""
+msgstr "Totale"
 
 #: templates/shop/cart.html:88
 msgid "Continue shopping"
-msgstr ""
+msgstr "Continua con gli acquisti"
 
 #: templates/shop/cart.html:91
 msgid "Empty"
-msgstr ""
+msgstr "Svuota"
 
 #: templates/shop/cart.html:94
 msgid "Check out"
-msgstr ""
+msgstr "Acquista"
 
 #: templates/shop/contacts.html:9
 msgid "Contact us"
-msgstr ""
+msgstr "Contattaci"
 
 #: templates/shop/contacts.html:19
 msgid "Name and Surname"
-msgstr ""
+msgstr "Nome e Cognome"
 
 #: templates/shop/contacts.html:28
 msgid "Company"
-msgstr ""
+msgstr "Azienda"
 
 #: templates/shop/contacts.html:37
 msgid "City"
-msgstr ""
+msgstr "Citta'"
 
 #: templates/shop/contacts.html:46
 msgid "Telephone"
-msgstr ""
+msgstr "Telefono"
 
 #: templates/shop/contacts.html:66
 msgid "Message"
-msgstr ""
+msgstr "Messaggio"
 
 #: templates/shop/contacts.html:79
 msgid "* fields are required"
-msgstr ""
+msgstr "* campi obbligatori"
 
 #: templates/shop/contacts.html:83
 msgid "Submit"
-msgstr ""
+msgstr "Invia"
 
 #: templates/shop/checkout/form.html:10 templates/shop/checkout/form.html:14
 #: templates/shop/checkout/success_bonifico.html:13
@@ -597,26 +602,29 @@ msgstr ""
 #: templates/shop/checkout/success_generic.html:13
 #: templates/shop/checkout/creditcard/error.html:10
 msgid "Checkout"
-msgstr ""
+msgstr "Acquista"
 
 #: templates/shop/checkout/form.html:17
 msgid "Ship/Bill"
-msgstr ""
+msgstr "Consegna/Fatturazione"
 
 #: templates/shop/checkout/form.html:19
 msgid "Confirmation"
-msgstr ""
+msgstr "Conferma"
 
 #: templates/shop/checkout/form.html:22
 msgid ""
 "Please complete the following information in order to submit your order."
 msgstr ""
+"Inserisci le seguenti informazioni prima di procedere con l'ordine."
 
 #: templates/shop/checkout/form.html:33
 msgid ""
 "If you already have an account, you can login now to fill in most of the "
 "information below."
 msgstr ""
+"Se hai gia' un account, devi autenticarti ed inserire le "
+"informazioni richieste."
 
 #: templates/shop/checkout/form.html:34
 msgid "This is just a convenience, no account is required!"
@@ -624,7 +632,7 @@ msgstr ""
 
 #: templates/shop/checkout/form.html:37
 msgid "Username or email"
-msgstr ""
+msgstr "Username o email"
 
 #: templates/shop/checkout/form.html:38
 msgid "Password"
@@ -636,11 +644,11 @@ msgstr ""
 
 #: templates/shop/checkout/form.html:46
 msgid "You'll need to fill out at least the fields with a *"
-msgstr ""
+msgstr "I campi con * sono obbligatori"
 
 #: templates/shop/checkout/form.html:57
 msgid "Continue Checkout"
-msgstr ""
+msgstr "Continua"
 
 #: templates/shop/checkout/success_bonifico.html:19
 #: templates/shop/checkout/success_bonifico.html:40
@@ -651,7 +659,7 @@ msgstr ""
 #: templates/shop/checkout/success_generic.html:19
 #: templates/shop/checkout/success_generic.html:28
 msgid "Thank you for your order!"
-msgstr ""
+msgstr "Grazie per l'acquisto!"
 
 #: templates/shop/checkout/success_bonifico.html:21
 #: templates/shop/checkout/success_contrassegno.html:20
@@ -673,21 +681,21 @@ msgstr ""
 #: templates/shop/checkout/success_creditcard.html:31
 #: templates/shop/checkout/success_generic.html:32
 msgid "You can check your order status"
-msgstr ""
+msgstr "Puoi controllare lo stato dei tuoi ordini"
 
 #: templates/shop/checkout/success_bonifico.html:45
 #: templates/shop/checkout/success_contrassegno.html:36
 #: templates/shop/checkout/success_creditcard.html:32
 #: templates/shop/checkout/success_generic.html:33
 msgid "order history"
-msgstr ""
+msgstr "Storia degli ordini"
 
 #: templates/shop/checkout/success_bonifico.html:46
 #: templates/shop/checkout/success_contrassegno.html:37
 #: templates/shop/checkout/success_creditcard.html:33
 #: templates/shop/checkout/success_generic.html:34
 msgid "Proceed with another purchase"
-msgstr ""
+msgstr "Procedi con gli acquisti"
 
 #: templates/shop/checkout/success_bonifico.html:54
 msgid ""
@@ -705,19 +713,19 @@ msgstr ""
 
 #: templates/shop/checkout/contrassegno/confirm.html:11
 msgid "Your payment will be processed through CONTRASSEGNO."
-msgstr ""
+msgstr "Il tuo pagamento verra' gestito in CONTRASSEGNO"
 
 #: templates/shop/checkout/contrassegno/confirm.html:17
 #: templates/shop/checkout/contrassegno/confirm.html:87
 #: templates/shop/checkout/creditcard/confirm.html:22
 #: templates/shop/checkout/creditcard/confirm.html:93
 msgid "Purchase Items"
-msgstr ""
+msgstr "Acquista"
 
 #: templates/shop/checkout/creditcard/confirm.html:16
 msgid "Your payment will be processed through BANCASELLA."
-msgstr ""
+msgstr "Il tuo pagamento verra' elaborato da BANCASELLA"
 
 #: templates/shop/checkout/creditcard/error.html:16
 msgid "Error. Check your order!"
-msgstr ""
+msgstr "Errore. Controlla il tuo ordine!"
