@@ -3,7 +3,7 @@ from django.core import urlresolvers
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.cache import never_cache
 from livesettings import config_get_group, config_value 
 from payment.config import gateway_live

@@ -3,7 +3,6 @@ from livesettings import config_value
 from satchmo_store.shop.models import Config
 
 
-# XXX: should go in satchmo-utils
 class ShopUtils(object):
     """Utility to retrieve the shop configuration.
     """
