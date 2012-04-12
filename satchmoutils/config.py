@@ -1,30 +1,100 @@
 from livesettings import config_register, ConfigurationGroup, StringValue
+from django.core.validators import RegexValidator, validate_email
 from django.utils.translation import ugettext_lazy as _
 
 
-# Shop configs
-SHOP_INFO = ConfigurationGroup(
-    'SHOP_INFO',
-    _('Shop info'),
-    ordering=1 
-    )
-    
-config_register(
-    StringValue(
-        SHOP_INFO,
-        'IBAN_CODE',
-        description = _('IBAN code'),
-        help_text = "",
-        default = "iban"
-    )
-)
+class IBANValue(StringValue):
+
+    def make_field(self, **kwargs):
+        validators = kwargs.setdefault('validators', [])
+        validators.append(
+            RegexValidator(
+                (r'[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}'
+                 r'([a-zA-Z0-9]?){0,16}'),
+                message=_(u"Invalid IBAN code. Please make sure to remove "
+                          u"all spaces")))
+        return super(IBANValue, self).make_field(**kwargs)
+
+
+class EmailValue(StringValue):
+
+    def make_field(self, **kwargs):
+        validators = kwargs.setdefault('validators', [])
+        validators.append(validate_email)
+        return super(EmailValue, self).make_field(**kwargs)
+
+
+SHOP_CONFIG = ConfigurationGroup(
+    'SHOP_CONFIG',
+    _(u'Shop configuration'),
+    ordering=0)
 
 config_register(
     StringValue(
-        SHOP_INFO,
-        'VAT_NUMBER',
-        description = _('VAT number'),
-        help_text = "",
-        default = "vat"
-    )
-)
+        SHOP_CONFIG,
+        'SHOP_NAME',
+        description=_(u'Shop name'),
+        help_text=_(u'The name of the site, shown on all pages and mails'),
+        default=u"Primi Frutti"))
+
+config_register(
+    IBANValue(
+        SHOP_CONFIG,
+        'IBAN',
+        description=_(u'IBAN'),
+        help_text=_(u'your bank account code: fill in if you have chosen '
+                    u'to accept payments via bank transfer'),
+        default=u''))
+
+config_register(
+    StringValue(
+        SHOP_CONFIG,
+        'ADDRESS',
+        description=_(u'Address'),
+        help_text=_(u'the physical or legal address of your business'),
+        default=u"Via Nuova Sarno, Trav. Aiello 1"))
+
+config_register(
+    StringValue(
+        SHOP_CONFIG,
+        'ZIP_CODE',
+        description=_(u'Zip code'),
+        default=u"80036"))
+
+config_register(
+    StringValue(
+        SHOP_CONFIG,
+        'CITY',
+        description=_(u'City'),
+        default=u"Palma Campania (NA)"))
+
+config_register(
+    EmailValue(
+        SHOP_CONFIG,
+        'EMAIL',
+        description=_(u'E-mail'),
+        help_text=_(u"an e-mail address where your customers can "
+                    u"contact you for informations or other needs"),
+        default="test@abstract.it"))
+
+config_register(
+    StringValue(
+        SHOP_CONFIG,
+        'VAT',
+        description=_(u'Vat number'),
+        default=u"P.IVA 12345678910"))
+
+config_register(
+    StringValue(
+        SHOP_CONFIG,
+        'TELEPHONE',
+        description=_(u'Telephone'),
+        help_text=_(u"a phone number to allow your customers to contact you"),
+        default=u"0818246420"))
+
+config_register(
+    StringValue(
+        SHOP_CONFIG,
+        'FAX',
+        description=_(u'Fax'),
+        default=u"0818246420"))
