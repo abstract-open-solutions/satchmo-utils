@@ -81,5 +81,6 @@
  <div class="actions">
 	<button type="submit">{% trans "Continue Checkout" %}</button>
  </div>
+ {% if sale %}{% include "product/sale_details.html" %}{% endif %}
 </form>
 {% endblock %}

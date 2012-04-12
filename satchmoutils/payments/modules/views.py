@@ -165,8 +165,8 @@ def multisuccess_view(request):
     store_name = shop.store_name
     street1 = shop.street1
     state = shop.state
-    p_iva = config_value('SHOP_INFO','VAT_NUMBER')
-    iban = config_value('SHOP_INFO','IBAN_CODE')
+    p_iva = config_value('SHOP_CONFIG','VAT')
+    iban = config_value('SHOP_CONFIG','IBAN')
     
     # Cablare il campo per il rilevamento della tipologia 
     # di pagamento

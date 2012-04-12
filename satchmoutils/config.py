@@ -59,6 +59,7 @@ config_register(
         SHOP_CONFIG,
         'ZIP_CODE',
         description=_(u'Zip code'),
+        help_text=_(u'the zip code of the shop address'),
         default=u"80036"))
 
 config_register(
@@ -66,6 +67,7 @@ config_register(
         SHOP_CONFIG,
         'CITY',
         description=_(u'City'),
+        help_text=_(u'the city of the shop'),
         default=u"Palma Campania (NA)"))
 
 config_register(
@@ -82,6 +84,7 @@ config_register(
         SHOP_CONFIG,
         'VAT',
         description=_(u'Vat number'),
+        help_text=_(u'shop vat number'),
         default=u"P.IVA 12345678910"))
 
 config_register(
@@ -97,4 +100,5 @@ config_register(
         SHOP_CONFIG,
         'FAX',
         description=_(u'Fax'),
+        help_text=_(u"a fax number to allow your customers to contact you"),
         default=u"0818246420"))
