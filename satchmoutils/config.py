@@ -35,7 +35,7 @@ config_register(
         'SHOP_NAME',
         description=_(u'Shop name'),
         help_text=_(u'The name of the site, shown on all pages and mails'),
-        default=u"Primi Frutti"))
+        default=u"Sho Name"))
 
 config_register(
     IBANValue(
@@ -52,7 +52,7 @@ config_register(
         'ADDRESS',
         description=_(u'Address'),
         help_text=_(u'the physical or legal address of your business'),
-        default=u"Via Nuova Sarno, Trav. Aiello 1"))
+        default=u"address"))
 
 config_register(
     StringValue(
@@ -60,7 +60,7 @@ config_register(
         'ZIP_CODE',
         description=_(u'Zip code'),
         help_text=_(u'the zip code of the shop address'),
-        default=u"80036"))
+        default=u"00000"))
 
 config_register(
     StringValue(
@@ -68,7 +68,7 @@ config_register(
         'CITY',
         description=_(u'City'),
         help_text=_(u'the city of the shop'),
-        default=u"Palma Campania (NA)"))
+        default=u"city"))
 
 config_register(
     EmailValue(
@@ -77,7 +77,7 @@ config_register(
         description=_(u'E-mail'),
         help_text=_(u"an e-mail address where your customers can "
                     u"contact you for informations or other needs"),
-        default="test@abstract.it"))
+        default="email@domain.ext"))
 
 config_register(
     StringValue(
@@ -93,7 +93,7 @@ config_register(
         'TELEPHONE',
         description=_(u'Telephone'),
         help_text=_(u"a phone number to allow your customers to contact you"),
-        default=u"0818246420"))
+        default=u"0000000000"))
 
 config_register(
     StringValue(
@@ -101,4 +101,4 @@ config_register(
         'FAX',
         description=_(u'Fax'),
         help_text=_(u"a fax number to allow your customers to contact you"),
-        default=u"0818246420"))
+        default=u"0000000000"))
