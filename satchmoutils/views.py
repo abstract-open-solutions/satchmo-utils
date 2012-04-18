@@ -9,8 +9,10 @@ from satchmo_store.mail import send_store_mail
 from satchmo_store.shop.signals import contact_sender
 from satchmo_store.shop.views.contact import ContactForm as BaseContactForm
 from satchmo_store.shop.models import Cart
+from satchmo_utils.views import bad_or_missing
 
 from captcha.fields import CaptchaField
+from .models import Page
 
 import logging
 
@@ -71,3 +73,28 @@ def contact_form(request):
 
     return render_to_response('shop/contact_form.html', {'form': form},
                               context_instance=RequestContext(request))
+
+
+def get_static_page(request, page_slug, template="shop/page.html"):
+    """ display page item """
+    errors = request.session.get('ERRORS', None)
+    if errors is not None:
+        del(request.session['ERRORS'])
+
+    pages = Page.objects.filter(slug=page_slug)
+
+    if not pages:
+        return bad_or_missing(
+            request,
+            _('The page you have requested does not exist.')
+        )
+    page = pages[0]
+
+    if not page.active:
+        return bad_or_missing(
+            request,
+            _('The page you have requested does not exist.')
+        )
+
+    context = RequestContext(request, {'page': page})
+    return render_to_response(template, context_instance=context)
