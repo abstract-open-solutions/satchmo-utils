@@ -81,6 +81,7 @@ class PageView(DetailView):
     model = Page
     slug_field = 'slug'
     context_object_name = "page"
-    template_name='shop/page.html'
+    template_name = 'shop/page.html'
+
 
 get_static_page = PageView.as_view()
