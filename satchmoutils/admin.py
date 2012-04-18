@@ -45,8 +45,7 @@ class PageOptions(admin.ModelAdmin):
     class Media:
         js = [
             '/static/theme/scripts/tiny_mce/tiny_mce.js',
-            '/static/theme/scripts/tiny_mce/textareas.js',
-        ]
+            '/static/theme/scripts/tiny_mce/textareas.js']
 
 
 admin.site.register(

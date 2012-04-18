@@ -5,11 +5,11 @@ from django.core import urlresolvers
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic.detail import DetailView
 from satchmo_store.mail import send_store_mail
 from satchmo_store.shop.signals import contact_sender
 from satchmo_store.shop.views.contact import ContactForm as BaseContactForm
 from satchmo_store.shop.models import Cart
-from satchmo_utils.views import bad_or_missing
 
 from captcha.fields import CaptchaField
 from .models import Page
@@ -75,26 +75,12 @@ def contact_form(request):
                               context_instance=RequestContext(request))
 
 
-def get_static_page(request, page_slug, template="shop/page.html"):
-    """ display page item """
-    errors = request.session.get('ERRORS', None)
-    if errors is not None:
-        del(request.session['ERRORS'])
+class PageView(DetailView):
+    """ display static page item
+    """
+    model = Page
+    slug_field = 'slug'
+    context_object_name = "page"
+    template_name='shop/page.html'
 
-    pages = Page.objects.filter(slug=page_slug)
-
-    if not pages:
-        return bad_or_missing(
-            request,
-            _('The page you have requested does not exist.')
-        )
-    page = pages[0]
-
-    if not page.active:
-        return bad_or_missing(
-            request,
-            _('The page you have requested does not exist.')
-        )
-
-    context = RequestContext(request, {'page': page})
-    return render_to_response(template, context_instance=context)
+get_static_page = PageView.as_view()
