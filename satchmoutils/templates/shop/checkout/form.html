@@ -69,7 +69,13 @@
                 {% endif %}
             {% endif %}
          {% endif %}>
-      <label for="{{name}}">{{field.label}}</label>
+      <label for="{{name}}">
+          {% if name != 'street2' %}
+            {% if name != 'ship_street2' %}
+            {{field.label}}
+            {% else %}&nbsp;{% endif %}
+          {% else %}&nbsp;{% endif %}
+      </label>
       {{ field }}
       {% if field.errors %}
       <div class="error">{{ field.errors|join:", " }}</div>
