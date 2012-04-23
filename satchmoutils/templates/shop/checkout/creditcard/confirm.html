@@ -12,7 +12,7 @@
 
 {% block payment_display %}
 
-<h4>{% trans "Payment" %}</h4>
+<h2>{% trans "Payment" %}</h2>
 {% trans "Your payment will be processed through BANCASELLA." %}
 {% endblock %}
 
@@ -87,10 +87,9 @@
 <input type="hidden" name="email" value="{{order.contact.email}}" />
 <input type="hidden" name="address_override" value="0" />
 {% endwith %}{% endif %}
-<div class="button-cart-go">
-	<div class="addBttnBig">
-	    <input type="submit" value="{% trans 'Purchase Items' %}"/>
-	</div>
+<div class="addBttnBig">
+	<input class="btn btn-primary" type="submit" value="{% trans 'Purchase Items' %}"/>
+</div>
 </div>
 </form>
 {% endif %}

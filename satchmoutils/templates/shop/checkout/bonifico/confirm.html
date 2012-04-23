@@ -6,7 +6,7 @@
 {% block payment_step %}<a href="{% url BONIFICO_satchmo_checkout-step2 %}">{% trans "Payment" %}</a>{% endblock %}
 
 {% block payment_display %}
-<h4>{% trans "Payment" %}</h4>
+<h2>{% trans "Payment" %}</h2>
 {% if not PAYMENT_LIVE %}<b>BONIFICO PAYMENT</b><br/>{% endif %}
 {% trans "Your payment will be processed through BONIFICO." %}
 {% endblock %}
@@ -83,8 +83,8 @@
 <input type="hidden" name="address_override" value="0" />
 {% endwith %}{% endif %}
 <br />
-<span class="button yellow">
-    <input class="button yellow" type="submit" value='{% trans "Conferma il tuo ordine" %}' />
+<span>
+    <input class="btn btn-primary" type="submit" value='{% trans "Conferma il tuo ordine" %}' />
 </span>
 <p>&nbsp;</p>
 </form>

@@ -6,7 +6,7 @@
 {% block payment_step %}<a href="{% url CONTRASSEGNO_satchmo_checkout-step2 %}">{% trans "Payment" %}</a>{% endblock %}
 
 {% block payment_display %}
-<h4>{% trans "Payment" %}</h4>
+<h2>{% trans "Payment" %}</h2>
 {% if not PAYMENT_LIVE %}<b>PAYMENT</b><br/>{% endif %}
 {% trans "Your payment will be processed through CONTRASSEGNO." %}
 {% endblock %}
@@ -83,7 +83,7 @@
 <input type="hidden" name="address_override" value="0" />
 {% endwith %}{% endif %}
     <br />
-<input type="submit" value="{% trans "Purchase Items" %}" />
+<input class="btn btn-primary" type="submit" value="{% trans "Purchase Items" %}" />
 </form>
 {% endif %}
 {% endblock %}
