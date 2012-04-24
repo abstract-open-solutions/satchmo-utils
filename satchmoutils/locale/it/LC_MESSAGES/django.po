@@ -850,7 +850,7 @@ msgid ""
 "with this information."
 msgstr ""
 "Vi consigliamo di stampare questa pagina come ricevuta. Riceverai anche una e-mail"
-"con queste informazioni"
+" con queste informazioni"
 
 #: templates/shop/checkout/success_bonifico.html:34
 msgid ""
