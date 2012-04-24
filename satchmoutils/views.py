@@ -34,18 +34,18 @@ def cart_empty(request):
 
 # Choices displayed to the user to categorize the type of contact request.
 email_choices = (
-    ("General Question", _("General question")),
-    ("Order Problem", _("Order problem")),
-    ("Product Info", _("Product Info")),
-    ("Shipping Info", _("Shipping Info")),
+    ("General Question", _(u"General question")),
+    ("Order Problem", _(u"Order problem")),
+    ("Product Info", _(u"Product Info")),
+    ("Shipping Info", _(u"Shipping Info")),
 )
 
 
 class ContactForm(BaseContactForm):
     inquiry = forms.ChoiceField(label=_("Inquiry"), choices=email_choices,
-        help_text=_("What about yuor question"))
+        help_text=_(u"What about yuor question"))
     captcha = CaptchaField(required=True,
-        help_text=_("Insert word you see into image"))
+        help_text=_(u"Insert word you see into image"))
 
 
 def contact_form(request):

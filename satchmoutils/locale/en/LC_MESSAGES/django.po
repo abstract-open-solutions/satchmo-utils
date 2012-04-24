@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-20 18:45+0100\n"
+"POT-Creation-Date: 2012-04-24 09:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,67 +17,115 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: config.py:8
-msgid "Shop info"
+#: admin.py:27 admin.py:33
+msgid "Page updtated"
 msgstr ""
 
-#: config.py:16
-msgid "IBAN code"
+#: admin.py:29
+msgid "activate"
 msgstr ""
 
-#: config.py:26 forms.py:120
-msgid "VAT number"
+#: admin.py:35
+msgid "deactivate"
 msgstr ""
 
-#: forms.py:37
+#: config.py:14
+msgid "Invalid IBAN code. Please make sure to remove all spaces"
+msgstr ""
+
+#: config.py:29
+msgid "Shop configuration"
+msgstr ""
+
+#: config.py:36
+msgid "Shop name"
+msgstr ""
+
+#: config.py:37
+msgid "The name of the site, shown on all pages and mails"
+msgstr ""
+
+#: config.py:44
+msgid "IBAN"
+msgstr ""
+
+#: config.py:45
+msgid ""
+"your bank account code: fill in if you have chosen to accept payments via "
+"bank transfer"
+msgstr ""
+
+#: config.py:53
+msgid "Address"
+msgstr ""
+
+#: config.py:54
+msgid "the physical or legal address of your business"
+msgstr ""
+
+#: config.py:61
+msgid "Zip code"
+msgstr ""
+
+#: config.py:62
+msgid "the zip code of the shop address"
+msgstr ""
+
+#: config.py:69
+msgid "City"
+msgstr ""
+
+#: config.py:70
+msgid "the city of the shop"
+msgstr ""
+
+#: config.py:77
+msgid "E-mail"
+msgstr ""
+
+#: config.py:78
+msgid ""
+"an e-mail address where your customers can contact you for informations or "
+"other needs"
+msgstr ""
+
+#: config.py:86
+msgid "Vat number"
+msgstr ""
+
+#: config.py:87
+msgid "shop vat number"
+msgstr ""
+
+#: config.py:94
+msgid "Telephone"
+msgstr ""
+
+#: config.py:95
+msgid "a phone number to allow your customers to contact you"
+msgstr ""
+
+#: config.py:102
+msgid "Fax"
+msgstr ""
+
+#: config.py:103
+msgid "a fax number to allow your customers to contact you"
+msgstr ""
+
+#: formextensions.py:24
 msgid ""
 "You must specify either your person number or the VAT number of your company "
 "in order to proceed with the purchase"
 msgstr ""
 
-#: forms.py:51
-msgid "You must specify house number in your address"
+#: formextensions.py:94
+msgid "I have read the Terms and Conditions"
 msgstr ""
 
-#: forms.py:83
-msgid "Vat number"
-msgstr ""
-
-#: forms.py:89 forms.py:126 templates/contact/update_form.html:63
-#: templates/contact/view_profile.html:35
-msgid "Person number"
-msgstr ""
-
-#: forms.py:95
-msgid "I have read the Terms and Conditions."
-msgstr ""
-
-#: models.py:12
-msgid "contact"
-msgstr ""
-
-#: models.py:15
-msgid "business number"
-msgstr ""
-
-#: models.py:19
-msgid "person number"
-msgstr ""
-
-#: models.py:24
-#, python-format
-msgid "administrative information for %(contact_name)s"
-msgstr ""
-
-#: models.py:29
-msgid "administrative information"
-msgstr ""
-
-#: models.py:30
-msgid "administrative informations"
-msgstr ""
-
-#: signals.py:16 templates/shop/checkout/form.html:18
+#: formextensions.py:102 templates/shop/checkout/form.html:18
+#: templates/shop/checkout/bonifico/confirm.html:6
+#: templates/shop/checkout/bonifico/confirm.html:9
 #: templates/shop/checkout/contrassegno/confirm.html:6
 #: templates/shop/checkout/contrassegno/confirm.html:9
 #: templates/shop/checkout/creditcard/confirm.html:7
@@ -85,20 +133,89 @@ msgstr ""
 msgid "Payment"
 msgstr ""
 
-#: signals.py:17
+#: formextensions.py:107
 msgid "Basic informations"
 msgstr ""
 
-#: signals.py:18
+#: formextensions.py:116
 msgid "Billing informations"
 msgstr ""
 
-#: signals.py:19
+#: formextensions.py:129
 msgid "Shipping informations"
 msgstr ""
 
-#: signals.py:103
-msgid "Other fields"
+#: formextensions.py:141
+msgid "Other informations"
+msgstr ""
+
+#: models.py:16
+msgid "contact"
+msgstr ""
+
+#: models.py:19
+msgid "business number"
+msgstr ""
+
+#: models.py:23
+msgid "person number"
+msgstr ""
+
+#: models.py:28
+#, python-format
+msgid "administrative information for %(contact_name)s"
+msgstr ""
+
+#: models.py:33
+msgid "administrative information"
+msgstr ""
+
+#: models.py:34
+msgid "administrative informations"
+msgstr ""
+
+#: models.py:42
+msgid "Title"
+msgstr ""
+
+#: models.py:47
+msgid "Slug Name"
+msgstr ""
+
+#: models.py:50
+msgid "Used for URLs, auto-generated from name if blank"
+msgstr ""
+
+#: models.py:53
+msgid "Text"
+msgstr ""
+
+#: models.py:54
+msgid "This field can contain HTML"
+msgstr ""
+
+#: models.py:58
+msgid "Ordering"
+msgstr ""
+
+#: models.py:60
+msgid "Override alphabetical order in category display"
+msgstr ""
+
+#: models.py:62
+msgid "Active"
+msgstr ""
+
+#: models.py:64
+msgid "This will determine whether or not this product will appear on the site"
+msgstr ""
+
+#: models.py:77
+msgid "page"
+msgstr ""
+
+#: models.py:78
+msgid "pages"
 msgstr ""
 
 #: validators.py:33 validators.py:61
@@ -114,22 +231,46 @@ msgid "Invalid person number"
 msgstr ""
 
 #: validators.py:79
-msgid "Invalid company number"
+msgid "Invalid Vat number"
 msgstr ""
 
-#: views.py:101
-msgid "Message sent."
+#: views.py:37
+msgid "General question"
+msgstr ""
+
+#: views.py:38
+msgid "Order problem"
+msgstr ""
+
+#: views.py:39
+msgid "Product Info"
+msgstr ""
+
+#: views.py:40
+msgid "Shipping Info"
+msgstr ""
+
+#: views.py:45
+msgid "Inquiry"
+msgstr ""
+
+#: views.py:46
+msgid "What about yuor question"
+msgstr ""
+
+#: views.py:48
+msgid "Insert word you see into image"
 msgstr ""
 
 #: payments/modules/base.py:38
 msgid "Success"
 msgstr ""
 
-#: payments/modules/views.py:63
+#: payments/modules/views.py:89
 msgid "Payment needs to be confirmed"
 msgstr ""
 
-#: payments/modules/views.py:88 payments/modules/creditcard/views.py:184
+#: payments/modules/views.py:150 payments/modules/creditcard/views.py:186
 msgid "Your order has already been processed."
 msgstr ""
 
@@ -270,7 +411,7 @@ msgid ""
 "This can be a named url and defaults to the standard checkout success."
 msgstr ""
 
-#: payments/modules/creditcard/views.py:51
+#: payments/modules/creditcard/views.py:46
 msgid "Your order is no longer valid."
 msgstr ""
 
@@ -314,6 +455,72 @@ msgstr ""
 msgid "tax rates"
 msgstr ""
 
+#: templates/admin/index.html:20
+msgid "(show)"
+msgstr ""
+
+#: templates/admin/index.html:21
+msgid "(hide)"
+msgstr ""
+
+#: templates/admin/index.html:66
+#, python-format
+msgid "Models available in the %(name)s application."
+msgstr ""
+
+#: templates/admin/index.html:67
+#, python-format
+msgid "%(name)s"
+msgstr ""
+
+#: templates/admin/index.html:77
+msgid "Add"
+msgstr ""
+
+#: templates/admin/index.html:83
+msgid "Change"
+msgstr ""
+
+#: templates/admin/index.html:93
+msgid "You don't have permission to edit anything."
+msgstr ""
+
+#: templates/admin/index.html:101
+msgid "Recent Actions"
+msgstr ""
+
+#: templates/admin/index.html:103
+msgid "My Actions"
+msgstr ""
+
+#: templates/admin/index.html:107
+msgid "None available"
+msgstr ""
+
+#: templates/admin/index.html:120
+msgid "Admin Tools"
+msgstr ""
+
+#: templates/admin/index.html:124
+msgid "Edit Site Settings"
+msgstr ""
+
+#: templates/admin/index.html:127
+msgid "Edit Inventory"
+msgstr ""
+
+#: templates/admin/index.html:130
+msgid "Export Product Defs"
+msgstr ""
+
+#: templates/admin/index.html:133
+msgid "Product Variation Manager"
+msgstr ""
+
+#: templates/admin/index.html:136
+msgid "Cache Status"
+msgstr ""
+
 #: templates/contact/update_form.html:5 templates/contact/view_profile.html:7
 #: templates/product/product.html:23 templates/shop/cart.html:11
 #: templates/shop/checkout/form.html:9
@@ -337,7 +544,7 @@ msgstr ""
 msgid "Your Profile"
 msgstr ""
 
-#: templates/contact/update_form.html:17 templates/shop/checkout/form.html:24
+#: templates/contact/update_form.html:17
 msgid "Please correct the following error:"
 msgstr ""
 
@@ -385,6 +592,11 @@ msgstr ""
 #: templates/contact/update_form.html:60
 #: templates/contact/view_profile.html:34
 msgid "Business number"
+msgstr ""
+
+#: templates/contact/update_form.html:63
+#: templates/contact/view_profile.html:35
+msgid "Person number"
 msgstr ""
 
 #: templates/contact/update_form.html:71
@@ -535,56 +747,24 @@ msgstr ""
 msgid "update"
 msgstr ""
 
-#: templates/shop/cart.html:63
+#: templates/shop/cart.html:64
 msgid "Remove"
 msgstr ""
 
-#: templates/shop/cart.html:73
+#: templates/shop/cart.html:74
 msgid "Cart Total"
 msgstr ""
 
-#: templates/shop/cart.html:88
+#: templates/shop/cart.html:89
 msgid "Continue shopping"
 msgstr ""
 
-#: templates/shop/cart.html:91
+#: templates/shop/cart.html:92
 msgid "Empty"
 msgstr ""
 
-#: templates/shop/cart.html:94
+#: templates/shop/cart.html:95
 msgid "Check out"
-msgstr ""
-
-#: templates/shop/contacts.html:9
-msgid "Contact us"
-msgstr ""
-
-#: templates/shop/contacts.html:19
-msgid "Name and Surname"
-msgstr ""
-
-#: templates/shop/contacts.html:28
-msgid "Company"
-msgstr ""
-
-#: templates/shop/contacts.html:37
-msgid "City"
-msgstr ""
-
-#: templates/shop/contacts.html:46
-msgid "Telephone"
-msgstr ""
-
-#: templates/shop/contacts.html:66
-msgid "Message"
-msgstr ""
-
-#: templates/shop/contacts.html:79
-msgid "* fields are required"
-msgstr ""
-
-#: templates/shop/contacts.html:83
-msgid "Submit"
 msgstr ""
 
 #: templates/shop/checkout/form.html:10 templates/shop/checkout/form.html:14
@@ -604,38 +784,42 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#: templates/shop/checkout/form.html:22
+#: templates/shop/checkout/form.html:24
 msgid ""
 "Please complete the following information in order to submit your order."
 msgstr ""
 
-#: templates/shop/checkout/form.html:33
+#: templates/shop/checkout/form.html:28
+msgid "Please correct the following errors"
+msgstr ""
+
+#: templates/shop/checkout/form.html:37
 msgid ""
 "If you already have an account, you can login now to fill in most of the "
 "information below."
 msgstr ""
 
-#: templates/shop/checkout/form.html:34
+#: templates/shop/checkout/form.html:38
 msgid "This is just a convenience, no account is required!"
 msgstr ""
 
-#: templates/shop/checkout/form.html:37
+#: templates/shop/checkout/form.html:41
 msgid "Username or email"
 msgstr ""
 
-#: templates/shop/checkout/form.html:38
+#: templates/shop/checkout/form.html:47
 msgid "Password"
 msgstr ""
 
-#: templates/shop/checkout/form.html:39
+#: templates/shop/checkout/form.html:53
 msgid "Login"
 msgstr ""
 
-#: templates/shop/checkout/form.html:46
+#: templates/shop/checkout/form.html:60
 msgid "You'll need to fill out at least the fields with a *"
 msgstr ""
 
-#: templates/shop/checkout/form.html:57
+#: templates/shop/checkout/form.html:88
 msgid "Continue Checkout"
 msgstr ""
 
@@ -700,15 +884,24 @@ msgid ""
 "Il corriere accetter&agrave; solo contanti."
 msgstr ""
 
-#: templates/shop/checkout/contrassegno/confirm.html:11
-msgid "Your payment will be processed through CONTRASSEGNO."
+#: templates/shop/checkout/bonifico/confirm.html:11
+msgid "Your payment will be processed through BONIFICO."
 msgstr ""
 
+#: templates/shop/checkout/bonifico/confirm.html:17
 #: templates/shop/checkout/contrassegno/confirm.html:17
-#: templates/shop/checkout/contrassegno/confirm.html:87
+#: templates/shop/checkout/contrassegno/confirm.html:86
 #: templates/shop/checkout/creditcard/confirm.html:22
-#: templates/shop/checkout/creditcard/confirm.html:93
+#: templates/shop/checkout/creditcard/confirm.html:91
 msgid "Purchase Items"
+msgstr ""
+
+#: templates/shop/checkout/bonifico/confirm.html:87
+msgid "Conferma il tuo ordine"
+msgstr ""
+
+#: templates/shop/checkout/contrassegno/confirm.html:11
+msgid "Your payment will be processed through CONTRASSEGNO."
 msgstr ""
 
 #: templates/shop/checkout/creditcard/confirm.html:16
