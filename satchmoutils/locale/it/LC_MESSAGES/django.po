@@ -895,7 +895,7 @@ msgstr ""
 
 #: templates/shop/checkout/bonifico/confirm.html:11
 msgid "Your payment will be processed through BONIFICO."
-msgstr "Il tuo pagamento verra' elaborato da BANCASELLA"
+msgstr "Il tuo pagamento verra' elaborato da BONIFICO"
 
 #: templates/shop/checkout/bonifico/confirm.html:17
 #: templates/shop/checkout/contrassegno/confirm.html:17
