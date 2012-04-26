@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-24 09:57+0200\n"
+"POT-Creation-Date: 2012-04-24 17:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,8 +54,8 @@ msgid ""
 "your bank account code: fill in if you have chosen to accept payments via "
 "bank transfer"
 msgstr ""
-"il tuo account bancario: compilare se si è scelto di accettare "
-"pagamenti tramite bonifico bancario"
+"il tuo account bancario: compilare se si è scelto di accettare pagamenti "
+"tramite bonifico bancario"
 
 #: config.py:53
 msgid "Address"
@@ -90,9 +90,10 @@ msgid ""
 "an e-mail address where your customers can contact you for informations or "
 "other needs"
 msgstr ""
-"inserisci un indirizzo email che i clienti potranno utilizzare per contattarti"
+"inserisci un indirizzo email che i clienti potranno utilizzare per "
+"contattarti"
 
-#: config.py:86
+#: config.py:86 formextensions.py:73
 msgid "Vat number"
 msgstr "P. IVA"
 
@@ -124,6 +125,11 @@ msgstr ""
 "Devi specificare almeno uno tra p.iva e codice fiscale per poter continuare "
 "il tuo ordine"
 
+#: formextensions.py:80 templates/contact/update_form.html:63
+#: templates/contact/view_profile.html:35
+msgid "Person number"
+msgstr "Codice fiscale"
+
 #: formextensions.py:94
 msgid "I have read the Terms and Conditions"
 msgstr "Ho letto le condizioni commerciali*."
@@ -135,6 +141,8 @@ msgstr "Ho letto le condizioni commerciali*."
 #: templates/shop/checkout/contrassegno/confirm.html:9
 #: templates/shop/checkout/creditcard/confirm.html:7
 #: templates/shop/checkout/creditcard/confirm.html:15
+#: templates/shop/checkout/paypal/confirm.html:7
+#: templates/shop/checkout/paypal/confirm.html:10
 msgid "Payment"
 msgstr "Pagamento"
 
@@ -599,11 +607,6 @@ msgstr "Informazioni personali"
 msgid "Business number"
 msgstr "P.IVA"
 
-#: templates/contact/update_form.html:63
-#: templates/contact/view_profile.html:35
-msgid "Person number"
-msgstr "Codice fiscale"
-
 #: templates/contact/update_form.html:71
 msgid "Update"
 msgstr "Aggiorna"
@@ -849,8 +852,8 @@ msgid ""
 "Please print out this page as a receipt.  You will also receive an email "
 "with this information."
 msgstr ""
-"Vi consigliamo di stampare questa pagina come ricevuta. Riceverai anche una e-mail"
-" con queste informazioni"
+"Vi consigliamo di stampare questa pagina come ricevuta. Riceverai anche una "
+"e-mail con queste informazioni"
 
 #: templates/shop/checkout/success_bonifico.html:34
 msgid ""
@@ -895,13 +898,15 @@ msgstr ""
 
 #: templates/shop/checkout/bonifico/confirm.html:11
 msgid "Your payment will be processed through BONIFICO."
-msgstr "Il tuo pagamento verra' elaborato da BANCASELLA"
+msgstr "Il tuo pagamento verra' elaborato da BONIFICO"
 
 #: templates/shop/checkout/bonifico/confirm.html:17
 #: templates/shop/checkout/contrassegno/confirm.html:17
 #: templates/shop/checkout/contrassegno/confirm.html:86
 #: templates/shop/checkout/creditcard/confirm.html:22
 #: templates/shop/checkout/creditcard/confirm.html:91
+#: templates/shop/checkout/paypal/confirm.html:18
+#: templates/shop/checkout/paypal/confirm.html:107
 msgid "Purchase Items"
 msgstr "Acquista"
 
@@ -920,6 +925,19 @@ msgstr "Il tuo pagamento verra' elaborato da BANCASELLA"
 #: templates/shop/checkout/creditcard/error.html:16
 msgid "Error. Check your order!"
 msgstr "Errore. Controlla il tuo ordine!"
+
+#: templates/shop/checkout/paypal/confirm.html:12
+msgid "Your payment will be processed through PayPal."
+msgstr "Il tuo pagamento verra' elaborato da PAYPAL"
+
+#: templates/shop/checkout/paypal/confirm.html:58
+#, python-format
+msgid "Remaining Balance for order %(order_id)s"
+msgstr "Totale da pagare per l'ordine %(order_id)s"
+
+#: templates/shop/checkout/paypal/confirm.html:73
+msgid "Shipping for free items"
+msgstr "Consegna gratis"
 
 msgid "VAT number"
 msgstr "P. IVA"
