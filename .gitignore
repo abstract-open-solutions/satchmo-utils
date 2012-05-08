@@ -3,7 +3,7 @@
 # Ignore eggs
 *.egg-info
 # Translation files
-*.mo
+# *.mo
 # Ignore backups
 *~
 .*.swp
