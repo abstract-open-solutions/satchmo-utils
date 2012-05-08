@@ -6,9 +6,6 @@ class BaseProcessor(BasePaymentProcessor):
         
     def allowed_for(self, cart=None):
         """Allows different payment processors to be allowed for certain situations."""
-        if not cart:
-            return False
-            
         return True
         
 class OneStepBasePaymentProcessor(BaseProcessor):
