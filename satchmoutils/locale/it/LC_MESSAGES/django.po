@@ -968,3 +968,9 @@ msgstr "* campi obbligatori"
 
 msgid "Submit"
 msgstr "Invia"
+
+# translated = "Codice postale / CAP"
+#: forms.py:37 templates/contact/login_signup_address.html:159
+#: templates/contact/update_form.html:112
+msgid "Shipping same as billing?"
+msgstr "L'indirizzo di consegna è lo stesso di fatturazione"
