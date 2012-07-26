@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-24 17:47+0200\n"
+"POT-Creation-Date: 2012-07-26 17:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -193,11 +193,11 @@ msgstr "Titolo"
 
 #: models.py:47
 msgid "Slug Name"
-msgstr ""
+msgstr "Slug"
 
 #: models.py:50
 msgid "Used for URLs, auto-generated from name if blank"
-msgstr ""
+msgstr "Viene usato l'url, autogenerato se lasciato vuoto"
 
 #: models.py:53
 msgid "Text"
@@ -275,7 +275,7 @@ msgstr "A cosa si riferisce la domanda"
 msgid "Insert word you see into image"
 msgstr "Testo dell'immagine"
 
-#: payments/modules/base.py:38
+#: payments/modules/base.py:35
 msgid "Success"
 msgstr "Operazione eseguita con successo"
 
@@ -939,38 +939,40 @@ msgstr "Totale da pagare per l'ordine %(order_id)s"
 msgid "Shipping for free items"
 msgstr "Consegna gratis"
 
-msgid "VAT number"
-msgstr "P. IVA"
+#: templates/tags/pages_links.html:5
+msgid "Other"
+msgstr "Altre pagine"
 
-msgid "You must specify house number in your address"
-msgstr "Devi specificare il numero civico nell'indirizzo"
+#~ msgid "VAT number"
+#~ msgstr "P. IVA"
 
-msgid "Other fields"
-msgstr "Altre informazioni"
+#~ msgid "You must specify house number in your address"
+#~ msgstr "Devi specificare il numero civico nell'indirizzo"
 
-msgid "Message sent."
-msgstr "Messaggio spedito con successo."
+#~ msgid "Other fields"
+#~ msgstr "Altre informazioni"
 
-msgid "Contact us"
-msgstr "Contattaci"
+#~ msgid "Message sent."
+#~ msgstr "Messaggio spedito con successo."
 
-msgid "Name and Surname"
-msgstr "Nome e Cognome"
+#~ msgid "Contact us"
+#~ msgstr "Contattaci"
 
-msgid "Company"
-msgstr "Azienda"
+#~ msgid "Name and Surname"
+#~ msgstr "Nome e Cognome"
 
-msgid "Message"
-msgstr "Messaggio"
+#~ msgid "Company"
+#~ msgstr "Azienda"
 
-msgid "* fields are required"
-msgstr "* campi obbligatori"
+#~ msgid "Message"
+#~ msgstr "Messaggio"
 
-msgid "Submit"
-msgstr "Invia"
+#~ msgid "* fields are required"
+#~ msgstr "* campi obbligatori"
+
+#~ msgid "Submit"
+#~ msgstr "Invia"
 
 # translated = "Codice postale / CAP"
-#: forms.py:37 templates/contact/login_signup_address.html:159
-#: templates/contact/update_form.html:112
-msgid "Shipping same as billing?"
-msgstr "L'indirizzo di consegna è lo stesso di fatturazione"
+#~ msgid "Shipping same as billing?"
+#~ msgstr "L'indirizzo di consegna è lo stesso di fatturazione"

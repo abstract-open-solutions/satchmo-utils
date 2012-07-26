@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-24 09:57+0200\n"
+"POT-Creation-Date: 2012-07-26 17:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,7 +89,7 @@ msgid ""
 "other needs"
 msgstr ""
 
-#: config.py:86
+#: config.py:86 formextensions.py:73
 msgid "Vat number"
 msgstr ""
 
@@ -119,6 +119,11 @@ msgid ""
 "in order to proceed with the purchase"
 msgstr ""
 
+#: formextensions.py:80 templates/contact/update_form.html:63
+#: templates/contact/view_profile.html:35
+msgid "Person number"
+msgstr ""
+
 #: formextensions.py:94
 msgid "I have read the Terms and Conditions"
 msgstr ""
@@ -130,6 +135,8 @@ msgstr ""
 #: templates/shop/checkout/contrassegno/confirm.html:9
 #: templates/shop/checkout/creditcard/confirm.html:7
 #: templates/shop/checkout/creditcard/confirm.html:15
+#: templates/shop/checkout/paypal/confirm.html:7
+#: templates/shop/checkout/paypal/confirm.html:10
 msgid "Payment"
 msgstr ""
 
@@ -262,7 +269,7 @@ msgstr ""
 msgid "Insert word you see into image"
 msgstr ""
 
-#: payments/modules/base.py:38
+#: payments/modules/base.py:35
 msgid "Success"
 msgstr ""
 
@@ -594,11 +601,6 @@ msgstr ""
 msgid "Business number"
 msgstr ""
 
-#: templates/contact/update_form.html:63
-#: templates/contact/view_profile.html:35
-msgid "Person number"
-msgstr ""
-
 #: templates/contact/update_form.html:71
 msgid "Update"
 msgstr ""
@@ -893,6 +895,8 @@ msgstr ""
 #: templates/shop/checkout/contrassegno/confirm.html:86
 #: templates/shop/checkout/creditcard/confirm.html:22
 #: templates/shop/checkout/creditcard/confirm.html:91
+#: templates/shop/checkout/paypal/confirm.html:18
+#: templates/shop/checkout/paypal/confirm.html:107
 msgid "Purchase Items"
 msgstr ""
 
@@ -910,4 +914,21 @@ msgstr ""
 
 #: templates/shop/checkout/creditcard/error.html:16
 msgid "Error. Check your order!"
+msgstr ""
+
+#: templates/shop/checkout/paypal/confirm.html:12
+msgid "Your payment will be processed through PayPal."
+msgstr ""
+
+#: templates/shop/checkout/paypal/confirm.html:58
+#, python-format
+msgid "Remaining Balance for order %(order_id)s"
+msgstr ""
+
+#: templates/shop/checkout/paypal/confirm.html:73
+msgid "Shipping for free items"
+msgstr ""
+
+#: templates/tags/pages_links.html:5
+msgid "Other"
 msgstr ""

@@ -2,6 +2,7 @@ from django import template
 from django.conf import settings
 
 from ..formextender import import_path
+from ..models import Page
 
 register = template.Library()
 
@@ -20,3 +21,17 @@ def admin_extra_links(context):
         admin_extra_links.extend(
             extender.get_admin_links())
     return {'admin_extra_links': admin_extra_links}
+
+
+@register.inclusion_tag('tags/pages_links.html', takes_context=True)
+def pages_links(context):
+    """Box for Pages list"""
+    default_pages = [
+        'l-azienda',
+        'condizioni-spedizione',
+        'tipologie-pagamento',
+        'buono-regalo',
+    ]
+    pages = Page.objects.filter(active=True).order_by('ordering', 'title')
+    pages = [p for p in pages if p.slug not in default_pages]
+    return {'pages': pages}
