@@ -68,10 +68,7 @@ class Page(models.Model):
         return u"%(title)s" % {'title': self.title}
 
     def get_absolute_url(self):
-        page_prefix = get_satchmo_setting('PAGE_SLUG')
-        return "/%(page_prefix)s/%(slug)s/" % {
-            'page_prefix': page_prefix,
-            'slug': self.slug}
+        return "/pagine/%(slug)s/" % {'slug': self.slug}
 
     class Meta:
         verbose_name = _("page")
