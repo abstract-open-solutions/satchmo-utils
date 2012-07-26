@@ -25,7 +25,8 @@ def admin_extra_links(context):
 
 @register.inclusion_tag('tags/pages_links.html', takes_context=True)
 def pages_links(context):
-    """Box for Pages list"""
+    """Box for Pages list
+    Default limit to 10 pages"""
     default_pages = [
         'l-azienda',
         'condizioni-spedizione',
@@ -33,5 +34,5 @@ def pages_links(context):
         'buono-regalo',
     ]
     pages = Page.objects.filter(active=True).order_by('ordering', 'title')
-    pages = [p for p in pages if p.slug not in default_pages]
+    pages = [p for p in pages if p.slug not in default_pages][:10]
     return {'pages': pages}
