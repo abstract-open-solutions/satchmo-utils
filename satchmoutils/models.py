@@ -27,9 +27,9 @@ class ContactAdministrativeInformation(models.Model):
         contact_fullname = ''
         if self.contact and self.contact.full_name:
             contact_fullname = self.contact.full_name
-        return _(u"administrative information for %(contact_name)s") % {
+        return _(u"administrative information for %(contact_name)s" % {
             'contact_name': contact_fullname
-        }
+        })
 
     class Meta:
         verbose_name = _(u"administrative information")
