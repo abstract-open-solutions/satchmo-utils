@@ -24,12 +24,14 @@ class ContactAdministrativeInformation(models.Model):
     )
 
     def __unicode__(self):
+        # XXX: I have to duplicate here 'ugettext_lazy' import
+        # if not '_' is None
+        from django.utils.translation import ugettext_lazy as _
         contact_fullname = ''
         if self.contact and self.contact.full_name:
             contact_fullname = self.contact.full_name
-        return _(u"administrative information for %(contact_name)s" % {
-            'contact_name': contact_fullname
-        })
+        return _(u"administrative information for %(contact_name)s") % {
+            'contact_name': contact_fullname}
 
     class Meta:
         verbose_name = _(u"administrative information")
