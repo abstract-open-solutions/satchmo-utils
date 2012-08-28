@@ -976,3 +976,18 @@ msgstr "Altre pagine"
 # translated = "Codice postale / CAP"
 #~ msgid "Shipping same as billing?"
 #~ msgstr "L'indirizzo di consegna è lo stesso di fatturazione"
+
+#~ msgid "Your order #%(orderid)s has shipped today."
+#~ msgstr "Il tuo ordine #%(orderid)s è stato spedito oggi."
+
+#~ msgid "This completes your order."
+#~ msgstr "Il tuo ordine è stato evaso."
+
+#~ msgid "I have read the Terms and Conditions."
+#~ msgstr "Dichiaro di aver letto le condizioni commerciali."
+
+#~ msgid "Thank you for signing up with %(company_name)s."
+#~ msgstr "Grazie per esserti registrato con %(company_name)s."
+
+#~ msgid "Welcome to %s"
+#~ msgstr "Benvenuto in %s"
