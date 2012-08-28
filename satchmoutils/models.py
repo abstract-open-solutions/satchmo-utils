@@ -2,7 +2,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.db.models.signals import pre_save
 from satchmo_store.contact import models as contact_models
-from satchmo_store.shop import get_satchmo_setting
 
 from .utils import slugify
 
@@ -25,8 +24,11 @@ class ContactAdministrativeInformation(models.Model):
     )
 
     def __unicode__(self):
+        contact_fullname = ''
+        if self.contact and self.contact.full_name:
+            contact_fullname = self.contact.full_name
         return _(u"administrative information for %(contact_name)s") % {
-            'contact_name': self.contact.full_name
+            'contact_name': contact_fullname
         }
 
     class Meta:
