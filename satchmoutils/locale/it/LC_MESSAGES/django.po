@@ -943,6 +943,12 @@ msgstr "Consegna gratis"
 msgid "Other"
 msgstr "Altre pagine"
 
+msgid "State"
+msgstr "Provincia"
+
+#~ msgid "State/Province"
+#~ msgstr "Stato/Provincia"
+
 #~ msgid "VAT number"
 #~ msgstr "P. IVA"
 
