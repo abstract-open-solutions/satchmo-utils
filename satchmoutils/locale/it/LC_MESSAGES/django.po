@@ -946,54 +946,53 @@ msgstr "Altre pagine"
 msgid "State"
 msgstr "Provincia"
 
-#~ msgid "State/Province"
-#~ msgstr "Stato/Provincia"
+msgid "State/Province"
+msgstr "Provincia"
 
-#~ msgid "VAT number"
-#~ msgstr "P. IVA"
+msgid "VAT number"
+msgstr "P. IVA"
 
-#~ msgid "You must specify house number in your address"
-#~ msgstr "Devi specificare il numero civico nell'indirizzo"
+msgid "You must specify house number in your address"
+msgstr "Devi specificare il numero civico nell'indirizzo"
 
-#~ msgid "Other fields"
-#~ msgstr "Altre informazioni"
+msgid "Other fields"
+msgstr "Altre informazioni"
 
-#~ msgid "Message sent."
-#~ msgstr "Messaggio spedito con successo."
+msgid "Message sent."
+msgstr "Messaggio spedito con successo."
 
-#~ msgid "Contact us"
-#~ msgstr "Contattaci"
+msgid "Contact us"
+msgstr "Contattaci"
 
-#~ msgid "Name and Surname"
-#~ msgstr "Nome e Cognome"
+msgid "Name and Surname"
+msgstr "Nome e Cognome"
 
-#~ msgid "Company"
-#~ msgstr "Azienda"
+msgid "Company"
+msgstr "Azienda"
 
-#~ msgid "Message"
-#~ msgstr "Messaggio"
+msgid "Message"
+msgstr "Messaggio"
 
-#~ msgid "* fields are required"
-#~ msgstr "* campi obbligatori"
+msgid "* fields are required"
+msgstr "* campi obbligatori"
 
-#~ msgid "Submit"
-#~ msgstr "Invia"
+msgid "Submit"
+msgstr "Invia"
 
-# translated = "Codice postale / CAP"
-#~ msgid "Shipping same as billing?"
-#~ msgstr "L'indirizzo di consegna è lo stesso di fatturazione"
+msgid "Shipping same as billing?"
+msgstr "L'indirizzo di consegna è lo stesso di fatturazione"
 
-#~ msgid "Your order #%(orderid)s has shipped today."
-#~ msgstr "Il tuo ordine #%(orderid)s è stato spedito oggi."
+msgid "Your order #%(orderid)s has shipped today."
+msgstr "Il tuo ordine #%(orderid)s è stato spedito oggi."
 
-#~ msgid "This completes your order."
-#~ msgstr "Il tuo ordine è stato evaso."
+msgid "This completes your order."
+msgstr "Il tuo ordine è stato evaso."
 
-#~ msgid "I have read the Terms and Conditions."
-#~ msgstr "Dichiaro di aver letto le condizioni commerciali."
+msgid "I have read the Terms and Conditions."
+msgstr "Dichiaro di aver letto le condizioni commerciali."
 
-#~ msgid "Thank you for signing up with %(company_name)s."
-#~ msgstr "Grazie per esserti registrato con %(company_name)s."
+msgid "Thank you for signing up with %(company_name)s."
+msgstr "Grazie per esserti registrato con %(company_name)s."
 
-#~ msgid "Welcome to %s"
-#~ msgstr "Benvenuto in %s"
+msgid "Welcome to %s"
+msgstr "Benvenuto in %s"
