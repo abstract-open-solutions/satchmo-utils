@@ -985,6 +985,9 @@ msgstr "L'indirizzo di consegna è lo stesso di fatturazione"
 msgid "Your order #%(orderid)s has shipped today."
 msgstr "Il tuo ordine #%(orderid)s è stato spedito oggi."
 
+msgid "Your order #%(orderid)s has shipped today via %(shippingmethod)s."
+msgstr "Il tuo ordine #%(orderid)s è stato spedito oggi mediante %(shippingmethod)s."
+
 msgid "This completes your order."
 msgstr "Il tuo ordine è stato evaso."
 
@@ -993,6 +996,9 @@ msgstr "Dichiaro di aver letto le condizioni commerciali."
 
 msgid "Thank you for signing up with %(company_name)s."
 msgstr "Grazie per esserti registrato con %(company_name)s."
+
+msgid "Thank you for signing up with {{ shop_name }}."
+msgstr "Grazie per esserti registrato su {{ shop_name }}."
 
 msgid "Welcome to %s"
 msgstr "Benvenuto in %s"
