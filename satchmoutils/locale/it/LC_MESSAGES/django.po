@@ -1000,5 +1000,8 @@ msgstr "Grazie per esserti registrato con %(company_name)s."
 msgid "Thank you for signing up with {{ shop_name }}."
 msgstr "Grazie per esserti registrato su {{ shop_name }}."
 
+msgid "Your order from %(shop_name)s has shipped"
+msgstr "Grazie per aver ordinato il prodotto su %(shop_name)s."
+
 msgid "Welcome to %s"
 msgstr "Benvenuto in %s"
