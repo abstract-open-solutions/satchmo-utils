@@ -5,19 +5,24 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: satchmoutils 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-26 17:07+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2012-10-18 17:32+0200\n"
+"PO-Revision-Date: 2012-10-18 17:38+0100\n"
+"Last-Translator: Simone Deponti <simone.deponti@abstract.it>\n"
+"Language-Team: Abstract <team@abstract.it>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: ../../../\n"
 
-#: admin.py:27 admin.py:33
+#: admin.py:27
+#: admin.py:33
 msgid "Page updtated"
 msgstr "Pagina aggiornata"
 
@@ -50,12 +55,8 @@ msgid "IBAN"
 msgstr "Codice IBAN"
 
 #: config.py:45
-msgid ""
-"your bank account code: fill in if you have chosen to accept payments via "
-"bank transfer"
-msgstr ""
-"il tuo account bancario: compilare se si è scelto di accettare pagamenti "
-"tramite bonifico bancario"
+msgid "your bank account code: fill in if you have chosen to accept payments via bank transfer"
+msgstr "il tuo account bancario: compilare se si è scelto di accettare pagamenti tramite bonifico bancario"
 
 #: config.py:53
 msgid "Address"
@@ -83,17 +84,14 @@ msgstr "Città dove risiede il negozio"
 
 #: config.py:77
 msgid "E-mail"
-msgstr ""
+msgstr "E-mail"
 
 #: config.py:78
-msgid ""
-"an e-mail address where your customers can contact you for informations or "
-"other needs"
-msgstr ""
-"inserisci un indirizzo email che i clienti potranno utilizzare per "
-"contattarti"
+msgid "an e-mail address where your customers can contact you for informations or other needs"
+msgstr "inserisci un indirizzo email che i clienti potranno utilizzare per contattarti"
 
-#: config.py:86 formextensions.py:73
+#: config.py:86
+#: formextensions.py:73
 msgid "Vat number"
 msgstr "P. IVA"
 
@@ -111,21 +109,18 @@ msgstr "inserisci un numero di telefono"
 
 #: config.py:102
 msgid "Fax"
-msgstr ""
+msgstr "Fax"
 
 #: config.py:103
 msgid "a fax number to allow your customers to contact you"
 msgstr "inserisci un numero di FAX"
 
 #: formextensions.py:24
-msgid ""
-"You must specify either your person number or the VAT number of your company "
-"in order to proceed with the purchase"
-msgstr ""
-"Devi specificare almeno uno tra p.iva e codice fiscale per poter continuare "
-"il tuo ordine"
+msgid "You must specify either your person number or the VAT number of your company in order to proceed with the purchase"
+msgstr "Devi specificare almeno uno tra p.iva e codice fiscale per poter continuare il tuo ordine"
 
-#: formextensions.py:80 templates/contact/update_form.html:63
+#: formextensions.py:80
+#: templates/contact/update_form.html:63
 #: templates/contact/view_profile.html:35
 msgid "Person number"
 msgstr "Codice fiscale"
@@ -134,7 +129,8 @@ msgstr "Codice fiscale"
 msgid "I have read the Terms and Conditions"
 msgstr "Ho letto le condizioni commerciali*."
 
-#: formextensions.py:102 templates/shop/checkout/form.html:18
+#: formextensions.py:102
+#: templates/shop/checkout/form.html:18
 #: templates/shop/checkout/bonifico/confirm.html:6
 #: templates/shop/checkout/bonifico/confirm.html:9
 #: templates/shop/checkout/contrassegno/confirm.html:6
@@ -162,80 +158,82 @@ msgstr "Dati di consegna"
 msgid "Other informations"
 msgstr "Altri dati"
 
-#: models.py:16
+#: models.py:15
 msgid "contact"
 msgstr "contatto"
 
-#: models.py:19
+#: models.py:18
 msgid "business number"
 msgstr "p.iva"
 
-#: models.py:23
+#: models.py:22
 msgid "person number"
 msgstr "codice fiscale"
 
-#: models.py:28
+#: models.py:33
 #, python-format
 msgid "administrative information for %(contact_name)s"
 msgstr "informazioni amministrative per %(contact_name)s"
 
-#: models.py:33
+#: models.py:37
 msgid "administrative information"
 msgstr "informazioni amministrative"
 
-#: models.py:34
+#: models.py:38
 msgid "administrative informations"
 msgstr "informazioni amministrative"
 
-#: models.py:42
+#: models.py:46
 msgid "Title"
 msgstr "Titolo"
 
-#: models.py:47
+#: models.py:51
 msgid "Slug Name"
 msgstr "Slug"
 
-#: models.py:50
+#: models.py:54
 msgid "Used for URLs, auto-generated from name if blank"
 msgstr "Viene usato l'url, autogenerato se lasciato vuoto"
 
-#: models.py:53
+#: models.py:57
 msgid "Text"
 msgstr "Testo"
 
-#: models.py:54
+#: models.py:58
 msgid "This field can contain HTML"
 msgstr "Può contenere HTML"
 
-#: models.py:58
+#: models.py:62
 msgid "Ordering"
 msgstr "Ordinamento"
 
-#: models.py:60
+#: models.py:64
 msgid "Override alphabetical order in category display"
 msgstr "Imposta ordine alfabetico nella visualizzazione della categoria"
 
-#: models.py:62
+#: models.py:66
 msgid "Active"
 msgstr "Abilita"
 
-#: models.py:64
+#: models.py:68
 msgid "This will determine whether or not this product will appear on the site"
 msgstr "Questo determinerà se il prodotto apparirà sul sito"
 
-#: models.py:77
+#: models.py:78
 msgid "page"
 msgstr "pagina"
 
-#: models.py:78
+#: models.py:79
 msgid "pages"
 msgstr "pagine"
 
-#: validators.py:33 validators.py:61
+#: validators.py:33
+#: validators.py:61
 msgid "The code is too short or contains invalid characters"
 msgstr "Il codice è troppo corto oppure contiene caratteri non consentiti"
 
-#: validators.py:42 validators.py:73
+#: validators.py:42
+#: validators.py:73
 msgid "The code is malformed"
 msgstr "Il codice non è valido"
 
@@ -283,7 +281,8 @@ msgstr "Operazione eseguita con successo"
 msgid "Payment needs to be confirmed"
 msgstr "Il pagamento deve essere confermato"
 
-#: payments/modules/views.py:150 payments/modules/creditcard/views.py:186
+#: payments/modules/views.py:150
+#: payments/modules/creditcard/views.py:186
 msgid "Your order has already been processed."
 msgstr "Il tuo ordine è stato già eseguito"
 
@@ -342,8 +341,7 @@ msgstr "Questo testo verrà processato dal modulo di traduzione"
 #: payments/modules/bonifico/config.py:41
 #: payments/modules/contrassegno/config.py:41
 #: payments/modules/creditcard/config.py:46
-msgid ""
-"The url base used for constructing urlpatterns which will use this module"
+msgid "The url base used for constructing urlpatterns which will use this module"
 msgstr "URL base per questo pagamento"
 
 #: payments/modules/bonifico/config.py:46
@@ -419,9 +417,7 @@ msgid "Return URL"
 msgstr "URL di ritorno"
 
 #: payments/modules/creditcard/config.py:90
-msgid ""
-"Where BancaSella will return the customer after the purchase is complete.  "
-"This can be a named url and defaults to the standard checkout success."
+msgid "Where BancaSella will return the customer after the purchase is complete.  This can be a named url and defaults to the standard checkout success."
 msgstr "URL di ritorno di Bancasella"
 
 #: payments/modules/creditcard/views.py:46
@@ -452,7 +448,8 @@ msgstr "Usa il prezzo completo per il calcolo del' IVA"
 msgid "tax class"
 msgstr "Classe di tassa"
 
-#: tax/modules/noarea/models.py:10 tax/modules/noarea/models.py:15
+#: tax/modules/noarea/models.py:10
+#: tax/modules/noarea/models.py:15
 msgid "Percentage"
 msgstr "Percentuale"
 
@@ -484,7 +481,7 @@ msgstr "Modelli disponibili nella cartella %(name)s."
 #: templates/admin/index.html:67
 #, python-format
 msgid "%(name)s"
-msgstr ""
+msgstr "%(name)s"
 
 #: templates/admin/index.html:77
 msgid "Add"
@@ -512,7 +509,7 @@ msgstr "Non disponibile"
 
 #: templates/admin/index.html:120
 msgid "Admin Tools"
-msgstr ""
+msgstr "Strumenti amministrativi"
 
 #: templates/admin/index.html:124
 msgid "Edit Site Settings"
@@ -520,22 +517,25 @@ msgstr "Modifica le impostazioni del sito"
 
 #: templates/admin/index.html:127
 msgid "Edit Inventory"
-msgstr ""
+msgstr "Modifica inventario"
 
 #: templates/admin/index.html:130
 msgid "Export Product Defs"
-msgstr ""
+msgstr "Esporta la definizione dei prodotti"
 
 #: templates/admin/index.html:133
 msgid "Product Variation Manager"
-msgstr ""
+msgstr "Gestore varianti di prodotto"
 
 #: templates/admin/index.html:136
 msgid "Cache Status"
-msgstr ""
+msgstr "Stato della cache"
 
-#: templates/contact/update_form.html:5 templates/contact/view_profile.html:7
-#: templates/product/product.html:23 templates/shop/cart.html:11
+#: templates/contact/update_form.html:5
+#: templates/contact/view_profile.html:7
+#: templates/product/product.html:23
+#: templates/shop/cart.html:11
+#: templates/shop/page.html:6
 #: templates/shop/checkout/form.html:9
 #: templates/shop/checkout/success_bonifico.html:12
 #: templates/shop/checkout/success_contrassegno.html:12
@@ -543,11 +543,12 @@ msgstr ""
 #: templates/shop/checkout/success_generic.html:12
 #: templates/shop/checkout/creditcard/error.html:9
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
-#: templates/contact/update_form.html:6 templates/contact/view_profile.html:8
+#: templates/contact/update_form.html:6
+#: templates/contact/view_profile.html:8
 msgid "Account"
-msgstr ""
+msgstr "Profilo"
 
 #: templates/contact/update_form.html:7
 msgid "Update Profile"
@@ -626,7 +627,7 @@ msgstr "Il tuo profilo"
 
 #: templates/contact/view_profile.html:20
 msgid "Email:"
-msgstr ""
+msgstr "Email:"
 
 #: templates/contact/view_profile.html:22
 msgid "Organization:"
@@ -638,7 +639,7 @@ msgstr "Data di nascita:"
 
 #: templates/contact/view_profile.html:26
 msgid "Newsletter:"
-msgstr ""
+msgstr "Newsletter:"
 
 #: templates/contact/view_profile.html:26
 msgid "Yes"
@@ -646,7 +647,7 @@ msgstr "Si"
 
 #: templates/contact/view_profile.html:26
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: templates/contact/view_profile.html:28
 msgid "Billing Address:"
@@ -679,7 +680,7 @@ msgstr "Aggiorna il tuo profilo"
 
 #: templates/contact/view_profile.html:51
 msgid "Add address book entry"
-msgstr ""
+msgstr "Inserisci un nuovo contatto"
 
 #: templates/contact/view_profile.html:53
 #: templates/contact/view_profile.html:66
@@ -691,8 +692,7 @@ msgid "Order History"
 msgstr "Storia degli ordini"
 
 #: templates/contact/view_profile.html:60
-msgid ""
-"Sorry, the user you've logged in as doesn't have any contact information."
+msgid "Sorry, the user you've logged in as doesn't have any contact information."
 msgstr "Spiacenti, l'utente usato non ha alcuna informazione."
 
 #: templates/contact/view_profile.html:60
@@ -703,15 +703,17 @@ msgstr "Forse sei un amministratore"
 msgid "Set up contact information"
 msgstr "Inserisci le tue informazioni"
 
-#: templates/product/product.html:34 templates/shop/cart.html:35
+#: templates/product/product.html:34
+#: templates/shop/cart.html:35
 msgid "Price"
 msgstr "Prezzo"
 
 #: templates/product/product.html:34
 msgid "(incl. tax)"
-msgstr "(iva incl.)"
+msgstr "(IVA incl.)"
 
-#: templates/product/product.html:54 templates/shop/cart.html:29
+#: templates/product/product.html:54
+#: templates/shop/cart.html:29
 msgid "Quantity"
 msgstr "Quantità"
 
@@ -745,7 +747,7 @@ msgstr "Prezzo"
 
 #: templates/shop/cart.html:37
 msgid "Total<br/>(incl.&nbsp;tax)"
-msgstr "Totale<br/>(incl.&nbsp;tax)"
+msgstr "Totale (IVA incl.)"
 
 #: templates/shop/cart.html:37
 msgid "Total"
@@ -775,7 +777,8 @@ msgstr "Svuota"
 msgid "Check out"
 msgstr "Acquista"
 
-#: templates/shop/checkout/form.html:10 templates/shop/checkout/form.html:14
+#: templates/shop/checkout/form.html:10
+#: templates/shop/checkout/form.html:14
 #: templates/shop/checkout/success_bonifico.html:13
 #: templates/shop/checkout/success_contrassegno.html:13
 #: templates/shop/checkout/success_creditcard.html:13
@@ -793,8 +796,7 @@ msgid "Confirmation"
 msgstr "Conferma"
 
 #: templates/shop/checkout/form.html:24
-msgid ""
-"Please complete the following information in order to submit your order."
+msgid "Please complete the following information in order to submit your order."
 msgstr "Inserisci le seguenti informazioni prima di procedere con l'ordine."
 
 #: templates/shop/checkout/form.html:28
@@ -802,12 +804,8 @@ msgid "Please correct the following errors"
 msgstr "Per favore correggi gli errori senalati:"
 
 #: templates/shop/checkout/form.html:37
-msgid ""
-"If you already have an account, you can login now to fill in most of the "
-"information below."
-msgstr ""
-"Se hai già un account, devi autenticarti ed inserire le informazioni "
-"richieste."
+msgid "If you already have an account, you can login now to fill in most of the information below."
+msgstr "Se hai già un account, devi autenticarti ed inserire le informazioni richieste."
 
 #: templates/shop/checkout/form.html:38
 msgid "This is just a convenience, no account is required!"
@@ -819,11 +817,11 @@ msgstr "Username o email"
 
 #: templates/shop/checkout/form.html:47
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #: templates/shop/checkout/form.html:53
 msgid "Login"
-msgstr ""
+msgstr "Accesso"
 
 #: templates/shop/checkout/form.html:60
 msgid "You'll need to fill out at least the fields with a *"
@@ -848,18 +846,12 @@ msgstr "Grazie per l'acquisto!"
 #: templates/shop/checkout/success_contrassegno.html:20
 #: templates/shop/checkout/success_creditcard.html:23
 #: templates/shop/checkout/success_generic.html:20
-msgid ""
-"Please print out this page as a receipt.  You will also receive an email "
-"with this information."
-msgstr ""
-"Vi consigliamo di stampare questa pagina come ricevuta. Riceverai anche una "
-"e-mail con queste informazioni"
+msgid "Please print out this page as a receipt.  You will also receive an email with this information."
+msgstr "Vi consigliamo di stampare questa pagina come ricevuta. Riceverai anche una e-mail con queste informazioni"
 
 #: templates/shop/checkout/success_bonifico.html:34
-msgid ""
-"La richiesta verr&agrave; evasa una volta ricevuta conferma dell'avvenuto "
-"pagamento."
-msgstr ""
+msgid "La richiesta verr&agrave; evasa una volta ricevuta conferma dell'avvenuto pagamento."
+msgstr "La richiesta verrà evasa una volta ricevuta conferma dell'avvenuto pagamento."
 
 #: templates/shop/checkout/success_bonifico.html:44
 #: templates/shop/checkout/success_contrassegno.html:35
@@ -883,18 +875,12 @@ msgid "Proceed with another purchase"
 msgstr "Procedi con gli acquisti"
 
 #: templates/shop/checkout/success_bonifico.html:54
-msgid ""
-"Attenzione: le spese di spedizione non sono state conteggiate nell'ordine. "
-"<br /> Verrete contattati via email da un nostro operatore e il vostro "
-"ordine verr&agrave; <br /> confermato solo qualora accettiate il preventivo "
-"di spedizione <br />"
-msgstr ""
+msgid "Attenzione: le spese di spedizione non sono state conteggiate nell'ordine. <br /> Verrete contattati via email da un nostro operatore e il vostro ordine verr&agrave; <br /> confermato solo qualora accettiate il preventivo di spedizione <br />"
+msgstr "Attenzione: le spese di spedizione non sono state conteggiate nell'ordine. <br /> Verrete contattati via email da un nostro operatore e il vostro ordine verrà <br /> confermato solo qualora accettiate il preventivo di spedizione <br />"
 
 #: templates/shop/checkout/success_contrassegno.html:24
-msgid ""
-"Attenzione!!! Il pagamento in contrassegno &egrave; valido solo in contanti. "
-"Il corriere accetter&agrave; solo contanti."
-msgstr ""
+msgid "Attenzione!!! Il pagamento in contrassegno &egrave; valido solo in contanti. Il corriere accetter&agrave; solo contanti."
+msgstr "Attenzione!!! Il pagamento in contrassegno è valido solo in contanti. Il corriere accetterà solo contanti."
 
 #: templates/shop/checkout/bonifico/confirm.html:11
 msgid "Your payment will be processed through BONIFICO."
@@ -912,7 +898,7 @@ msgstr "Acquista"
 
 #: templates/shop/checkout/bonifico/confirm.html:87
 msgid "Conferma il tuo ordine"
-msgstr ""
+msgstr "Conferma il tuo ordine"
 
 #: templates/shop/checkout/contrassegno/confirm.html:11
 msgid "Your payment will be processed through CONTRASSEGNO."
@@ -943,65 +929,67 @@ msgstr "Consegna gratis"
 msgid "Other"
 msgstr "Altre pagine"
 
-msgid "State"
-msgstr "Provincia"
+#~ msgid "State"
+#~ msgstr "Provincia"
 
-msgid "State/Province"
-msgstr "Provincia"
+#~ msgid "State/Province"
+#~ msgstr "Provincia"
 
-msgid "VAT number"
-msgstr "P. IVA"
+#~ msgid "VAT number"
+#~ msgstr "P. IVA"
 
-msgid "You must specify house number in your address"
-msgstr "Devi specificare il numero civico nell'indirizzo"
+#~ msgid "You must specify house number in your address"
+#~ msgstr "Devi specificare il numero civico nell'indirizzo"
 
-msgid "Other fields"
-msgstr "Altre informazioni"
+#~ msgid "Other fields"
+#~ msgstr "Altre informazioni"
 
-msgid "Message sent."
-msgstr "Messaggio spedito con successo."
+#~ msgid "Message sent."
+#~ msgstr "Messaggio spedito con successo."
 
-msgid "Contact us"
-msgstr "Contattaci"
+#~ msgid "Contact us"
+#~ msgstr "Contattaci"
 
-msgid "Name and Surname"
-msgstr "Nome e Cognome"
+#~ msgid "Name and Surname"
+#~ msgstr "Nome e Cognome"
 
-msgid "Company"
-msgstr "Azienda"
+#~ msgid "Company"
+#~ msgstr "Azienda"
 
-msgid "Message"
-msgstr "Messaggio"
+#~ msgid "Message"
+#~ msgstr "Messaggio"
 
-msgid "* fields are required"
-msgstr "* campi obbligatori"
+#~ msgid "* fields are required"
+#~ msgstr "* campi obbligatori"
 
-msgid "Submit"
-msgstr "Invia"
+#~ msgid "Submit"
+#~ msgstr "Invia"
 
-msgid "Shipping same as billing?"
-msgstr "L'indirizzo di consegna è lo stesso di fatturazione"
+#~ msgid "Shipping same as billing?"
+#~ msgstr "L'indirizzo di consegna è lo stesso di fatturazione"
 
-msgid "Your order #%(orderid)s has shipped today."
-msgstr "Il tuo ordine #%(orderid)s è stato spedito oggi."
+#~ msgid "Your order #%(orderid)s has shipped today."
+#~ msgstr "Il tuo ordine #%(orderid)s è stato spedito oggi."
 
-msgid "Your order #%(orderid)s has shipped today via %(shippingmethod)s."
-msgstr "Il tuo ordine #%(orderid)s è stato spedito oggi mediante %(shippingmethod)s."
+#~ msgid "Your order #%(orderid)s has shipped today via %(shippingmethod)s."
+#~ msgstr ""
+#~ "Il tuo ordine #%(orderid)s è stato spedito oggi mediante %(shippingmethod)"
+#~ "s."
 
-msgid "This completes your order."
-msgstr "Il tuo ordine è stato evaso."
+#~ msgid "This completes your order."
+#~ msgstr "Il tuo ordine è stato evaso."
 
-msgid "I have read the Terms and Conditions."
-msgstr "Dichiaro di aver letto le condizioni commerciali."
+#~ msgid "I have read the Terms and Conditions."
+#~ msgstr "Dichiaro di aver letto le condizioni commerciali."
 
-msgid "Thank you for signing up with %(company_name)s."
-msgstr "Grazie per esserti registrato con %(company_name)s."
+#~ msgid "Thank you for signing up with %(company_name)s."
+#~ msgstr "Grazie per esserti registrato con %(company_name)s."
 
-msgid "Thank you for signing up with {{ shop_name }}."
-msgstr "Grazie per esserti registrato su {{ shop_name }}."
+#~ msgid "Thank you for signing up with {{ shop_name }}."
+#~ msgstr "Grazie per esserti registrato su {{ shop_name }}."
 
-msgid "Your order from %(shop_name)s has shipped"
-msgstr "Grazie per aver ordinato il prodotto su %(shop_name)s."
+#~ msgid "Your order from %(shop_name)s has shipped"
+#~ msgstr "Grazie per aver ordinato il prodotto su %(shop_name)s."
 
-msgid "Welcome to %s"
-msgstr "Benvenuto in %s"
+#~ msgid "Welcome to %s"
+#~ msgstr "Benvenuto in %s"

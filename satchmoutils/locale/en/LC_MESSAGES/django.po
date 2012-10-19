@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-26 17:07+0200\n"
+"POT-Creation-Date: 2012-10-18 17:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -156,72 +156,72 @@ msgstr ""
 msgid "Other informations"
 msgstr ""
 
-#: models.py:16
+#: models.py:15
 msgid "contact"
 msgstr ""
 
-#: models.py:19
+#: models.py:18
 msgid "business number"
 msgstr ""
 
-#: models.py:23
+#: models.py:22
 msgid "person number"
 msgstr ""
 
-#: models.py:28
+#: models.py:33
 #, python-format
 msgid "administrative information for %(contact_name)s"
 msgstr ""
 
-#: models.py:33
+#: models.py:37
 msgid "administrative information"
 msgstr ""
 
-#: models.py:34
+#: models.py:38
 msgid "administrative informations"
 msgstr ""
 
-#: models.py:42
+#: models.py:46
 msgid "Title"
 msgstr ""
 
-#: models.py:47
+#: models.py:51
 msgid "Slug Name"
 msgstr ""
 
-#: models.py:50
+#: models.py:54
 msgid "Used for URLs, auto-generated from name if blank"
 msgstr ""
 
-#: models.py:53
+#: models.py:57
 msgid "Text"
 msgstr ""
 
-#: models.py:54
+#: models.py:58
 msgid "This field can contain HTML"
 msgstr ""
 
-#: models.py:58
+#: models.py:62
 msgid "Ordering"
 msgstr ""
 
-#: models.py:60
+#: models.py:64
 msgid "Override alphabetical order in category display"
 msgstr ""
 
-#: models.py:62
+#: models.py:66
 msgid "Active"
 msgstr ""
 
-#: models.py:64
+#: models.py:68
 msgid "This will determine whether or not this product will appear on the site"
 msgstr ""
 
-#: models.py:77
+#: models.py:78
 msgid "page"
 msgstr ""
 
-#: models.py:78
+#: models.py:79
 msgid "pages"
 msgstr ""
 
@@ -530,7 +530,7 @@ msgstr ""
 
 #: templates/contact/update_form.html:5 templates/contact/view_profile.html:7
 #: templates/product/product.html:23 templates/shop/cart.html:11
-#: templates/shop/checkout/form.html:9
+#: templates/shop/page.html:6 templates/shop/checkout/form.html:9
 #: templates/shop/checkout/success_bonifico.html:12
 #: templates/shop/checkout/success_contrassegno.html:12
 #: templates/shop/checkout/success_creditcard.html:12
