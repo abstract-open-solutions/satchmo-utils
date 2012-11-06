@@ -31,5 +31,5 @@ config_register(
          description=_("Use item full-price for tax?"),
          requires=TAX_MODULE,
          requiresvalue='satchmoutils.tax.modules.noarea',
-         default=True)
+         default=False)
 )

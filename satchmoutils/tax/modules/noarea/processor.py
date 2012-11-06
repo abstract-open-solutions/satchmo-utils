@@ -127,7 +127,9 @@ class Processor(object):
                 rate = self.get_rate(tc, get_object=True)
                 rates[tc_key] = rate
                 taxes[tc_key] = Decimal("0.00")
-            
+            # XXX If this setting is true,
+            # Satchmo does it wrong most of the time.
+            # We MUST have tests for this!
             if config_value('TAX', 'TAX_USE_ITEMPRICE'):
                 # In Europe, if there is a supplier 
                 # which applies discounts to products
